@@ -2,44 +2,39 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WorkFlow.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
+    public class ValuesController : Controller
     {
-        // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [Authorize]
+        [Route("getlogin")]
+        public IActionResult GetLogin()
         {
-            return new string[] { "value1", "value2" };
+            return Ok($"Ваш логин: {User.Identity.Name}");
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [Authorize(Roles = "admin, user")]
+        [Route("getrole")]
+        public IActionResult GetRole()
         {
-            return "value";
+            if (User.IsInRole("admin"))
+            {
+                return Ok("Ваша роль: администратор");
+            }
+            else if(User.IsInRole("user"))
+            {
+                return Ok("Ваша роль: пользователь");
+            }
+            else
+            {
+                return Ok("Ваша роль: can`t found");
+            }         
+           
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
