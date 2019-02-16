@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 
 namespace WorkFlow.Models
 {
-    public class Person
+    public class SearchHistory
     {
         public int Id { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public string Role { get; set; }
+        public string SearchQuary { get; set; }
+
+        public int? UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

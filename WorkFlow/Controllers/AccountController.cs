@@ -59,13 +59,13 @@ namespace WorkFlow.Controllers
 
         private ClaimsIdentity GetIdentity(string username, string password)
         {
-            Person person = db.Users.FirstOrDefault(x => x.Login == username && x.Password == password);
-            if (person != null)
+            User user = db.Users.FirstOrDefault(x => x.Login == username && x.Password == password);
+            if (user != null)
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, person.Login),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, person.Role)
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
                 };
                 ClaimsIdentity claimsIdentity =
                 new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
