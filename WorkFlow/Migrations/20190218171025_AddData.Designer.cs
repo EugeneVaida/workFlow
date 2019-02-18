@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkFlow.Models;
 
 namespace WorkFlow.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20190218171025_AddData")]
+    partial class AddData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,19 +36,6 @@ namespace WorkFlow.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Companies");
-
-                    b.HasData(
-                        new { Id = 1, Adress = "Чонгарский бульвар дом 402", Name = "Макдоналдс" },
-                        new { Id = 2, Adress = "Ленинградский проспект", Name = "РесоГарантия", Telephone = "+8 555 35 35" },
-                        new { Id = 3, Adress = "Ул. Пушкина дом 32", Name = "HolyDev", Telephone = "+7 456 7899 00" },
-                        new { Id = 4, Adress = "Ул. Ялтинская дом 68", Name = "ФранчайзКомпани", Telephone = "+8 909 807 654" },
-                        new { Id = 5, Adress = "Ул. Солнечная дом 2", Name = "WorkFlow", Telephone = "+8 999 807 699" },
-                        new { Id = 6, Adress = "Ул. Цветочная дом 84", Name = "ПаркВысокихТехнологий", Telephone = "+8 678 897 699" },
-                        new { Id = 7, Adress = "Ул. Якуба Колоса дом 5", Name = "SprintSolutions", Telephone = "+8 999 837 699" },
-                        new { Id = 8, Adress = "Проспект Рокоссовского дом 132", Name = "MediaStars", Telephone = "+8 678 807 549" },
-                        new { Id = 9, Adress = "Ул. Лазурная дом 4", Name = "StarClub", Telephone = "+8 999 374 400" },
-                        new { Id = 10, Adress = "Кутузовский проспект дом 1", Name = "PineApple", Telephone = "+8 688 807 471" }
-                    );
                 });
 
             modelBuilder.Entity("WorkFlow.Models.LogHistory", b =>
@@ -106,16 +95,16 @@ namespace WorkFlow.Migrations
                     b.ToTable("Projects");
 
                     b.HasData(
-                        new { Id = 1, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 23, 0, 34, 35, 934, DateTimeKind.Local), Name = "Проект 1", StartDate = new DateTime(2019, 1, 20, 0, 34, 35, 933, DateTimeKind.Local) },
-                        new { Id = 2, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 21, 0, 34, 35, 934, DateTimeKind.Local), Name = "Проект по строительству", StartDate = new DateTime(2019, 2, 9, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 3, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 23, 0, 34, 35, 934, DateTimeKind.Local), Name = "Проект по искусству", StartDate = new DateTime(2019, 1, 30, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 4, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 24, 0, 34, 35, 934, DateTimeKind.Local), Name = "Открываю пивко", StartDate = new DateTime(2019, 1, 19, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 5, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 25, 0, 34, 35, 934, DateTimeKind.Local), Name = "Наливаю в бокал", StartDate = new DateTime(2019, 1, 17, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 6, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 26, 0, 34, 35, 934, DateTimeKind.Local), Name = "Щас мне будет легко", StartDate = new DateTime(2019, 1, 15, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 7, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 27, 0, 34, 35, 934, DateTimeKind.Local), Name = "Аеееее", StartDate = new DateTime(2019, 1, 13, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 8, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 28, 0, 34, 35, 934, DateTimeKind.Local), Name = "Здоровье", StartDate = new DateTime(2019, 1, 12, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 9, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 25, 0, 34, 35, 934, DateTimeKind.Local), Name = "Проект оздоровления нации", StartDate = new DateTime(2019, 1, 16, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 10, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 5, 0, 34, 35, 934, DateTimeKind.Local), Name = "Пкция за спасение медвежат", StartDate = new DateTime(2019, 1, 11, 0, 34, 35, 934, DateTimeKind.Local) }
+                        new { Id = 1, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 22, 20, 10, 25, 257, DateTimeKind.Local), Name = "Проект 1", StartDate = new DateTime(2019, 1, 19, 20, 10, 25, 249, DateTimeKind.Local) },
+                        new { Id = 2, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 20, 20, 10, 25, 258, DateTimeKind.Local), Name = "Проект по строительству", StartDate = new DateTime(2019, 2, 8, 20, 10, 25, 258, DateTimeKind.Local) },
+                        new { Id = 3, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 22, 20, 10, 25, 258, DateTimeKind.Local), Name = "Проект по искусству", StartDate = new DateTime(2019, 1, 29, 20, 10, 25, 258, DateTimeKind.Local) },
+                        new { Id = 4, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 23, 20, 10, 25, 258, DateTimeKind.Local), Name = "Открываю пивко", StartDate = new DateTime(2019, 1, 18, 20, 10, 25, 258, DateTimeKind.Local) },
+                        new { Id = 5, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 24, 20, 10, 25, 258, DateTimeKind.Local), Name = "Наливаю в бокал", StartDate = new DateTime(2019, 1, 16, 20, 10, 25, 258, DateTimeKind.Local) },
+                        new { Id = 6, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 25, 20, 10, 25, 258, DateTimeKind.Local), Name = "Щас мне будет легко", StartDate = new DateTime(2019, 1, 14, 20, 10, 25, 258, DateTimeKind.Local) },
+                        new { Id = 7, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 26, 20, 10, 25, 258, DateTimeKind.Local), Name = "Аеееее", StartDate = new DateTime(2019, 1, 12, 20, 10, 25, 258, DateTimeKind.Local) },
+                        new { Id = 8, Describtion = "Describtion", EndDate = new DateTime(2019, 2, 27, 20, 10, 25, 258, DateTimeKind.Local), Name = "Здоровье", StartDate = new DateTime(2019, 1, 11, 20, 10, 25, 258, DateTimeKind.Local) },
+                        new { Id = 9, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 24, 20, 10, 25, 258, DateTimeKind.Local), Name = "Проект оздоровления нации", StartDate = new DateTime(2019, 1, 15, 20, 10, 25, 258, DateTimeKind.Local) },
+                        new { Id = 10, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 4, 20, 10, 25, 258, DateTimeKind.Local), Name = "Пкция за спасение медвежат", StartDate = new DateTime(2019, 1, 10, 20, 10, 25, 258, DateTimeKind.Local) }
                     );
                 });
 
@@ -207,19 +196,6 @@ namespace WorkFlow.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sprints");
-
-                    b.HasData(
-                        new { Id = 1, Describtion = "Describtion for sprint 1", EndDate = new DateTime(2019, 2, 23, 0, 34, 35, 934, DateTimeKind.Local), Name = "Спринт по Проект 1", Priority = 1, StartDate = new DateTime(2019, 1, 25, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 2, Describtion = "Describtion for sprint 2", EndDate = new DateTime(2019, 2, 21, 0, 34, 35, 934, DateTimeKind.Local), Name = "Спринт по Проект по строительству", Priority = 2, StartDate = new DateTime(2019, 2, 10, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 3, Describtion = "Describtion for sprint 3", EndDate = new DateTime(2019, 2, 23, 0, 34, 35, 934, DateTimeKind.Local), Name = "Спринт по Проект по искусству", Priority = 3, StartDate = new DateTime(2019, 1, 31, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 4, Describtion = "Describtion for sprint 4", EndDate = new DateTime(2019, 2, 24, 0, 34, 35, 934, DateTimeKind.Local), Name = "Спринт по Открываю пивко", Priority = 4, StartDate = new DateTime(2019, 1, 21, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 5, Describtion = "Describtion for sprint 5", EndDate = new DateTime(2019, 2, 25, 0, 34, 35, 934, DateTimeKind.Local), Name = "Спринт по Наливаю в бокал", Priority = 5, StartDate = new DateTime(2019, 1, 19, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 6, Describtion = "Describtion  for sprint 6", EndDate = new DateTime(2019, 2, 26, 0, 34, 35, 934, DateTimeKind.Local), Name = "Спринт по Щас мне будет легко", Priority = 2, StartDate = new DateTime(2019, 1, 19, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 7, Describtion = "Describtion  for sprint 7 ", EndDate = new DateTime(2019, 2, 27, 0, 34, 35, 934, DateTimeKind.Local), Name = "Спринт по Аеееее", Priority = 3, StartDate = new DateTime(2019, 1, 16, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 8, Describtion = "Describtion for sprint 8", EndDate = new DateTime(2019, 2, 28, 0, 34, 35, 934, DateTimeKind.Local), Name = "Спринт по Здоровье", Priority = 2, StartDate = new DateTime(2019, 1, 20, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 9, Describtion = "Describtion for sprint 9", EndDate = new DateTime(2019, 3, 25, 0, 34, 35, 934, DateTimeKind.Local), Name = "Спринт по Проект оздоровления нации", Priority = 2, StartDate = new DateTime(2019, 1, 18, 0, 34, 35, 934, DateTimeKind.Local) },
-                        new { Id = 10, Describtion = "Describtion for sprint 10", EndDate = new DateTime(2019, 3, 5, 0, 34, 35, 934, DateTimeKind.Local), Name = "Спринт по Пкция за спасение медвежат", Priority = 2, StartDate = new DateTime(2019, 1, 19, 0, 34, 35, 934, DateTimeKind.Local) }
-                    );
                 });
 
             modelBuilder.Entity("WorkFlow.Models.SprintUser", b =>
