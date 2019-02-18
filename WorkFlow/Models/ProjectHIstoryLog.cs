@@ -7,6 +7,7 @@ namespace WorkFlow.Models
 {
     public class ProjectHistoryLog
     {
-
+        public string Json { get; set; }
+        public DateTime Date { get; set; }
     }
 }

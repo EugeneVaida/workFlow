@@ -17,8 +17,8 @@ namespace WorkFlow.Models
         public int? CompanyId { get; set; }
         public virtual Company Company { get; set; }
 
-        //public ICollection<Project> Projects { get; set; }
-        //public ICollection<Sprint> Sprints { get; set; }
+        public ICollection<SprintUser> SprintUsers { get; set; }
+        public ICollection<ProjectUser> ProjectUsers { get; set; }
         public ICollection<Notification> Notofications { get; set; }
         public ICollection<LogHistory> LogHistories { get; set; }
         public ICollection<SearchHistory> SearchHistories { get; set; }

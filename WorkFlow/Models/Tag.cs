@@ -10,6 +10,6 @@ namespace WorkFlow.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        //public ICollection<Project> Projects { get; set; }
+        public ICollection<ProjectTag> ProjectTags { get; set; }
     }
 }
