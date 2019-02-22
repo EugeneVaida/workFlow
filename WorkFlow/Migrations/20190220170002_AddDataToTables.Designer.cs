@@ -9,7 +9,7 @@ using WorkFlow.Models;
 
 namespace WorkFlow.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(Context))]
     [Migration("20190220170002_AddDataToTables")]
     partial class AddDataToTables
     {

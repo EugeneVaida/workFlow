@@ -8,7 +8,7 @@ using WorkFlow.Models;
 
 namespace WorkFlow.Migrations
 {
-    [DbContext(typeof(UserContext))]
+    [DbContext(typeof(Context))]
     partial class UserContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

@@ -14,9 +14,9 @@ namespace WorkFlow.Controllers
 {
     public class AccountController : Controller
     {
-        private UserContext db;
+        private Context db;
 
-        public AccountController(UserContext context)
+        public AccountController(Context context)
         {
             db = context;   
         }        

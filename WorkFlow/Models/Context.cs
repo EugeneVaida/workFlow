@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WorkFlow.Models
 {
-    public class UserContext : DbContext
+    public class Context : DbContext
     {
         public DbSet<Company> Companies { get; set; }
         public DbSet<LogHistory> LogHistories { get; set; }
@@ -18,7 +18,7 @@ namespace WorkFlow.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
 
-        public UserContext(DbContextOptions<UserContext> options)
+        public Context(DbContextOptions<Context> options)
             : base(options)
         {
             Database.EnsureCreated();
@@ -207,11 +207,6 @@ namespace WorkFlow.Models
             modelBuilder.Entity<SprintUser>().HasData(
                 new SprintUser { UserId = 1, SprintId = 1 }
             );
-
-
-
-
-
         }
     }
 }
