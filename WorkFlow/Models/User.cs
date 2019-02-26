@@ -11,12 +11,11 @@ namespace WorkFlow.Models
         public string Login { get; set; }
         public string Password { get; set; }
 
-        public int? RoleId { get; set; }
-        public virtual Role Role { get; set; }
-
         public int? CompanyId { get; set; }
         public virtual Company Company { get; set; }
 
+
+        public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<SprintUser> SprintUsers { get; set; }
         public ICollection<ProjectUser> ProjectUsers { get; set; }
         public ICollection<Notification> Notofications { get; set; }

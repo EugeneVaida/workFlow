@@ -17,6 +17,7 @@ namespace WorkFlow.Models
         public DbSet<Tag> Tags { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
 
         public Context(DbContextOptions<Context> options)
             : base(options)
@@ -73,6 +74,17 @@ namespace WorkFlow.Models
                 .WithMany(c => c.SprintUsers)
                 .HasForeignKey(bc => bc.UserId);
 
+            modelBuilder.Entity<UserRole>()
+                .HasKey(bc => new { bc.RoleId, bc.UserId });
+            modelBuilder.Entity<UserRole>()
+                .HasOne(bc => bc.Role)
+                .WithMany(b => b.UserRoles)
+                .HasForeignKey(bc => bc.RoleId);
+            modelBuilder.Entity<UserRole>()
+                .HasOne(bc => bc.User)
+                .WithMany(c => c.UserRoles)
+                .HasForeignKey(bc => bc.UserId);
+
             var arrCom = new Company[]
             {
                 new Company{ Id = 1, Name = "Макдоналдс", Adress = "Чонгарский бульвар дом 402", Telephone = "+8 587 475 350" },
@@ -86,18 +98,7 @@ namespace WorkFlow.Models
                 new Company{ Id = 9, Name = "StarClub", Adress = "Ул. Лазурная дом 4", Telephone = "+8 999 374 400" },
                 new Company{ Id = 10, Name = "PineApple", Adress = "Кутузовский проспект дом 1", Telephone = "+8 688 807 471" }
             };
-
-            var arrRole = new Role[]
-            {
-              new Role{ Id = 1, Name = "Admin" },
-              new Role{ Id = 2, Name = "User" }
-            };
-
-            //modelBuilder.Entity<User>()
-            //    .HasOne(bc => bc.Role)
-            //    .WithMany(c => c.Users)
-            //    .HasForeignKey(bc => bc.RoleId);
-
+            
             modelBuilder.Entity<Company>().HasData(
                 new Company { Id = 1, Name = "Макдоналдс", Adress = "Чонгарский бульвар дом 402", Telephone = "+8 587 475 350" },
                 new Company{ Id = 2, Name = "РесоГарантия", Adress = "Ленинградский проспект", Telephone = "+8 555 35 35" },
@@ -114,13 +115,12 @@ namespace WorkFlow.Models
 
             modelBuilder.Entity<Role>().HasData(
               new Role { Id = 1, Name = "Admin" },
-              new Role { Id = 2, Name = "User" }
+              new Role { Id = 2, Name = "User" },
+              new Role { Id = 3, Name = "Manager" }
             );
 
             modelBuilder.Entity<User>().HasData(
-                //new { Id = 1, CompanyId = 1, Login = "User", Password = "123", RoleId = 1 },
-                //new { Id = 2, CompanyId = 2, Login = "Admin", Password = "123", RoleId = 2 }
-                new User { Id = 1, CompanyId = 1, Login = "User", Password = "123", RoleId = 1 }
+                new User { Id = 1, CompanyId = 1, Login = "User", Password = "123"}
            );
 
             modelBuilder.Entity<Tag>().HasData(
@@ -205,7 +205,20 @@ namespace WorkFlow.Models
             );
 
             modelBuilder.Entity<SprintUser>().HasData(
-                new SprintUser { UserId = 1, SprintId = 1 }
+                new SprintUser { UserId = 1, SprintId = 1 },
+                new SprintUser { UserId = 1, SprintId = 2 },
+                new SprintUser { UserId = 1, SprintId = 3 },
+                new SprintUser { UserId = 1, SprintId = 4 },
+                new SprintUser { UserId = 1, SprintId = 5 },
+                new SprintUser { UserId = 1, SprintId = 6 },
+                new SprintUser { UserId = 1, SprintId = 7 },
+                new SprintUser { UserId = 1, SprintId = 8 },
+                new SprintUser { UserId = 1, SprintId = 9 },
+                new SprintUser { UserId = 1, SprintId = 10 }
+            );
+
+            modelBuilder.Entity<UserRole>().HasData(
+                new UserRole { UserId = 1, RoleId = 1 }                
             );
         }
     }

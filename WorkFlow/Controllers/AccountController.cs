@@ -64,9 +64,15 @@ namespace WorkFlow.Controllers
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login)
                 };
+                var userRolesId = db.UserRoles.Where(x => x.UserId == user.Id).Select(x => x.RoleId);
+                
+                foreach (int roleId in userRolesId)
+                {
+                    var roleName = db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
+                    claims.Add(new Claim(ClaimTypes.Role, roleName));
+                }
                 ClaimsIdentity claimsIdentity =
                 new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
                     ClaimsIdentity.DefaultRoleClaimType);

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WorkFlow.Migrations
 {
-    public partial class AddDataToTables : Migration
+    public partial class initializeBD : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,7 +90,6 @@ namespace WorkFlow.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Login = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
-                    RoleId = table.Column<int>(nullable: true),
                     CompanyId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -100,12 +99,6 @@ namespace WorkFlow.Migrations
                         name: "FK_Users_Companies_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Users_Roles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -268,6 +261,30 @@ namespace WorkFlow.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoles", x => new { x.RoleId, x.UserId });
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Companies",
                 columns: new[] { "Id", "Adress", "Name", "Telephone" },
@@ -290,16 +307,16 @@ namespace WorkFlow.Migrations
                 columns: new[] { "Id", "Describtion", "EndDate", "Name", "StartDate" },
                 values: new object[,]
                 {
-                    { 9, "Describtion", new DateTime(2019, 3, 26, 19, 59, 47, 678, DateTimeKind.Local), "Проект оздоровления нации", new DateTime(2019, 1, 17, 19, 59, 47, 678, DateTimeKind.Local) },
-                    { 8, "Describtion", new DateTime(2019, 3, 1, 19, 59, 47, 678, DateTimeKind.Local), "Здоровье", new DateTime(2019, 1, 13, 19, 59, 47, 678, DateTimeKind.Local) },
-                    { 7, "Describtion", new DateTime(2019, 2, 28, 19, 59, 47, 678, DateTimeKind.Local), "Аеееее", new DateTime(2019, 1, 14, 19, 59, 47, 678, DateTimeKind.Local) },
-                    { 6, "Describtion", new DateTime(2019, 2, 27, 19, 59, 47, 678, DateTimeKind.Local), "Щас мне будет легко", new DateTime(2019, 1, 16, 19, 59, 47, 678, DateTimeKind.Local) },
-                    { 1, "Describtion", new DateTime(2019, 2, 24, 19, 59, 47, 678, DateTimeKind.Local), "Проект 1", new DateTime(2019, 1, 21, 19, 59, 47, 678, DateTimeKind.Local) },
-                    { 4, "Describtion", new DateTime(2019, 2, 25, 19, 59, 47, 678, DateTimeKind.Local), "Открываю пивко", new DateTime(2019, 1, 20, 19, 59, 47, 678, DateTimeKind.Local) },
-                    { 3, "Describtion", new DateTime(2019, 2, 24, 19, 59, 47, 678, DateTimeKind.Local), "Проект по искусству", new DateTime(2019, 1, 31, 19, 59, 47, 678, DateTimeKind.Local) },
-                    { 2, "Describtion", new DateTime(2019, 2, 22, 19, 59, 47, 678, DateTimeKind.Local), "Проект по строительству", new DateTime(2019, 2, 10, 19, 59, 47, 678, DateTimeKind.Local) },
-                    { 10, "Describtion", new DateTime(2019, 3, 6, 19, 59, 47, 678, DateTimeKind.Local), "Пкция за спасение медвежат", new DateTime(2019, 1, 12, 19, 59, 47, 678, DateTimeKind.Local) },
-                    { 5, "Describtion", new DateTime(2019, 2, 26, 19, 59, 47, 678, DateTimeKind.Local), "Наливаю в бокал", new DateTime(2019, 1, 18, 19, 59, 47, 678, DateTimeKind.Local) }
+                    { 9, "Describtion", new DateTime(2019, 4, 1, 14, 57, 57, 169, DateTimeKind.Local), "Проект оздоровления нации", new DateTime(2019, 1, 23, 14, 57, 57, 169, DateTimeKind.Local) },
+                    { 8, "Describtion", new DateTime(2019, 3, 7, 14, 57, 57, 169, DateTimeKind.Local), "Здоровье", new DateTime(2019, 1, 19, 14, 57, 57, 169, DateTimeKind.Local) },
+                    { 7, "Describtion", new DateTime(2019, 3, 6, 14, 57, 57, 169, DateTimeKind.Local), "Аеееее", new DateTime(2019, 1, 20, 14, 57, 57, 169, DateTimeKind.Local) },
+                    { 6, "Describtion", new DateTime(2019, 3, 5, 14, 57, 57, 169, DateTimeKind.Local), "Щас мне будет легко", new DateTime(2019, 1, 22, 14, 57, 57, 169, DateTimeKind.Local) },
+                    { 1, "Describtion", new DateTime(2019, 3, 2, 14, 57, 57, 169, DateTimeKind.Local), "Проект 1", new DateTime(2019, 1, 27, 14, 57, 57, 169, DateTimeKind.Local) },
+                    { 4, "Describtion", new DateTime(2019, 3, 3, 14, 57, 57, 169, DateTimeKind.Local), "Открываю пивко", new DateTime(2019, 1, 26, 14, 57, 57, 169, DateTimeKind.Local) },
+                    { 3, "Describtion", new DateTime(2019, 3, 2, 14, 57, 57, 169, DateTimeKind.Local), "Проект по искусству", new DateTime(2019, 2, 6, 14, 57, 57, 169, DateTimeKind.Local) },
+                    { 2, "Describtion", new DateTime(2019, 2, 28, 14, 57, 57, 169, DateTimeKind.Local), "Проект по строительству", new DateTime(2019, 2, 16, 14, 57, 57, 169, DateTimeKind.Local) },
+                    { 10, "Describtion", new DateTime(2019, 3, 12, 14, 57, 57, 169, DateTimeKind.Local), "Пкция за спасение медвежат", new DateTime(2019, 1, 18, 14, 57, 57, 169, DateTimeKind.Local) },
+                    { 5, "Describtion", new DateTime(2019, 3, 4, 14, 57, 57, 169, DateTimeKind.Local), "Наливаю в бокал", new DateTime(2019, 1, 24, 14, 57, 57, 169, DateTimeKind.Local) }
                 });
 
             migrationBuilder.InsertData(
@@ -307,6 +324,7 @@ namespace WorkFlow.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
+                    { 3, "Manager" },
                     { 2, "User" },
                     { 1, "Admin" }
                 });
@@ -316,16 +334,16 @@ namespace WorkFlow.Migrations
                 columns: new[] { "Id", "Describtion", "EndDate", "Name", "Priority", "StartDate" },
                 values: new object[,]
                 {
-                    { 1, "Describtion for sprint 1", new DateTime(2019, 2, 24, 19, 59, 47, 679, DateTimeKind.Local), "Спринт по Проект 1", 1, new DateTime(2019, 1, 26, 19, 59, 47, 679, DateTimeKind.Local) },
-                    { 9, "Describtion for sprint 9", new DateTime(2019, 3, 26, 19, 59, 47, 679, DateTimeKind.Local), "Спринт по Проект оздоровления нации", 2, new DateTime(2019, 1, 19, 19, 59, 47, 679, DateTimeKind.Local) },
-                    { 8, "Describtion for sprint 8", new DateTime(2019, 3, 1, 19, 59, 47, 679, DateTimeKind.Local), "Спринт по Здоровье", 2, new DateTime(2019, 1, 21, 19, 59, 47, 679, DateTimeKind.Local) },
-                    { 7, "Describtion  for sprint 7 ", new DateTime(2019, 2, 28, 19, 59, 47, 679, DateTimeKind.Local), "Спринт по Аеееее", 3, new DateTime(2019, 1, 17, 19, 59, 47, 679, DateTimeKind.Local) },
-                    { 6, "Describtion  for sprint 6", new DateTime(2019, 2, 27, 19, 59, 47, 679, DateTimeKind.Local), "Спринт по Щас мне будет легко", 2, new DateTime(2019, 1, 20, 19, 59, 47, 679, DateTimeKind.Local) },
-                    { 10, "Describtion for sprint 10", new DateTime(2019, 3, 6, 19, 59, 47, 679, DateTimeKind.Local), "Спринт по Пкция за спасение медвежат", 2, new DateTime(2019, 1, 20, 19, 59, 47, 679, DateTimeKind.Local) },
-                    { 4, "Describtion for sprint 4", new DateTime(2019, 2, 25, 19, 59, 47, 679, DateTimeKind.Local), "Спринт по Открываю пивко", 4, new DateTime(2019, 1, 22, 19, 59, 47, 679, DateTimeKind.Local) },
-                    { 3, "Describtion for sprint 3", new DateTime(2019, 2, 24, 19, 59, 47, 679, DateTimeKind.Local), "Спринт по Проект по искусству", 3, new DateTime(2019, 2, 1, 19, 59, 47, 679, DateTimeKind.Local) },
-                    { 2, "Describtion for sprint 2", new DateTime(2019, 2, 22, 19, 59, 47, 679, DateTimeKind.Local), "Спринт по Проект по строительству", 2, new DateTime(2019, 2, 11, 19, 59, 47, 679, DateTimeKind.Local) },
-                    { 5, "Describtion for sprint 5", new DateTime(2019, 2, 26, 19, 59, 47, 679, DateTimeKind.Local), "Спринт по Наливаю в бокал", 5, new DateTime(2019, 1, 20, 19, 59, 47, 679, DateTimeKind.Local) }
+                    { 9, "Describtion for sprint 9", new DateTime(2019, 4, 1, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Проект оздоровления нации", 2, new DateTime(2019, 1, 25, 14, 57, 57, 170, DateTimeKind.Local) },
+                    { 8, "Describtion for sprint 8", new DateTime(2019, 3, 7, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Здоровье", 2, new DateTime(2019, 1, 27, 14, 57, 57, 170, DateTimeKind.Local) },
+                    { 7, "Describtion  for sprint 7 ", new DateTime(2019, 3, 6, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Аеееее", 3, new DateTime(2019, 1, 23, 14, 57, 57, 170, DateTimeKind.Local) },
+                    { 6, "Describtion  for sprint 6", new DateTime(2019, 3, 5, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Щас мне будет легко", 2, new DateTime(2019, 1, 26, 14, 57, 57, 170, DateTimeKind.Local) },
+                    { 10, "Describtion for sprint 10", new DateTime(2019, 3, 12, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Пкция за спасение медвежат", 2, new DateTime(2019, 1, 26, 14, 57, 57, 170, DateTimeKind.Local) },
+                    { 4, "Describtion for sprint 4", new DateTime(2019, 3, 3, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Открываю пивко", 4, new DateTime(2019, 1, 28, 14, 57, 57, 170, DateTimeKind.Local) },
+                    { 3, "Describtion for sprint 3", new DateTime(2019, 3, 2, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Проект по искусству", 3, new DateTime(2019, 2, 7, 14, 57, 57, 170, DateTimeKind.Local) },
+                    { 2, "Describtion for sprint 2", new DateTime(2019, 2, 28, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Проект по строительству", 2, new DateTime(2019, 2, 17, 14, 57, 57, 170, DateTimeKind.Local) },
+                    { 1, "Describtion for sprint 1", new DateTime(2019, 3, 2, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Проект 1", 1, new DateTime(2019, 2, 1, 14, 57, 57, 170, DateTimeKind.Local) },
+                    { 5, "Describtion for sprint 5", new DateTime(2019, 3, 4, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Наливаю в бокал", 5, new DateTime(2019, 1, 26, 14, 57, 57, 170, DateTimeKind.Local) }
                 });
 
             migrationBuilder.InsertData(
@@ -381,8 +399,8 @@ namespace WorkFlow.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CompanyId", "Login", "Password", "RoleId" },
-                values: new object[] { 1, 1, "User", "123", 1 });
+                columns: new[] { "Id", "CompanyId", "Login", "Password" },
+                values: new object[] { 1, 1, "User", "123" });
 
             migrationBuilder.InsertData(
                 table: "ProjectUser",
@@ -404,6 +422,23 @@ namespace WorkFlow.Migrations
             migrationBuilder.InsertData(
                 table: "SprintUser",
                 columns: new[] { "SprintId", "UserId" },
+                values: new object[,]
+                {
+                    { 9, 1 },
+                    { 8, 1 },
+                    { 7, 1 },
+                    { 6, 1 },
+                    { 1, 1 },
+                    { 4, 1 },
+                    { 3, 1 },
+                    { 2, 1 },
+                    { 10, 1 },
+                    { 5, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UserRoles",
+                columns: new[] { "RoleId", "UserId" },
                 values: new object[] { 1, 1 });
 
             migrationBuilder.CreateIndex(
@@ -442,14 +477,14 @@ namespace WorkFlow.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_UserId",
+                table: "UserRoles",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_CompanyId",
                 table: "Users",
                 column: "CompanyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_RoleId",
-                table: "Users",
-                column: "RoleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -476,6 +511,9 @@ namespace WorkFlow.Migrations
                 name: "SprintUser");
 
             migrationBuilder.DropTable(
+                name: "UserRoles");
+
+            migrationBuilder.DropTable(
                 name: "Tags");
 
             migrationBuilder.DropTable(
@@ -485,13 +523,13 @@ namespace WorkFlow.Migrations
                 name: "Sprints");
 
             migrationBuilder.DropTable(
+                name: "Roles");
+
+            migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Companies");
-
-            migrationBuilder.DropTable(
-                name: "Roles");
         }
     }
 }
