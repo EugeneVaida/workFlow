@@ -17,15 +17,15 @@ namespace WorkFlow.Controllers
             return Ok($"Ваш логин: {User.Identity.Name}");
         }
 
-        [Authorize(Roles = "admin, user")]
+        [Authorize(Roles = "Admin, User")]
         [Route("getrole")]
         public IActionResult GetRole()
         {
-            if (User.IsInRole("admin"))
+            if (User.IsInRole("Admin"))
             {
                 return Ok("Ваша роль: администратор");
             }
-            else if(User.IsInRole("user"))
+            else if(User.IsInRole("User"))
             {
                 return Ok("Ваша роль: пользователь");
             }
