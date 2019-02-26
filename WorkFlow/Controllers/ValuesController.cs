@@ -4,12 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WorkFlow.Models;
 
 namespace WorkFlow.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private Context db;
+
+        public ValuesController(Context context)
+        {
+            db = context;
+        }
+
         [Authorize]
         [Route("getlogin")]
         public IActionResult GetLogin()
@@ -17,23 +25,23 @@ namespace WorkFlow.Controllers
             return Ok($"Ваш логин: {User.Identity.Name}");
         }
 
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles = "Admin, User, Manager")]
         [Route("getrole")]
         public IActionResult GetRole()
         {
-            if (User.IsInRole("Admin"))
+            string result = "";
+            var roleNames = db.Roles.Select(x => x.Name);
+
+            foreach (string name in roleNames)
             {
-                return Ok("Ваша роль: администратор");
+                if (User.IsInRole(name))
+                {
+                    result += " " + name;
+                }
             }
-            else if(User.IsInRole("User"))
-            {
-                return Ok("Ваша роль: пользователь");
-            }
-            else
-            {
-                return Ok("Ваша роль: can`t found");
-            }         
-           
+
+            return Ok(result);
+
         }
 
     }

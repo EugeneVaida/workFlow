@@ -63,7 +63,6 @@
                 type: 'GET',
                 url: '/api/values/getlogin',
                 beforeSend: function (xhr) {
-
                     var token = sessionStorage.getItem(tokenKey);
                     xhr.setRequestHeader("Authorization", "Bearer " + token);
                 },
@@ -81,7 +80,6 @@
                 type: 'GET',
                 url: '/api/values/getrole',
                 beforeSend: function (xhr) {
-
                     var token = sessionStorage.getItem(tokenKey);
                     xhr.setRequestHeader("Authorization", "Bearer " + token);
                 },
