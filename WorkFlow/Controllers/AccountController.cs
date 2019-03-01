@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace WorkFlow.Controllers
         public AccountController(Context context)
         {
             db = context;   
-        }        
+        }
 
         [HttpPost("/token")]
         public async Task Token()
@@ -36,7 +37,7 @@ namespace WorkFlow.Controllers
             }
 
             var now = DateTime.UtcNow;
-            // создаем JWT-токен
+            
             var jwt = new JwtSecurityToken(
                     issuer: AuthOptions.ISSUER,
                     audience: AuthOptions.AUDIENCE,
@@ -46,16 +47,24 @@ namespace WorkFlow.Controllers
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
+            var userId = db.Users.Where(x => x.Login == identity.Name).FirstOrDefault().Id;
+            var userRolesId = db.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId);
+            List<string> userRolesNames = new List<string>();
+            foreach (int roleId in userRolesId)
+            {
+                var roleName = db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
+                userRolesNames.Add(roleName);
+            }
             var response = new
             {
                 access_token = encodedJwt,
-                username = identity.Name
+                role = userRolesNames.ToArray()
             };
 
-            // сериализация ответа
             Response.ContentType = "application/json";
             await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
         }
+
 
         private ClaimsIdentity GetIdentity(string username, string password)
         {
@@ -78,8 +87,7 @@ namespace WorkFlow.Controllers
                     ClaimsIdentity.DefaultRoleClaimType);
                 return claimsIdentity;
             }
-
-            // если пользователя не найдено
+                        
             return null;
         }
     }

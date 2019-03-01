@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using WorkFlow.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace WorkFlow
 {
@@ -27,7 +28,7 @@ namespace WorkFlow
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-        {
+        {            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
@@ -59,11 +60,18 @@ namespace WorkFlow
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(connection));
 
+            services.AddCors();
             services.AddMvc();
+            
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors(builder =>
+                builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+            );
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
