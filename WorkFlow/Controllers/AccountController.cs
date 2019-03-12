@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -89,6 +91,51 @@ namespace WorkFlow.Controllers
             }
                         
             return null;
+        }
+
+        [HttpPost("/api/User/Register")]
+        [AllowAnonymous]
+        public async Task Register([FromBody] AccountModel model)
+        {            
+            User user = new User() { Login = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Password = model.Password};
+            db.Users.Add(user);
+            db.SaveChanges();
+                       
+            var identity = GetIdentity(user.Login, user.Password);
+            if (identity == null)
+            {
+                Response.StatusCode = 400;
+                await Response.WriteAsync("Invalid username or password.");
+                return;
+            }
+
+            var now = DateTime.UtcNow;
+
+            var jwt = new JwtSecurityToken(
+                    issuer: AuthOptions.ISSUER,
+                    audience: AuthOptions.AUDIENCE,
+                    notBefore: now,
+                    claims: identity.Claims,
+                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+            var userId = db.Users.Where(x => x.Login == identity.Name).FirstOrDefault().Id;
+            var userRolesId = db.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId);
+            List<string> userRolesNames = new List<string>();
+            foreach (int roleId in userRolesId)
+            {
+                var roleName = db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
+                userRolesNames.Add(roleName);
+            }
+            var response = new
+            {
+                access_token = encodedJwt,
+                role = userRolesNames.ToArray()
+            };
+
+            Response.ContentType = "application/json";
+            await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
         }
     }
 }
