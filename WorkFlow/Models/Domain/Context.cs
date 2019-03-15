@@ -117,11 +117,7 @@ namespace WorkFlow.Models
               new Role { Id = 1, Name = "Admin" },
               new Role { Id = 2, Name = "User" },
               new Role { Id = 3, Name = "Manager" }
-            );
-
-            modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, CompanyId = 1, Login = "User", Password = "123"}
-           );
+            );            
 
             modelBuilder.Entity<Tag>().HasData(
                 new Tag { Id = 1, Name = "Строительство" },

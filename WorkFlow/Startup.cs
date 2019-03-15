@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using WorkFlow.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using WorkFlow.Services;
 
 namespace WorkFlow
 {
@@ -60,6 +61,8 @@ namespace WorkFlow
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(connection));
 
+            // configure DI for application services
+            services.AddScoped<IUserService, UserService>();
             services.AddCors();
             services.AddMvc();
             

@@ -17,125 +17,125 @@ namespace WorkFlow.Controllers
 {
     public class AccountController : Controller
     {
-        private Context db;
+        //private Context db;
 
-        public AccountController(Context context)
-        {
-            db = context;   
-        }
+        //public AccountController(Context context)
+        //{
+        //    db = context;   
+        //}
 
-        [HttpPost("/token")]
-        public async Task Token()
-        {
-            var username = Request.Form["username"];
-            var password = Request.Form["password"];
+        //[HttpPost("/token")]
+        //public async Task Token()
+        //{
+        //    var username = Request.Form["username"];
+        //    var password = Request.Form["password"];
 
-            var identity = GetIdentity(username, password);
-            if (identity == null)
-            {
-                Response.StatusCode = 400;
-                await Response.WriteAsync("Invalid username or password.");
-                return;
-            }
+        //    var identity = GetIdentity(username, password);
+        //    if (identity == null)
+        //    {
+        //        Response.StatusCode = 400;
+        //        await Response.WriteAsync("Invalid username or password.");
+        //        return;
+        //    }
 
-            var now = DateTime.UtcNow;
+        //    var now = DateTime.UtcNow;
             
-            var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-                    audience: AuthOptions.AUDIENCE,
-                    notBefore: now,
-                    claims: identity.Claims,
-                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+        //    var jwt = new JwtSecurityToken(
+        //            issuer: AuthOptions.ISSUER,
+        //            audience: AuthOptions.AUDIENCE,
+        //            notBefore: now,
+        //            claims: identity.Claims,
+        //            expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+        //            signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+        //    var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            var userId = db.Users.Where(x => x.Login == identity.Name).FirstOrDefault().Id;
-            var userRolesId = db.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId);
-            List<string> userRolesNames = new List<string>();
-            foreach (int roleId in userRolesId)
-            {
-                var roleName = db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
-                userRolesNames.Add(roleName);
-            }
-            var response = new
-            {
-                access_token = encodedJwt,
-                role = userRolesNames.ToArray()
-            };
+        //    var userId = db.Users.Where(x => x.Login == identity.Name).FirstOrDefault().Id;
+        //    var userRolesId = db.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId);
+        //    List<string> userRolesNames = new List<string>();
+        //    foreach (int roleId in userRolesId)
+        //    {
+        //        var roleName = db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
+        //        userRolesNames.Add(roleName);
+        //    }
+        //    var response = new
+        //    {
+        //        access_token = encodedJwt,
+        //        role = userRolesNames.ToArray()
+        //    };
 
-            Response.ContentType = "application/json";
-            await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
-        }
+        //    Response.ContentType = "application/json";
+        //    await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
+        //}
 
 
-        private ClaimsIdentity GetIdentity(string username, string password)
-        {
-            User user = db.Users.FirstOrDefault(x => x.Login == username && x.Password == password);
-            if (user != null)
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login)
-                };
-                var userRolesId = db.UserRoles.Where(x => x.UserId == user.Id).Select(x => x.RoleId);
+        //private ClaimsIdentity GetIdentity(string username, string password)
+        //{
+        //    User user = db.Users.FirstOrDefault(x => x.Login == username && x.Password == password);
+        //    if (user != null)
+        //    {
+        //        var claims = new List<Claim>
+        //        {
+        //            new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login)
+        //        };
+        //        var userRolesId = db.UserRoles.Where(x => x.UserId == user.Id).Select(x => x.RoleId);
                 
-                foreach (int roleId in userRolesId)
-                {
-                    var roleName = db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
-                    claims.Add(new Claim(ClaimTypes.Role, roleName));
-                }
-                ClaimsIdentity claimsIdentity =
-                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType);
-                return claimsIdentity;
-            }
+        //        foreach (int roleId in userRolesId)
+        //        {
+        //            var roleName = db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
+        //            claims.Add(new Claim(ClaimTypes.Role, roleName));
+        //        }
+        //        ClaimsIdentity claimsIdentity =
+        //        new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+        //            ClaimsIdentity.DefaultRoleClaimType);
+        //        return claimsIdentity;
+        //    }
                         
-            return null;
-        }
+        //    return null;
+        //}
 
-        [HttpPost("/api/User/Register")]
-        [AllowAnonymous]
-        public async Task Register([FromBody] AccountModel model)
-        {            
-            User user = new User() { Login = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Password = model.Password};
-            db.Users.Add(user);
-            db.SaveChanges();
+        //[HttpPost("/api/User/Register")]
+        //[AllowAnonymous]
+        //public async Task Register([FromBody] AccountModel model)
+        //{            
+        //    User user = new User() { Login = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Password = model.Password};
+        //    db.Users.Add(user);
+        //    db.SaveChanges();
                        
-            var identity = GetIdentity(user.Login, user.Password);
-            if (identity == null)
-            {
-                Response.StatusCode = 400;
-                await Response.WriteAsync("Invalid username or password.");
-                return;
-            }
+        //    var identity = GetIdentity(user.Login, user.Password);
+        //    if (identity == null)
+        //    {
+        //        Response.StatusCode = 400;
+        //        await Response.WriteAsync("Invalid username or password.");
+        //        return;
+        //    }
 
-            var now = DateTime.UtcNow;
+        //    var now = DateTime.UtcNow;
 
-            var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-                    audience: AuthOptions.AUDIENCE,
-                    notBefore: now,
-                    claims: identity.Claims,
-                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+        //    var jwt = new JwtSecurityToken(
+        //            issuer: AuthOptions.ISSUER,
+        //            audience: AuthOptions.AUDIENCE,
+        //            notBefore: now,
+        //            claims: identity.Claims,
+        //            expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+        //            signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+        //    var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            var userId = db.Users.Where(x => x.Login == identity.Name).FirstOrDefault().Id;
-            var userRolesId = db.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId);
-            List<string> userRolesNames = new List<string>();
-            foreach (int roleId in userRolesId)
-            {
-                var roleName = db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
-                userRolesNames.Add(roleName);
-            }
-            var response = new
-            {
-                access_token = encodedJwt,
-                role = userRolesNames.ToArray()
-            };
+        //    var userId = db.Users.Where(x => x.Login == identity.Name).FirstOrDefault().Id;
+        //    var userRolesId = db.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId);
+        //    List<string> userRolesNames = new List<string>();
+        //    foreach (int roleId in userRolesId)
+        //    {
+        //        var roleName = db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
+        //        userRolesNames.Add(roleName);
+        //    }
+        //    var response = new
+        //    {
+        //        access_token = encodedJwt,
+        //        role = userRolesNames.ToArray()
+        //    };
 
-            Response.ContentType = "application/json";
-            await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
-        }
+        //    Response.ContentType = "application/json";
+        //    await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
+        //}
     }
 }
