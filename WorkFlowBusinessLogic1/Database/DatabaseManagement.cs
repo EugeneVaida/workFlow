@@ -1,25 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WorkFlowBusinessLogic;
+﻿using WorkFlowBusinessLogic;
+using WorkFlowBusinessLogic.Database;
 
 namespace WorkFlow.BusinessLogic
 {
     public class DatabaseManagement
     {
-        public string ConnectionString { get; set; }
-        public WorkFlowDbDataContext Db { get; set; }
-
-        public DatabaseManagement(string connection)
+        public DatabaseManagement(WorkFlowDbContext db)
         {
-            this.Db = new WorkFlowDbDataContext(connection);
-            this.ConnectionString = connection;
+            this.Db = db;
         }
-
-        public void ReInit()
-        {
-            this.Db = new WorkFlowDbDataContext(this.ConnectionString);
-        }
+        public WorkFlowDbContext Db { get; set; }        
     }
 }

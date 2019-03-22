@@ -1,32 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using WorkFlow.Models;
+using WorkFlowBusinessLogic.Database;
 
 namespace WorkFlow.Controllers
 {
     public class RoleController : Controller
     {
-        private Context db;
+        private readonly RoleManagement rm;
 
-        public RoleController(Context context)
+        public RoleController(WorkFlowDbContext context)
         {
-            db = context;
-        }
+            rm = new RoleManagement(context);
+        }       
+
+        //RoleManagement rm = new RoleManagement(ConfigurationManager.ConnectionStrings["WorkFlowConnection"].ToString());
+
 
         [HttpGet]
         [Route("api/GetAllRoles")]
         [AllowAnonymous]
         public JsonResult GetRoles()
         {
-            var roles = db.Roles
-                .Select(x => new { x.Id, x.Name })
-                .ToList();
+            var roles = rm.GetListOfAllRoles();
             return Json(roles);
         }
     }

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkFlow.BusinessLogic;
+using WorkFlow.Models;
 
 namespace WorkFlowBusinessLogic.Database
 {
     public class RoleManagement : DatabaseManagement
     {
 
-        public RoleManagement(string connection) : base(connection) { }
+        public RoleManagement(WorkFlowDbContext db) : base(db) { }
 
         public List<string> GetListOfUserRolesNames(int userId)
         {
@@ -29,5 +30,24 @@ namespace WorkFlowBusinessLogic.Database
         {
             return this.Db.Roles.Select(x => x.Name).ToList();
         }
+
+        public List<Role> GetListOfAllRoles()
+        {
+            return this.Db.Roles.ToList();
+        }
+
+        public void Create(string name)
+        {
+            Role role = new Role();
+            Create(role);
+        }
+
+        public void Create(Role role)
+        {
+            this.Db.Roles.Add(role);
+            this.Db.SaveChanges();
+        }
+
+        
     }
 }

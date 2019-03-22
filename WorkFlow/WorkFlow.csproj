@@ -15,4 +15,8 @@
     <ProjectReference Include="..\WorkFlowBusinessLogic1\WorkFlowBusinessLogic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

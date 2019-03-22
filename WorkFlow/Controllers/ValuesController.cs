@@ -13,33 +13,33 @@ namespace WorkFlow.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        RoleManagement rm = new RoleManagement(ConfigurationManager.ConnectionStrings["WorkFlowConnection"].ToString());
+        //RoleManagement rm = new RoleManagement(ConfigurationManager.ConnectionStrings["WorkFlowConnection"].ToString());
 
-        [Authorize]
-        [Route("getlogin")]
-        public IActionResult GetLogin()
-        {
-            return Ok($"Ваш логин: {User.Identity.Name}");
-        }
+        //[Authorize]
+        //[Route("getlogin")]
+        //public IActionResult GetLogin()
+        //{
+        //    return Ok($"Ваш логин: {User.Identity.Name}");
+        //}
 
-        [Authorize(Roles = "Admin, User, Manager")]
-        [Route("getrole")]
-        public IActionResult GetRole()
-        {
-            string result = "";
-            var roleNames = ;
+        //[Authorize(Roles = "Admin, User, Manager")]
+        //[Route("getrole")]
+        //public IActionResult GetRole()
+        //{
+        //    string result = "";
+        //    var roleNames = rm.GetListOfAllRolesNames();
 
-            foreach (string name in roleNames)
-            {
-                if (User.IsInRole(name))
-                {
-                    result += " " + name;
-                }
-            }
+        //    foreach (string name in roleNames)
+        //    {
+        //        if (User.IsInRole(name))
+        //        {
+        //            result += " " + name;
+        //        }
+        //    }
 
-            return Ok(result);
+        //    return Ok(result);
 
-        }
+        //}
 
     }
 }

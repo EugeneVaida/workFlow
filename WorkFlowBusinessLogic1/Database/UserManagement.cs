@@ -5,14 +5,15 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using WorkFlow.Models;
 using WorkFlowBusinessLogic;
+using WorkFlowBusinessLogic.Database;
 
 namespace WorkFlow.BusinessLogic
 {
     public class UserManagement : DatabaseManagement
     {
-        public UserManagement(string connection) : base(connection)
-        { }
+        public UserManagement(WorkFlowDbContext db) : base(db) { }
 
         public List<User> GetAllUsers()
         {
@@ -26,7 +27,7 @@ namespace WorkFlow.BusinessLogic
 
         public User GetUserByUsername(string username)
         {
-            return this.Db.Users.Where(x => x.Login.Equals(username)).FirstOrDefault();
+            return this.Db.Users.Where(x => x.Username.Equals(username)).FirstOrDefault();
         }
 
         public int GetUserIdByUsername(string username)
@@ -36,13 +37,13 @@ namespace WorkFlow.BusinessLogic
 
         public void CreateUser(User user)
         {
-            this.Db.Users.InsertOnSubmit(user);
+            this.Db.Users.Add(user);
             Submit();
         }
 
         public void CreateUser(string login, string password, int companyId)
         {
-            var user = new User(login, GetHash(password), companyId);
+            var user = new User();
             CreateUser(user);
         }
 
@@ -57,8 +58,8 @@ namespace WorkFlow.BusinessLogic
 
             if (user != null)
             {
-                user.Login = login;
-                user.Password = GetHash(password);
+                user.Username = login;
+                user.PasswordHash = GetHash(password);
                 user.CompanyId = companyId;
             }
             else
@@ -70,17 +71,17 @@ namespace WorkFlow.BusinessLogic
 
         public void Submit()
         {
-            this.Db.SubmitChanges();
+            this.Db.SaveChanges();
         }
 
         public ClaimsIdentity GetIdentity(string username, string password)
         {
-            User user = this.Db.Users.FirstOrDefault(x => x.Login == username && x.Password == GetHash(password));
+            User user = this.Db.Users.FirstOrDefault(x => x.Username == username && x.PasswordHash == GetHash(password));
             if (user != null)
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login)
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Username)
                 };
                 var userRolesId = this.Db.UserRoles.Where(x => x.UserId == user.Id).Select(x => x.RoleId);
 

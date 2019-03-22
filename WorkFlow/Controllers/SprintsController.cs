@@ -13,113 +13,113 @@ namespace WorkFlow.Controllers
     [ApiController]
     public class SprintsController : ControllerBase
     {
-        private readonly Context _context;
+        //private readonly Context _context;
 
-        public SprintsController(Context context)
-        {
-            _context = context;
-        }
+        //public SprintsController(Context context)
+        //{
+        //    _context = context;
+        //}
 
-        // GET: api/Sprints
-        [HttpGet]
-        public IEnumerable<Sprint> GetSprints()
-        {
-            return _context.Sprints;
-        }
+        //// GET: api/Sprints
+        //[HttpGet]
+        //public IEnumerable<Sprint> GetSprints()
+        //{
+        //    return _context.Sprints;
+        //}
 
-        // GET: api/Sprints/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSprint([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// GET: api/Sprints/5
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetSprint([FromRoute] int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            var sprint = await _context.Sprints.FindAsync(id);
+        //    var sprint = await _context.Sprints.FindAsync(id);
 
-            if (sprint == null)
-            {
-                return NotFound();
-            }
+        //    if (sprint == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(sprint);
-        }
+        //    return Ok(sprint);
+        //}
 
-        // PUT: api/Sprints/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSprint([FromRoute] int id, [FromBody] Sprint sprint)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/Sprints/5
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutSprint([FromRoute] int id, [FromBody] Sprint sprint)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != sprint.Id)
-            {
-                return BadRequest();
-            }
+        //    if (id != sprint.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            _context.Entry(sprint).State = EntityState.Modified;
+        //    _context.Entry(sprint).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SprintExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!SprintExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        // POST: api/Sprints
-        [HttpPost]
-        public async Task<IActionResult> PostSprint([FromBody] Sprint sprint)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: api/Sprints
+        //[HttpPost]
+        //public async Task<IActionResult> PostSprint([FromBody] Sprint sprint)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            _context.Sprints.Add(sprint);
-            await _context.SaveChangesAsync();
+        //    _context.Sprints.Add(sprint);
+        //    await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSprint", new { id = sprint.Id }, sprint);
-        }
+        //    return CreatedAtAction("GetSprint", new { id = sprint.Id }, sprint);
+        //}
 
-        // DELETE: api/Sprints/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSprint([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// DELETE: api/Sprints/5
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteSprint([FromRoute] int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            var sprint = await _context.Sprints.FindAsync(id);
-            if (sprint == null)
-            {
-                return NotFound();
-            }
+        //    var sprint = await _context.Sprints.FindAsync(id);
+        //    if (sprint == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.Sprints.Remove(sprint);
-            await _context.SaveChangesAsync();
+        //    _context.Sprints.Remove(sprint);
+        //    await _context.SaveChangesAsync();
 
-            return Ok(sprint);
-        }
+        //    return Ok(sprint);
+        //}
 
-        private bool SprintExists(int id)
-        {
-            return _context.Sprints.Any(e => e.Id == id);
-        }
+        //private bool SprintExists(int id)
+        //{
+        //    return _context.Sprints.Any(e => e.Id == id);
+        //}
     }
 }
