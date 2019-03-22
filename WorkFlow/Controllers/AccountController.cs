@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
@@ -9,18 +10,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using WorkFlow.BusinessLogic;
 using WorkFlow.Models;
+using WorkFlowBusinessLogic.Database;
 
 namespace WorkFlow.Controllers
 {
     public class AccountController : Controller
     {
-        private Context db;
-
-        public AccountController(Context context)
-        {
-            db = context;   
-        }
+        UserManagement um = new UserManagement(ConfigurationManager.ConnectionStrings["WorkFlowConnection"].ToString());
+        RoleManagement rm = new RoleManagement(ConfigurationManager.ConnectionStrings["WorkFlowConnection"].ToString());
 
         [HttpPost("/token")]
         public async Task Token()
@@ -36,8 +35,8 @@ namespace WorkFlow.Controllers
                 return;
             }
 
-            var now = DateTime.UtcNow;
-            
+            var now = DateTime.UtcNow;            
+
             var jwt = new JwtSecurityToken(
                     issuer: AuthOptions.ISSUER,
                     audience: AuthOptions.AUDIENCE,
@@ -47,14 +46,8 @@ namespace WorkFlow.Controllers
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            var userId = db.Users.Where(x => x.Login == identity.Name).FirstOrDefault().Id;
-            var userRolesId = db.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId);
-            List<string> userRolesNames = new List<string>();
-            foreach (int roleId in userRolesId)
-            {
-                var roleName = db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
-                userRolesNames.Add(roleName);
-            }
+            var userId = um.GetUserIdByUsername(identity.Name);
+            var userRolesNames = rm.GetListOfUserRolesNames(userId);
             var response = new
             {
                 access_token = encodedJwt,
@@ -68,27 +61,7 @@ namespace WorkFlow.Controllers
 
         private ClaimsIdentity GetIdentity(string username, string password)
         {
-            User user = db.Users.FirstOrDefault(x => x.Login == username && x.Password == password);
-            if (user != null)
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login)
-                };
-                var userRolesId = db.UserRoles.Where(x => x.UserId == user.Id).Select(x => x.RoleId);
-                
-                foreach (int roleId in userRolesId)
-                {
-                    var roleName = db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
-                    claims.Add(new Claim(ClaimTypes.Role, roleName));
-                }
-                ClaimsIdentity claimsIdentity =
-                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType);
-                return claimsIdentity;
-            }
-                        
-            return null;
+            return um.GetIdentity(username, password);
         }
     }
 }
