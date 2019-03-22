@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WorkFlow.Migrations
 {
-    public partial class initializeBD : Migration
+    public partial class firstmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -88,8 +88,11 @@ namespace WorkFlow.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Login = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
                     CompanyId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -307,16 +310,16 @@ namespace WorkFlow.Migrations
                 columns: new[] { "Id", "Describtion", "EndDate", "Name", "StartDate" },
                 values: new object[,]
                 {
-                    { 9, "Describtion", new DateTime(2019, 4, 1, 14, 57, 57, 169, DateTimeKind.Local), "Проект оздоровления нации", new DateTime(2019, 1, 23, 14, 57, 57, 169, DateTimeKind.Local) },
-                    { 8, "Describtion", new DateTime(2019, 3, 7, 14, 57, 57, 169, DateTimeKind.Local), "Здоровье", new DateTime(2019, 1, 19, 14, 57, 57, 169, DateTimeKind.Local) },
-                    { 7, "Describtion", new DateTime(2019, 3, 6, 14, 57, 57, 169, DateTimeKind.Local), "Аеееее", new DateTime(2019, 1, 20, 14, 57, 57, 169, DateTimeKind.Local) },
-                    { 6, "Describtion", new DateTime(2019, 3, 5, 14, 57, 57, 169, DateTimeKind.Local), "Щас мне будет легко", new DateTime(2019, 1, 22, 14, 57, 57, 169, DateTimeKind.Local) },
-                    { 1, "Describtion", new DateTime(2019, 3, 2, 14, 57, 57, 169, DateTimeKind.Local), "Проект 1", new DateTime(2019, 1, 27, 14, 57, 57, 169, DateTimeKind.Local) },
-                    { 4, "Describtion", new DateTime(2019, 3, 3, 14, 57, 57, 169, DateTimeKind.Local), "Открываю пивко", new DateTime(2019, 1, 26, 14, 57, 57, 169, DateTimeKind.Local) },
-                    { 3, "Describtion", new DateTime(2019, 3, 2, 14, 57, 57, 169, DateTimeKind.Local), "Проект по искусству", new DateTime(2019, 2, 6, 14, 57, 57, 169, DateTimeKind.Local) },
-                    { 2, "Describtion", new DateTime(2019, 2, 28, 14, 57, 57, 169, DateTimeKind.Local), "Проект по строительству", new DateTime(2019, 2, 16, 14, 57, 57, 169, DateTimeKind.Local) },
-                    { 10, "Describtion", new DateTime(2019, 3, 12, 14, 57, 57, 169, DateTimeKind.Local), "Пкция за спасение медвежат", new DateTime(2019, 1, 18, 14, 57, 57, 169, DateTimeKind.Local) },
-                    { 5, "Describtion", new DateTime(2019, 3, 4, 14, 57, 57, 169, DateTimeKind.Local), "Наливаю в бокал", new DateTime(2019, 1, 24, 14, 57, 57, 169, DateTimeKind.Local) }
+                    { 9, "Describtion", new DateTime(2019, 4, 18, 19, 9, 15, 830, DateTimeKind.Local), "Проект оздоровления нации", new DateTime(2019, 2, 9, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 8, "Describtion", new DateTime(2019, 3, 24, 19, 9, 15, 830, DateTimeKind.Local), "Здоровье", new DateTime(2019, 2, 5, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 7, "Describtion", new DateTime(2019, 3, 23, 19, 9, 15, 830, DateTimeKind.Local), "Аеееее", new DateTime(2019, 2, 6, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 6, "Describtion", new DateTime(2019, 3, 22, 19, 9, 15, 830, DateTimeKind.Local), "Щас мне будет легко", new DateTime(2019, 2, 8, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 1, "Describtion", new DateTime(2019, 3, 19, 19, 9, 15, 830, DateTimeKind.Local), "Проект 1", new DateTime(2019, 2, 13, 19, 9, 15, 829, DateTimeKind.Local) },
+                    { 4, "Describtion", new DateTime(2019, 3, 20, 19, 9, 15, 830, DateTimeKind.Local), "Открываю пивко", new DateTime(2019, 2, 12, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 3, "Describtion", new DateTime(2019, 3, 19, 19, 9, 15, 830, DateTimeKind.Local), "Проект по искусству", new DateTime(2019, 2, 23, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 2, "Describtion", new DateTime(2019, 3, 17, 19, 9, 15, 830, DateTimeKind.Local), "Проект по строительству", new DateTime(2019, 3, 5, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 10, "Describtion", new DateTime(2019, 3, 29, 19, 9, 15, 830, DateTimeKind.Local), "Пкция за спасение медвежат", new DateTime(2019, 2, 4, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 5, "Describtion", new DateTime(2019, 3, 21, 19, 9, 15, 830, DateTimeKind.Local), "Наливаю в бокал", new DateTime(2019, 2, 10, 19, 9, 15, 830, DateTimeKind.Local) }
                 });
 
             migrationBuilder.InsertData(
@@ -334,16 +337,16 @@ namespace WorkFlow.Migrations
                 columns: new[] { "Id", "Describtion", "EndDate", "Name", "Priority", "StartDate" },
                 values: new object[,]
                 {
-                    { 9, "Describtion for sprint 9", new DateTime(2019, 4, 1, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Проект оздоровления нации", 2, new DateTime(2019, 1, 25, 14, 57, 57, 170, DateTimeKind.Local) },
-                    { 8, "Describtion for sprint 8", new DateTime(2019, 3, 7, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Здоровье", 2, new DateTime(2019, 1, 27, 14, 57, 57, 170, DateTimeKind.Local) },
-                    { 7, "Describtion  for sprint 7 ", new DateTime(2019, 3, 6, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Аеееее", 3, new DateTime(2019, 1, 23, 14, 57, 57, 170, DateTimeKind.Local) },
-                    { 6, "Describtion  for sprint 6", new DateTime(2019, 3, 5, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Щас мне будет легко", 2, new DateTime(2019, 1, 26, 14, 57, 57, 170, DateTimeKind.Local) },
-                    { 10, "Describtion for sprint 10", new DateTime(2019, 3, 12, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Пкция за спасение медвежат", 2, new DateTime(2019, 1, 26, 14, 57, 57, 170, DateTimeKind.Local) },
-                    { 4, "Describtion for sprint 4", new DateTime(2019, 3, 3, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Открываю пивко", 4, new DateTime(2019, 1, 28, 14, 57, 57, 170, DateTimeKind.Local) },
-                    { 3, "Describtion for sprint 3", new DateTime(2019, 3, 2, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Проект по искусству", 3, new DateTime(2019, 2, 7, 14, 57, 57, 170, DateTimeKind.Local) },
-                    { 2, "Describtion for sprint 2", new DateTime(2019, 2, 28, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Проект по строительству", 2, new DateTime(2019, 2, 17, 14, 57, 57, 170, DateTimeKind.Local) },
-                    { 1, "Describtion for sprint 1", new DateTime(2019, 3, 2, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Проект 1", 1, new DateTime(2019, 2, 1, 14, 57, 57, 170, DateTimeKind.Local) },
-                    { 5, "Describtion for sprint 5", new DateTime(2019, 3, 4, 14, 57, 57, 170, DateTimeKind.Local), "Спринт по Наливаю в бокал", 5, new DateTime(2019, 1, 26, 14, 57, 57, 170, DateTimeKind.Local) }
+                    { 9, "Describtion for sprint 9", new DateTime(2019, 4, 18, 19, 9, 15, 830, DateTimeKind.Local), "Спринт по Проект оздоровления нации", 2, new DateTime(2019, 2, 11, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 8, "Describtion for sprint 8", new DateTime(2019, 3, 24, 19, 9, 15, 830, DateTimeKind.Local), "Спринт по Здоровье", 2, new DateTime(2019, 2, 13, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 7, "Describtion  for sprint 7 ", new DateTime(2019, 3, 23, 19, 9, 15, 830, DateTimeKind.Local), "Спринт по Аеееее", 3, new DateTime(2019, 2, 9, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 6, "Describtion  for sprint 6", new DateTime(2019, 3, 22, 19, 9, 15, 830, DateTimeKind.Local), "Спринт по Щас мне будет легко", 2, new DateTime(2019, 2, 12, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 10, "Describtion for sprint 10", new DateTime(2019, 3, 29, 19, 9, 15, 830, DateTimeKind.Local), "Спринт по Пкция за спасение медвежат", 2, new DateTime(2019, 2, 12, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 4, "Describtion for sprint 4", new DateTime(2019, 3, 20, 19, 9, 15, 830, DateTimeKind.Local), "Спринт по Открываю пивко", 4, new DateTime(2019, 2, 14, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 3, "Describtion for sprint 3", new DateTime(2019, 3, 19, 19, 9, 15, 830, DateTimeKind.Local), "Спринт по Проект по искусству", 3, new DateTime(2019, 2, 24, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 2, "Describtion for sprint 2", new DateTime(2019, 3, 17, 19, 9, 15, 830, DateTimeKind.Local), "Спринт по Проект по строительству", 2, new DateTime(2019, 3, 6, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 1, "Describtion for sprint 1", new DateTime(2019, 3, 19, 19, 9, 15, 830, DateTimeKind.Local), "Спринт по Проект 1", 1, new DateTime(2019, 2, 18, 19, 9, 15, 830, DateTimeKind.Local) },
+                    { 5, "Describtion for sprint 5", new DateTime(2019, 3, 21, 19, 9, 15, 830, DateTimeKind.Local), "Спринт по Наливаю в бокал", 5, new DateTime(2019, 2, 12, 19, 9, 15, 830, DateTimeKind.Local) }
                 });
 
             migrationBuilder.InsertData(
@@ -369,15 +372,15 @@ namespace WorkFlow.Migrations
                 values: new object[,]
                 {
                     { 10, 1 },
-                    { 1, 1 },
-                    { 2, 1 },
-                    { 3, 1 },
-                    { 4, 1 },
-                    { 5, 1 },
                     { 6, 1 },
+                    { 5, 1 },
+                    { 4, 1 },
+                    { 3, 1 },
+                    { 2, 1 },
+                    { 1, 1 },
+                    { 9, 1 },
                     { 7, 1 },
-                    { 8, 1 },
-                    { 9, 1 }
+                    { 8, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -385,29 +388,24 @@ namespace WorkFlow.Migrations
                 columns: new[] { "ProjectId", "TagId" },
                 values: new object[,]
                 {
-                    { 8, 8 },
-                    { 7, 7 },
-                    { 6, 6 },
-                    { 5, 5 },
-                    { 10, 10 },
-                    { 3, 3 },
                     { 2, 2 },
+                    { 3, 3 },
+                    { 4, 4 },
+                    { 5, 5 },
+                    { 6, 6 },
+                    { 7, 7 },
+                    { 8, 8 },
                     { 1, 1 },
                     { 9, 9 },
-                    { 4, 4 }
+                    { 10, 10 }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "CompanyId", "Login", "Password" },
-                values: new object[] { 1, 1, "User", "123" });
 
             migrationBuilder.InsertData(
                 table: "ProjectUser",
                 columns: new[] { "ProjectId", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 1 },
+                    { 10, 1 },
                     { 2, 1 },
                     { 3, 1 },
                     { 4, 1 },
@@ -416,7 +414,7 @@ namespace WorkFlow.Migrations
                     { 7, 1 },
                     { 8, 1 },
                     { 9, 1 },
-                    { 10, 1 }
+                    { 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -424,16 +422,16 @@ namespace WorkFlow.Migrations
                 columns: new[] { "SprintId", "UserId" },
                 values: new object[,]
                 {
-                    { 9, 1 },
                     { 8, 1 },
                     { 7, 1 },
                     { 6, 1 },
-                    { 1, 1 },
+                    { 5, 1 },
                     { 4, 1 },
                     { 3, 1 },
                     { 2, 1 },
-                    { 10, 1 },
-                    { 5, 1 }
+                    { 1, 1 },
+                    { 9, 1 },
+                    { 10, 1 }
                 });
 
             migrationBuilder.InsertData(
