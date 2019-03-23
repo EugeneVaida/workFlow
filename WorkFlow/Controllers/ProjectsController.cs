@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using WorkFlow.BusinessLogic;
 using WorkFlow.Models;
 using WorkFlowBusinessLogic;
+using WorkFlowBusinessLogic.Database;
 
 namespace WorkFlow.Controllers
 {
@@ -16,34 +17,39 @@ namespace WorkFlow.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
-        //ProjectManagement pm = new ProjectManagement();
+        private readonly ProjectManagement pm;
 
-        //// GET: api/Projects
-        //[HttpGet]
-        //public List<Project> GetProjects()
-        //{
-        //    return pm.GetAllProjects();
-        //}
+        public ProjectsController(WorkFlowDbContext context)
+        {
+            pm = new ProjectManagement(context);
+        }
 
-        //// GET: api/Projects/5
-        //[HttpGet("{id}")]
-        //public IActionResult GetProject([FromRoute] int id)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // GET: api/Projects
+        [HttpGet]
+        public List<Project> GetProjects()
+        {
+            return pm.GetAllProjects();
+        }
 
-        //    var project = pm.GetProjectById(id);
+        // GET: api/Projects/5
+        [HttpGet("{id}")]
+        public IActionResult GetProject([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    if (project == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var project = pm.GetProjectById(id);
 
-        //    return Ok(project);
-        //}
+            if (project == null)
+            {
+                return NotFound();
+            }
 
-        
+            return Ok(project);
+        }
+
+
     }
 }

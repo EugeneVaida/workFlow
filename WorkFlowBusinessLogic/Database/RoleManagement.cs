@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WorkFlow.BusinessLogic;
+using Microsoft.EntityFrameworkCore;
 using WorkFlow.Models;
 
 namespace WorkFlowBusinessLogic.Database
@@ -14,16 +15,8 @@ namespace WorkFlowBusinessLogic.Database
         public RoleManagement(WorkFlowDbContext db) : base(db) { }
 
         public List<string> GetListOfUserRolesNames(int userId)
-        {
-            //var userRolesId = this.Db.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId);
-            //List<string> userRolesNames = new List<string>();
-            //foreach (int roleId in userRolesId)
-            //{
-            //    var roleName = this.Db.Roles.Where(x => x.Id.Equals(roleId)).FirstOrDefault().Name;
-            //    userRolesNames.Add(roleName);
-            //}           
-
-            return this.Db.Users.Where(x => x.Id == userId).FirstOrDefault().UserRoles.Select(x => x.Role.Name).ToList();
+        {            
+            return this.Db.UserRoles.Include(x => x.Role).Select(x => x.Role.Name).ToList();
         }
 
         public List<string> GetListOfAllRolesNames()

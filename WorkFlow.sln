@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkFlow", "WorkFlow\WorkFlow.csproj", "{D50559AE-F369-4B77-92C3-3DBA583323BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlowBusinessLogic", "WorkFlowBusinessLogic1\WorkFlowBusinessLogic.csproj", "{3867E47C-13F8-4776-AEC6-C7465EDE7A7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkFlowBusinessLogic", "WorkFlowBusinessLogic\WorkFlowBusinessLogic.csproj", "{3867E47C-13F8-4776-AEC6-C7465EDE7A7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

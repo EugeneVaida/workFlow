@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
@@ -12,11 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkFlowBusinessLogic1\WorkFlowBusinessLogic.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\WorkFlowBusinessLogic\WorkFlowBusinessLogic.csproj" />
   </ItemGroup>
 
 </Project>

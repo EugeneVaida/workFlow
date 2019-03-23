@@ -20,10 +20,7 @@ namespace WorkFlow.Controllers
         public RoleController(WorkFlowDbContext context)
         {
             rm = new RoleManagement(context);
-        }       
-
-        //RoleManagement rm = new RoleManagement(ConfigurationManager.ConnectionStrings["WorkFlowConnection"].ToString());
-
+        } 
 
         [HttpGet]
         [Route("api/GetAllRoles")]

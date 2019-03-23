@@ -56,9 +56,9 @@ namespace WorkFlow
                         };
                     });
 
-            // получаем строку подключения из файла конфигурации
+            
             string connection = Configuration.GetConnectionString("WorkFlowConnection");
-            // добавляем контекст MobileContext в качестве сервиса в приложение
+            
             services.AddDbContext<WorkFlowDbContext>(options =>
                 options.UseSqlServer(connection));
 
