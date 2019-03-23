@@ -26,5 +26,31 @@ namespace WorkFlow.BusinessLogic
         {
             return this.Db.Projects.Where(x => x.Id == id).FirstOrDefault();
         }
+
+        public Project DeleteProject(int id)
+        {
+            var project = this.Db.Projects.Where(x => x.Id == id).FirstOrDefault();
+            this.Db.Remove(project);
+            this.Db.SaveChanges();
+            return project;
+        }
+
+        public void CreateProject(Project project)
+        {
+            this.Db.Projects.Add(project);
+            this.Db.SaveChanges();
+        }
+
+        public void UpdateProject(int id, Project project)
+        {
+            var item = this.Db.Projects.Where(x => x.Id == id).FirstOrDefault();
+
+            item.Name = project.Name;
+            item.Describtion = project.Describtion;
+            item.StartDate = project.StartDate;
+            item.EndDate = project.EndDate;
+
+            this.Db.SaveChanges();
+        }
     }
 }
