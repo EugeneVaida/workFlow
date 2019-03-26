@@ -37,34 +37,33 @@ namespace WorkFlow.BusinessLogic
 
         public void CreateUser(User user)
         {
+            user.PasswordHash = GetHash(user.PasswordHash);
             this.Db.Users.Add(user);
             Submit();
+        } 
+
+        public User DeleteUser(int id)
+        {
+            var user = this.Db.Users.Where(x => x.Id == id).FirstOrDefault();
+            this.Db.Users.Remove(user);
+            this.Db.SaveChanges();
+            return user;
         }
 
-        public void CreateUser(string login, string password, int companyId)
+        public void UpdateUser(int id, User user)
         {
-            var user = new User();
-            CreateUser(user);
-        }
-
-        public void UpdateUser(User user)
-        {
-            
-        }
-
-        public void UpdateUser(int id, string login, string password, int companyId)
-        {
-            var user = this.Db.Users.Where(x => x.Id == id).First();
+            var updUser = this.Db.Users.Where(x => x.Id == id).First();
 
             if (user != null)
             {
-                user.Username = login;
-                user.PasswordHash = GetHash(password);
-                user.CompanyId = companyId;
+                updUser.Username = user.Username;
+                updUser.LastName = user.LastName;
+                updUser.Username = user.Username;
+                updUser.PasswordHash = GetHash(user.PasswordHash);                
             }
             else
             {
-                CreateUser(login, password, companyId);
+                CreateUser(user);
             }
         }
 
@@ -97,8 +96,7 @@ namespace WorkFlow.BusinessLogic
             }
 
             return null;
-        }
-
+        }        
 
         public string GetHash(string password)
         {

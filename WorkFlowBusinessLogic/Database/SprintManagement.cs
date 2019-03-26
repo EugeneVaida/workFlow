@@ -16,10 +16,10 @@ namespace WorkFlow.BusinessLogic
             return this.Db.Sprints.ToList();
         }
 
-        //public List<Project> GetProjectsForUser(int userId)
-        //{
-        //    return this.Db.Users.Where(x => x.Id == userId).FirstOrDefault().ProjectUsers.Select(x => x.Project).ToList();
-        //}
+        public List<Project> GetProjectsForUser(int userId)
+        {
+            return this.Db.Users.Where(x => x.Id == userId).FirstOrDefault().ProjectUsers.Select(x => x.Project).ToList();
+        }
 
         public Sprint GetSprintById(int id)
         {
@@ -52,5 +52,7 @@ namespace WorkFlow.BusinessLogic
 
             this.Db.SaveChanges();
         }
+
+
     }
 }

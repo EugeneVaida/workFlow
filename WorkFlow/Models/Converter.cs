@@ -53,5 +53,17 @@ namespace WorkFlow.Models
             };
             return sprint;
         }
+
+        public User ToUser(UserDto userD)
+        {
+            User user = new User()
+            {
+                FirstName = userD.FirstName,
+                LastName = userD.LastName,
+                Username = userD.Username,
+                PasswordHash = userD.Password           
+            };
+            return user;
+        }
     }
 }
