@@ -14,6 +14,7 @@ namespace WorkFlowBusinessLogic.Database
         public DbSet<LogHistory> LogHistories { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectSprint> ProjectSprint { get; set; }
         public DbSet<ProjectTag> ProjectTags { get; set; }
         public DbSet<SearchHistory> SearchHistories { get; set; }
         public DbSet<Sprint> Sprints { get; set; }

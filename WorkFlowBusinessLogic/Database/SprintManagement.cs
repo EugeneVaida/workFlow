@@ -35,6 +35,35 @@ namespace WorkFlow.BusinessLogic
             return sprint;
         }
 
+        public void UpdateProjectsToSprint(int sprintId, List<int> projectIds)
+        {
+            RemoveProjectsToSprint(sprintId);
+            AddProjectsToSprint(sprintId, projectIds);
+        }
+
+        public void RemoveProjectsToSprint(int sprintId)
+        {
+            var sprintProjects = this.Db.ProjectSprint.Where(x => x.SprintId == sprintId);
+            this.Db.ProjectSprint.RemoveRange(sprintProjects);
+            this.Db.SaveChanges();
+        }
+
+        public void AddProjectsToSprint(int sprintId, List<int> projectIds)
+        {
+            List<ProjectSprint> updList = new List<ProjectSprint>();
+            foreach (var id in projectIds)
+            {
+                var projectSprint = new ProjectSprint()
+                {
+                    ProjectId = id,
+                    SprintId = sprintId
+                };
+                updList.Add(projectSprint);
+            }
+            this.Db.AddRange(updList);
+            this.Db.SaveChanges();
+        }
+
         public void CreateSprint(Sprint sprint)
         {
             this.Db.Sprints.Add(sprint);

@@ -49,7 +49,7 @@ namespace WorkFlow.Models
                 Description = sprintD.Description,
                 StartDate = sprintD.StartDate,
                 EndDate = sprintD.EndDate,
-                Priority = sprintD.Priority
+                Priority = sprintD.Priority                
             };
             return sprint;
         }

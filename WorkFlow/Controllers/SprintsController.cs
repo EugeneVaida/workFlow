@@ -61,6 +61,7 @@ namespace WorkFlow.Controllers
         {
             var sprint = converter.ToSprint(sprintD);
             sm.UpdateSprint(id, sprint);
+            sm.UpdateProjectsToSprint(id, sprintD.Projects.Select(x => x.Id).ToList());
             return Ok(sprint);
         }
     }

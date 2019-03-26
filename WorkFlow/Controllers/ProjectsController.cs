@@ -30,7 +30,7 @@ namespace WorkFlow.Controllers
         [AllowAnonymous]
         public JsonResult GetProjects()
         {
-            var projects = pm.GetAllProjects();
+            var projects = pm.GetAllProjects().Select(x => converter.ToProjectDto(x));
             return Json(projects);
         }
 
