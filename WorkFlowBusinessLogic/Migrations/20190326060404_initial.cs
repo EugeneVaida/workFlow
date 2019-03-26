@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WorkFlowBusinessLogic.Migrations
 {
-    public partial class first : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,7 +59,7 @@ namespace WorkFlowBusinessLogic.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    Describtion = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
                     Priority = table.Column<int>(nullable: false)
@@ -310,16 +310,16 @@ namespace WorkFlowBusinessLogic.Migrations
                 columns: new[] { "Id", "Describtion", "EndDate", "Name", "StartDate" },
                 values: new object[,]
                 {
-                    { 9, "Describtion", new DateTime(2019, 4, 25, 23, 30, 30, 107, DateTimeKind.Local), "Проект оздоровления нации", new DateTime(2019, 2, 16, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 8, "Describtion", new DateTime(2019, 3, 31, 23, 30, 30, 107, DateTimeKind.Local), "Здоровье", new DateTime(2019, 2, 12, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 7, "Describtion", new DateTime(2019, 3, 30, 23, 30, 30, 107, DateTimeKind.Local), "Аеееее", new DateTime(2019, 2, 13, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 6, "Describtion", new DateTime(2019, 3, 29, 23, 30, 30, 107, DateTimeKind.Local), "Щас мне будет легко", new DateTime(2019, 2, 15, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 1, "Describtion", new DateTime(2019, 3, 26, 23, 30, 30, 107, DateTimeKind.Local), "Проект 1", new DateTime(2019, 2, 20, 23, 30, 30, 106, DateTimeKind.Local) },
-                    { 4, "Describtion", new DateTime(2019, 3, 27, 23, 30, 30, 107, DateTimeKind.Local), "Открываю пивко", new DateTime(2019, 2, 19, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 3, "Describtion", new DateTime(2019, 3, 26, 23, 30, 30, 107, DateTimeKind.Local), "Проект по искусству", new DateTime(2019, 3, 2, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 2, "Describtion", new DateTime(2019, 3, 24, 23, 30, 30, 107, DateTimeKind.Local), "Проект по строительству", new DateTime(2019, 3, 12, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 10, "Describtion", new DateTime(2019, 4, 5, 23, 30, 30, 107, DateTimeKind.Local), "Пкция за спасение медвежат", new DateTime(2019, 2, 11, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 5, "Describtion", new DateTime(2019, 3, 28, 23, 30, 30, 107, DateTimeKind.Local), "Наливаю в бокал", new DateTime(2019, 2, 17, 23, 30, 30, 107, DateTimeKind.Local) }
+                    { 9, "Describtion", new DateTime(2019, 4, 29, 9, 4, 4, 119, DateTimeKind.Local), "Проект оздоровления нации", new DateTime(2019, 2, 20, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 8, "Describtion", new DateTime(2019, 4, 4, 9, 4, 4, 119, DateTimeKind.Local), "Здоровье", new DateTime(2019, 2, 16, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 7, "Describtion", new DateTime(2019, 4, 3, 9, 4, 4, 119, DateTimeKind.Local), "Аеееее", new DateTime(2019, 2, 17, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 6, "Describtion", new DateTime(2019, 4, 2, 9, 4, 4, 119, DateTimeKind.Local), "Щас мне будет легко", new DateTime(2019, 2, 19, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 1, "Describtion", new DateTime(2019, 3, 30, 9, 4, 4, 119, DateTimeKind.Local), "Проект 1", new DateTime(2019, 2, 24, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 4, "Describtion", new DateTime(2019, 3, 31, 9, 4, 4, 119, DateTimeKind.Local), "Открываю пивко", new DateTime(2019, 2, 23, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 3, "Describtion", new DateTime(2019, 3, 30, 9, 4, 4, 119, DateTimeKind.Local), "Проект по искусству", new DateTime(2019, 3, 6, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 2, "Describtion", new DateTime(2019, 3, 28, 9, 4, 4, 119, DateTimeKind.Local), "Проект по строительству", new DateTime(2019, 3, 16, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 10, "Describtion", new DateTime(2019, 4, 9, 9, 4, 4, 119, DateTimeKind.Local), "Пкция за спасение медвежат", new DateTime(2019, 2, 15, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 5, "Describtion", new DateTime(2019, 4, 1, 9, 4, 4, 119, DateTimeKind.Local), "Наливаю в бокал", new DateTime(2019, 2, 21, 9, 4, 4, 119, DateTimeKind.Local) }
                 });
 
             migrationBuilder.InsertData(
@@ -334,19 +334,19 @@ namespace WorkFlowBusinessLogic.Migrations
 
             migrationBuilder.InsertData(
                 table: "Sprints",
-                columns: new[] { "Id", "Describtion", "EndDate", "Name", "Priority", "StartDate" },
+                columns: new[] { "Id", "Description", "EndDate", "Name", "Priority", "StartDate" },
                 values: new object[,]
                 {
-                    { 9, "Describtion for sprint 9", new DateTime(2019, 4, 25, 23, 30, 30, 107, DateTimeKind.Local), "Спринт по Проект оздоровления нации", 2, new DateTime(2019, 2, 18, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 8, "Describtion for sprint 8", new DateTime(2019, 3, 31, 23, 30, 30, 107, DateTimeKind.Local), "Спринт по Здоровье", 2, new DateTime(2019, 2, 20, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 7, "Describtion  for sprint 7 ", new DateTime(2019, 3, 30, 23, 30, 30, 107, DateTimeKind.Local), "Спринт по Аеееее", 3, new DateTime(2019, 2, 16, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 6, "Describtion  for sprint 6", new DateTime(2019, 3, 29, 23, 30, 30, 107, DateTimeKind.Local), "Спринт по Щас мне будет легко", 2, new DateTime(2019, 2, 19, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 10, "Describtion for sprint 10", new DateTime(2019, 4, 5, 23, 30, 30, 107, DateTimeKind.Local), "Спринт по Пкция за спасение медвежат", 2, new DateTime(2019, 2, 19, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 4, "Describtion for sprint 4", new DateTime(2019, 3, 27, 23, 30, 30, 107, DateTimeKind.Local), "Спринт по Открываю пивко", 4, new DateTime(2019, 2, 21, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 3, "Describtion for sprint 3", new DateTime(2019, 3, 26, 23, 30, 30, 107, DateTimeKind.Local), "Спринт по Проект по искусству", 3, new DateTime(2019, 3, 3, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 2, "Describtion for sprint 2", new DateTime(2019, 3, 24, 23, 30, 30, 107, DateTimeKind.Local), "Спринт по Проект по строительству", 2, new DateTime(2019, 3, 13, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 1, "Describtion for sprint 1", new DateTime(2019, 3, 26, 23, 30, 30, 107, DateTimeKind.Local), "Спринт по Проект 1", 1, new DateTime(2019, 2, 25, 23, 30, 30, 107, DateTimeKind.Local) },
-                    { 5, "Describtion for sprint 5", new DateTime(2019, 3, 28, 23, 30, 30, 107, DateTimeKind.Local), "Спринт по Наливаю в бокал", 5, new DateTime(2019, 2, 19, 23, 30, 30, 107, DateTimeKind.Local) }
+                    { 9, "Describtion for sprint 9", new DateTime(2019, 4, 29, 9, 4, 4, 119, DateTimeKind.Local), "Спринт по Проект оздоровления нации", 2, new DateTime(2019, 2, 22, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 8, "Describtion for sprint 8", new DateTime(2019, 4, 4, 9, 4, 4, 119, DateTimeKind.Local), "Спринт по Здоровье", 2, new DateTime(2019, 2, 24, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 7, "Describtion  for sprint 7 ", new DateTime(2019, 4, 3, 9, 4, 4, 119, DateTimeKind.Local), "Спринт по Аеееее", 3, new DateTime(2019, 2, 20, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 6, "Describtion  for sprint 6", new DateTime(2019, 4, 2, 9, 4, 4, 119, DateTimeKind.Local), "Спринт по Щас мне будет легко", 2, new DateTime(2019, 2, 23, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 10, "Describtion for sprint 10", new DateTime(2019, 4, 9, 9, 4, 4, 119, DateTimeKind.Local), "Спринт по Пкция за спасение медвежат", 2, new DateTime(2019, 2, 23, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 4, "Describtion for sprint 4", new DateTime(2019, 3, 31, 9, 4, 4, 119, DateTimeKind.Local), "Спринт по Открываю пивко", 4, new DateTime(2019, 2, 25, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 3, "Describtion for sprint 3", new DateTime(2019, 3, 30, 9, 4, 4, 119, DateTimeKind.Local), "Спринт по Проект по искусству", 3, new DateTime(2019, 3, 7, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 2, "Describtion for sprint 2", new DateTime(2019, 3, 28, 9, 4, 4, 119, DateTimeKind.Local), "Спринт по Проект по строительству", 2, new DateTime(2019, 3, 17, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 1, "Describtion for sprint 1", new DateTime(2019, 3, 30, 9, 4, 4, 119, DateTimeKind.Local), "Спринт по Проект 1", 1, new DateTime(2019, 3, 1, 9, 4, 4, 119, DateTimeKind.Local) },
+                    { 5, "Describtion for sprint 5", new DateTime(2019, 4, 1, 9, 4, 4, 119, DateTimeKind.Local), "Спринт по Наливаю в бокал", 5, new DateTime(2019, 2, 23, 9, 4, 4, 119, DateTimeKind.Local) }
                 });
 
             migrationBuilder.InsertData(

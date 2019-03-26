@@ -10,6 +10,7 @@ using WorkFlow.BusinessLogic;
 using WorkFlow.Models;
 using WorkFlow.Models.Dtos;
 using WorkFlowBusinessLogic.Database;
+using Newtonsoft.Json;
 
 namespace WorkFlow.Controllers
 {    
@@ -28,8 +29,9 @@ namespace WorkFlow.Controllers
         [AllowAnonymous]
         public JsonResult GetSprints()
         {
-            var prosprints = sm.GetAllSprints();
-            return Json(prosprints);
+            var sprints = sm.GetAllSprints().Select(x => converter.ToSprintDto(x, x.ProjectSprints.Select(y => y.Project).ToList()));
+
+            return Json(sprints);
         }
 
         [HttpPost]

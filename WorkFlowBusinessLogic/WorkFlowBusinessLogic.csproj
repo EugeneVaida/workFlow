@@ -127,9 +127,9 @@
     <Compile Include="Database\TagManagement.cs" />
     <Compile Include="Database\UserManagement.cs" />
     <Compile Include="Database\WorkFlowDbContext.cs" />
-    <Compile Include="Migrations\20190322203041_first.cs" />
-    <Compile Include="Migrations\20190322203041_first.designer.cs">
-      <DependentUpon>20190322203041_first.cs</DependentUpon>
+    <Compile Include="Migrations\20190326060404_initial.cs" />
+    <Compile Include="Migrations\20190326060404_initial.designer.cs">
+      <DependentUpon>20190326060404_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\WorkFlowDbContextModelSnapshot.cs" />
     <Compile Include="Model\Domain\Company.cs" />

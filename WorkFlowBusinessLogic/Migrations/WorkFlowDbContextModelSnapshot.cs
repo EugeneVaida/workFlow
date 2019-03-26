@@ -106,16 +106,16 @@ namespace WorkFlowBusinessLogic.Migrations
                     b.ToTable("Projects");
 
                     b.HasData(
-                        new { Id = 1, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 26, 23, 30, 30, 107, DateTimeKind.Local), Name = "Проект 1", StartDate = new DateTime(2019, 2, 20, 23, 30, 30, 106, DateTimeKind.Local) },
-                        new { Id = 2, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 24, 23, 30, 30, 107, DateTimeKind.Local), Name = "Проект по строительству", StartDate = new DateTime(2019, 3, 12, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 3, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 26, 23, 30, 30, 107, DateTimeKind.Local), Name = "Проект по искусству", StartDate = new DateTime(2019, 3, 2, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 4, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 27, 23, 30, 30, 107, DateTimeKind.Local), Name = "Открываю пивко", StartDate = new DateTime(2019, 2, 19, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 5, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 28, 23, 30, 30, 107, DateTimeKind.Local), Name = "Наливаю в бокал", StartDate = new DateTime(2019, 2, 17, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 6, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 29, 23, 30, 30, 107, DateTimeKind.Local), Name = "Щас мне будет легко", StartDate = new DateTime(2019, 2, 15, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 7, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 30, 23, 30, 30, 107, DateTimeKind.Local), Name = "Аеееее", StartDate = new DateTime(2019, 2, 13, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 8, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 31, 23, 30, 30, 107, DateTimeKind.Local), Name = "Здоровье", StartDate = new DateTime(2019, 2, 12, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 9, Describtion = "Describtion", EndDate = new DateTime(2019, 4, 25, 23, 30, 30, 107, DateTimeKind.Local), Name = "Проект оздоровления нации", StartDate = new DateTime(2019, 2, 16, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 10, Describtion = "Describtion", EndDate = new DateTime(2019, 4, 5, 23, 30, 30, 107, DateTimeKind.Local), Name = "Пкция за спасение медвежат", StartDate = new DateTime(2019, 2, 11, 23, 30, 30, 107, DateTimeKind.Local) }
+                        new { Id = 1, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 30, 9, 4, 4, 119, DateTimeKind.Local), Name = "Проект 1", StartDate = new DateTime(2019, 2, 24, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 2, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 28, 9, 4, 4, 119, DateTimeKind.Local), Name = "Проект по строительству", StartDate = new DateTime(2019, 3, 16, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 3, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 30, 9, 4, 4, 119, DateTimeKind.Local), Name = "Проект по искусству", StartDate = new DateTime(2019, 3, 6, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 4, Describtion = "Describtion", EndDate = new DateTime(2019, 3, 31, 9, 4, 4, 119, DateTimeKind.Local), Name = "Открываю пивко", StartDate = new DateTime(2019, 2, 23, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 5, Describtion = "Describtion", EndDate = new DateTime(2019, 4, 1, 9, 4, 4, 119, DateTimeKind.Local), Name = "Наливаю в бокал", StartDate = new DateTime(2019, 2, 21, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 6, Describtion = "Describtion", EndDate = new DateTime(2019, 4, 2, 9, 4, 4, 119, DateTimeKind.Local), Name = "Щас мне будет легко", StartDate = new DateTime(2019, 2, 19, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 7, Describtion = "Describtion", EndDate = new DateTime(2019, 4, 3, 9, 4, 4, 119, DateTimeKind.Local), Name = "Аеееее", StartDate = new DateTime(2019, 2, 17, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 8, Describtion = "Describtion", EndDate = new DateTime(2019, 4, 4, 9, 4, 4, 119, DateTimeKind.Local), Name = "Здоровье", StartDate = new DateTime(2019, 2, 16, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 9, Describtion = "Describtion", EndDate = new DateTime(2019, 4, 29, 9, 4, 4, 119, DateTimeKind.Local), Name = "Проект оздоровления нации", StartDate = new DateTime(2019, 2, 20, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 10, Describtion = "Describtion", EndDate = new DateTime(2019, 4, 9, 9, 4, 4, 119, DateTimeKind.Local), Name = "Пкция за спасение медвежат", StartDate = new DateTime(2019, 2, 15, 9, 4, 4, 119, DateTimeKind.Local) }
                     );
                 });
 
@@ -239,7 +239,7 @@ namespace WorkFlowBusinessLogic.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Describtion");
+                    b.Property<string>("Description");
 
                     b.Property<DateTime>("EndDate");
 
@@ -254,16 +254,16 @@ namespace WorkFlowBusinessLogic.Migrations
                     b.ToTable("Sprints");
 
                     b.HasData(
-                        new { Id = 1, Describtion = "Describtion for sprint 1", EndDate = new DateTime(2019, 3, 26, 23, 30, 30, 107, DateTimeKind.Local), Name = "Спринт по Проект 1", Priority = 1, StartDate = new DateTime(2019, 2, 25, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 2, Describtion = "Describtion for sprint 2", EndDate = new DateTime(2019, 3, 24, 23, 30, 30, 107, DateTimeKind.Local), Name = "Спринт по Проект по строительству", Priority = 2, StartDate = new DateTime(2019, 3, 13, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 3, Describtion = "Describtion for sprint 3", EndDate = new DateTime(2019, 3, 26, 23, 30, 30, 107, DateTimeKind.Local), Name = "Спринт по Проект по искусству", Priority = 3, StartDate = new DateTime(2019, 3, 3, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 4, Describtion = "Describtion for sprint 4", EndDate = new DateTime(2019, 3, 27, 23, 30, 30, 107, DateTimeKind.Local), Name = "Спринт по Открываю пивко", Priority = 4, StartDate = new DateTime(2019, 2, 21, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 5, Describtion = "Describtion for sprint 5", EndDate = new DateTime(2019, 3, 28, 23, 30, 30, 107, DateTimeKind.Local), Name = "Спринт по Наливаю в бокал", Priority = 5, StartDate = new DateTime(2019, 2, 19, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 6, Describtion = "Describtion  for sprint 6", EndDate = new DateTime(2019, 3, 29, 23, 30, 30, 107, DateTimeKind.Local), Name = "Спринт по Щас мне будет легко", Priority = 2, StartDate = new DateTime(2019, 2, 19, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 7, Describtion = "Describtion  for sprint 7 ", EndDate = new DateTime(2019, 3, 30, 23, 30, 30, 107, DateTimeKind.Local), Name = "Спринт по Аеееее", Priority = 3, StartDate = new DateTime(2019, 2, 16, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 8, Describtion = "Describtion for sprint 8", EndDate = new DateTime(2019, 3, 31, 23, 30, 30, 107, DateTimeKind.Local), Name = "Спринт по Здоровье", Priority = 2, StartDate = new DateTime(2019, 2, 20, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 9, Describtion = "Describtion for sprint 9", EndDate = new DateTime(2019, 4, 25, 23, 30, 30, 107, DateTimeKind.Local), Name = "Спринт по Проект оздоровления нации", Priority = 2, StartDate = new DateTime(2019, 2, 18, 23, 30, 30, 107, DateTimeKind.Local) },
-                        new { Id = 10, Describtion = "Describtion for sprint 10", EndDate = new DateTime(2019, 4, 5, 23, 30, 30, 107, DateTimeKind.Local), Name = "Спринт по Пкция за спасение медвежат", Priority = 2, StartDate = new DateTime(2019, 2, 19, 23, 30, 30, 107, DateTimeKind.Local) }
+                        new { Id = 1, Description = "Describtion for sprint 1", EndDate = new DateTime(2019, 3, 30, 9, 4, 4, 119, DateTimeKind.Local), Name = "Спринт по Проект 1", Priority = 1, StartDate = new DateTime(2019, 3, 1, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 2, Description = "Describtion for sprint 2", EndDate = new DateTime(2019, 3, 28, 9, 4, 4, 119, DateTimeKind.Local), Name = "Спринт по Проект по строительству", Priority = 2, StartDate = new DateTime(2019, 3, 17, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 3, Description = "Describtion for sprint 3", EndDate = new DateTime(2019, 3, 30, 9, 4, 4, 119, DateTimeKind.Local), Name = "Спринт по Проект по искусству", Priority = 3, StartDate = new DateTime(2019, 3, 7, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 4, Description = "Describtion for sprint 4", EndDate = new DateTime(2019, 3, 31, 9, 4, 4, 119, DateTimeKind.Local), Name = "Спринт по Открываю пивко", Priority = 4, StartDate = new DateTime(2019, 2, 25, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 5, Description = "Describtion for sprint 5", EndDate = new DateTime(2019, 4, 1, 9, 4, 4, 119, DateTimeKind.Local), Name = "Спринт по Наливаю в бокал", Priority = 5, StartDate = new DateTime(2019, 2, 23, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 6, Description = "Describtion  for sprint 6", EndDate = new DateTime(2019, 4, 2, 9, 4, 4, 119, DateTimeKind.Local), Name = "Спринт по Щас мне будет легко", Priority = 2, StartDate = new DateTime(2019, 2, 23, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 7, Description = "Describtion  for sprint 7 ", EndDate = new DateTime(2019, 4, 3, 9, 4, 4, 119, DateTimeKind.Local), Name = "Спринт по Аеееее", Priority = 3, StartDate = new DateTime(2019, 2, 20, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 8, Description = "Describtion for sprint 8", EndDate = new DateTime(2019, 4, 4, 9, 4, 4, 119, DateTimeKind.Local), Name = "Спринт по Здоровье", Priority = 2, StartDate = new DateTime(2019, 2, 24, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 9, Description = "Describtion for sprint 9", EndDate = new DateTime(2019, 4, 29, 9, 4, 4, 119, DateTimeKind.Local), Name = "Спринт по Проект оздоровления нации", Priority = 2, StartDate = new DateTime(2019, 2, 22, 9, 4, 4, 119, DateTimeKind.Local) },
+                        new { Id = 10, Description = "Describtion for sprint 10", EndDate = new DateTime(2019, 4, 9, 9, 4, 4, 119, DateTimeKind.Local), Name = "Спринт по Пкция за спасение медвежат", Priority = 2, StartDate = new DateTime(2019, 2, 23, 9, 4, 4, 119, DateTimeKind.Local) }
                     );
                 });
 

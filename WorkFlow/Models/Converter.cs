@@ -46,12 +46,40 @@ namespace WorkFlow.Models
             Sprint sprint = new Sprint()
             {
                 Name = sprintD.Name,
-                Describtion = sprintD.Describtion,
+                Description = sprintD.Description,
                 StartDate = sprintD.StartDate,
                 EndDate = sprintD.EndDate,
                 Priority = sprintD.Priority
             };
             return sprint;
+        }
+
+        public SprintDto ToSprintDto(Sprint sprint, List<Project> projects)
+        {
+            SprintDto sprintDto = new SprintDto()
+            {
+                Id = sprint.Id,
+                Name = sprint.Name,
+                Description = sprint.Description,
+                StartDate = sprint.StartDate,
+                EndDate = sprint.EndDate,
+                Priority = sprint.Priority,
+                Projects = projects.Select(x => ToProjectDto(x)).ToList()
+            };
+            return sprintDto;
+        }
+
+        public ProjectDto ToProjectDto(Project project)
+        {
+            ProjectDto projectDto = new ProjectDto()
+            {
+                Id = project.Id,
+                Name = project.Name,
+                Describtion = project.Describtion,
+                StartDate = project.StartDate,
+                EndDate = project.EndDate
+            };
+            return projectDto;
         }
 
         public User ToUser(UserDto userD)

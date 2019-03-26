@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace WorkFlow.BusinessLogic
 
         public List<Sprint> GetAllSprints()
         {
-            return this.Db.Sprints.ToList();
+            return this.Db.Sprints.Include(x => x.ProjectSprints).ThenInclude(x => x.Project).ToList();
         }
 
         public List<Project> GetProjectsForUser(int userId)
@@ -45,7 +46,7 @@ namespace WorkFlow.BusinessLogic
             var item = this.Db.Sprints.Where(x => x.Id == id).FirstOrDefault();
 
             item.Name = sprint.Name;
-            item.Describtion = sprint.Describtion;
+            item.Description = sprint.Description;
             item.StartDate = sprint.StartDate;
             item.EndDate = sprint.EndDate;
             item.Priority = sprint.Priority;
