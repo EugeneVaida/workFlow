@@ -25,7 +25,7 @@ namespace WorkFlow.Models
             Project project = new Project()
             {
                 Name = projectD.Name,
-                Describtion = projectD.Describtion,
+                Description = projectD.Description,
                 StartDate = projectD.StartDate,
                 EndDate = projectD.EndDate
             };
@@ -54,7 +54,7 @@ namespace WorkFlow.Models
             return sprint;
         }
 
-        public SprintDto ToSprintDto(Sprint sprint, List<Project> projects)
+        public SprintDto ToSprintDto(Sprint sprint, List<Project> projects = null)
         {
             SprintDto sprintDto = new SprintDto()
             {
@@ -64,20 +64,22 @@ namespace WorkFlow.Models
                 StartDate = sprint.StartDate,
                 EndDate = sprint.EndDate,
                 Priority = sprint.Priority,
-                Projects = projects.Select(x => ToProjectDto(x)).ToList()
+                Percent = GetPercents(sprint.StartDate, sprint.EndDate),
+                Projects = projects == null ? new List<ProjectDto>() : projects.Select(x => ToProjectDto(x)).ToList()
             };
             return sprintDto;
         }
 
-        public ProjectDto ToProjectDto(Project project)
+        public ProjectDto ToProjectDto(Project project, List<Sprint> sprints = null)
         {
             ProjectDto projectDto = new ProjectDto()
             {
                 Id = project.Id,
                 Name = project.Name,
-                Describtion = project.Describtion,
+                Description = project.Description,
                 StartDate = project.StartDate,
-                EndDate = project.EndDate
+                EndDate = project.EndDate,
+                Sprints = sprints == null ? new List<SprintDto>() : sprints.Select(x => ToSprintDto(x)).ToList()                
             };
             return projectDto;
         }
@@ -92,6 +94,14 @@ namespace WorkFlow.Models
                 PasswordHash = userD.Password           
             };
             return user;
+        }
+
+        public int GetPercents(DateTime start, DateTime end)
+        {
+            int allDays = (end - start).Days;
+            int daysFromStart = (DateTime.Now - start).Days;
+            var per = Math.Round(((double)daysFromStart / allDays) * 100, 0);
+            return (int)per;
         }
     }
 }

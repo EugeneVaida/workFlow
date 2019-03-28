@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace WorkFlow.BusinessLogic
 
         public List<Project> GetAllProjects()
         {
-            return this.Db.Projects.ToList();
+            return this.Db.Projects.Include(x => x.ProjectSprints).ThenInclude(y => y.Sprint).ToList();
         }
 
         public List<Project> GetProjectsForUser(int userId)
@@ -35,6 +36,35 @@ namespace WorkFlow.BusinessLogic
             return project;
         }
 
+        public void UpdateSprintsToProject(int projectId, List<int> sprintIds)
+        {
+            RemoveSprintsToProject(projectId);
+            AddSprintsToProject(projectId, sprintIds);
+        }
+
+        public void RemoveSprintsToProject(int projectId)
+        {
+            var projectSprints = this.Db.ProjectSprint.Where(x => x.ProjectId == projectId);
+            this.Db.ProjectSprint.RemoveRange(projectSprints);
+            this.Db.SaveChanges();
+        }
+
+        public void AddSprintsToProject(int projectId, List<int> sprintIds)
+        {
+            List<ProjectSprint> updList = new List<ProjectSprint>();
+            foreach (var id in sprintIds)
+            {
+                var projectSprint = new ProjectSprint()
+                {
+                    ProjectId = projectId,
+                    SprintId = id
+                };
+                updList.Add(projectSprint);
+            }
+            this.Db.AddRange(updList);
+            this.Db.SaveChanges();
+        }
+
         public void CreateProject(Project project)
         {
             this.Db.Projects.Add(project);
@@ -46,7 +76,7 @@ namespace WorkFlow.BusinessLogic
             var item = this.Db.Projects.Where(x => x.Id == id).FirstOrDefault();
 
             item.Name = project.Name;
-            item.Describtion = project.Describtion;
+            item.Description = project.Description;
             item.StartDate = project.StartDate;
             item.EndDate = project.EndDate;
 

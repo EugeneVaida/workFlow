@@ -30,7 +30,7 @@ namespace WorkFlow.Controllers
         [AllowAnonymous]
         public JsonResult GetProjects()
         {
-            var projects = pm.GetAllProjects().Select(x => converter.ToProjectDto(x));
+            var projects = pm.GetAllProjects().Select(x => converter.ToProjectDto(x, x.ProjectSprints.Select(y => y.Sprint).ToList()));
             return Json(projects);
         }
 
@@ -61,6 +61,7 @@ namespace WorkFlow.Controllers
         {
             var project = converter.ToProject(projectD);
             pm.UpdateProject(id, project);
+            pm.UpdateSprintsToProject(id, projectD.Sprints.Select(x => x.Id).ToList());
             return Ok(project);
         }
 

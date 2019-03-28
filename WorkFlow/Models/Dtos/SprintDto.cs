@@ -12,6 +12,7 @@ namespace WorkFlow.Models.Dtos
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public int Percent { get; set; }
         public int Priority { get; set; }
 
         public List<ProjectDto> Projects { get; set; }
