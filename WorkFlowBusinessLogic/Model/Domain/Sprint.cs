@@ -13,6 +13,7 @@ namespace WorkFlow.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int Priority { get; set; }
+        public bool isDone { get; set; }
         
         public ICollection<SprintUser> SprintUsers { get; set; }
         public virtual ICollection<ProjectSprint> ProjectSprints { get; set; }

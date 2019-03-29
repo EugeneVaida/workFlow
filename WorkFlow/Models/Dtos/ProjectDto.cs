@@ -14,5 +14,6 @@ namespace WorkFlow.Models.Dtos
         public DateTime EndDate { get; set; }
 
         public List<SprintDto> Sprints { get; set; }
+        public List<TagDto> Tags { get; set; }
     }
 }

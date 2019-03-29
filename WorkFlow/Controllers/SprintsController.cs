@@ -64,5 +64,14 @@ namespace WorkFlow.Controllers
             sm.UpdateProjectsToSprint(id, sprintD.Projects.Select(x => x.Id).ToList());
             return Ok(sprint);
         }
+
+        [HttpPut]
+        [Route("api/MarkSprintAsDone/{id}")]
+        [AllowAnonymous]
+        public IActionResult MarkSprintAsDone(int id)
+        {
+            sm.MarkSprintAsDone(id);
+            return Ok(new Sprint());
+        }
     }
 }

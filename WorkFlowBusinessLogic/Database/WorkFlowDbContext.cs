@@ -140,16 +140,16 @@ namespace WorkFlowBusinessLogic.Database
             );
 
             modelBuilder.Entity<Sprint>().HasData(
-                new  { Id = 1, Name = "Спринт по Проект 1", Description = "Describtion for sprint 1", StartDate = DateTime.Now.AddDays(-25), EndDate = DateTime.Now.AddDays(4), Priority = 1 },
-                new  { Id = 2, Name = "Спринт по Проект по строительству", Description = "Describtion for sprint 2", StartDate = DateTime.Now.AddDays(-9), EndDate = DateTime.Now.AddDays(2), Priority = 2 },
-                new  { Id = 3, Name = "Спринт по Проект по искусству", Description = "Describtion for sprint 3", StartDate = DateTime.Now.AddDays(-19), EndDate = DateTime.Now.AddDays(4), Priority = 3 },
-                new  { Id = 4, Name = "Спринт по Открываю пивко", Description = "Describtion for sprint 4", StartDate = DateTime.Now.AddDays(-29), EndDate = DateTime.Now.AddDays(5), Priority = 4 },
-                new  { Id = 5, Name = "Спринт по Наливаю в бокал", Description = "Describtion for sprint 5", StartDate = DateTime.Now.AddDays(-31), EndDate = DateTime.Now.AddDays(6), Priority = 5 },
-                new  { Id = 6, Name = "Спринт по Щас мне будет легко", Description = "Describtion  for sprint 6", StartDate = DateTime.Now.AddDays(-31), EndDate = DateTime.Now.AddDays(7), Priority = 2 },
-                new  { Id = 7, Name = "Спринт по Аеееее", Description = "Describtion  for sprint 7 ", StartDate = DateTime.Now.AddDays(-34), EndDate = DateTime.Now.AddDays(8), Priority = 3 },
-                new  { Id = 8, Name = "Спринт по Здоровье", Description = "Describtion for sprint 8", StartDate = DateTime.Now.AddDays(-30), EndDate = DateTime.Now.AddDays(9), Priority = 2 },
-                new  { Id = 9, Name = "Спринт по Проект оздоровления нации", Description = "Describtion for sprint 9", StartDate = DateTime.Now.AddDays(-32), EndDate = DateTime.Now.AddDays(34), Priority = 2 },
-                new  { Id = 10, Name = "Спринт по Пкция за спасение медвежат", Description = "Describtion for sprint 10", StartDate = DateTime.Now.AddDays(-31), EndDate = DateTime.Now.AddDays(14), Priority = 2 }
+                new  { Id = 1, isDone = false, Name = "Спринт по Проект 1", Description = "Describtion for sprint 1", StartDate = DateTime.Now.AddDays(-25), EndDate = DateTime.Now.AddDays(4), Priority = 1 },
+                new  { Id = 2, isDone = false, Name = "Спринт по Проект по строительству", Description = "Describtion for sprint 2", StartDate = DateTime.Now.AddDays(-9), EndDate = DateTime.Now.AddDays(2), Priority = 2 },
+                new  { Id = 3, isDone = false, Name = "Спринт по Проект по искусству", Description = "Describtion for sprint 3", StartDate = DateTime.Now.AddDays(-19), EndDate = DateTime.Now.AddDays(4), Priority = 3 },
+                new  { Id = 4, isDone = false, Name = "Спринт по Открываю пивко", Description = "Describtion for sprint 4", StartDate = DateTime.Now.AddDays(-29), EndDate = DateTime.Now.AddDays(5), Priority = 4 },
+                new  { Id = 5, isDone = false, Name = "Спринт по Наливаю в бокал", Description = "Describtion for sprint 5", StartDate = DateTime.Now.AddDays(-31), EndDate = DateTime.Now.AddDays(6), Priority = 5 },
+                new  { Id = 6, isDone = false, Name = "Спринт по Щас мне будет легко", Description = "Describtion  for sprint 6", StartDate = DateTime.Now.AddDays(-31), EndDate = DateTime.Now.AddDays(7), Priority = 2 },
+                new  { Id = 7, isDone = false, Name = "Спринт по Аеееее", Description = "Describtion  for sprint 7 ", StartDate = DateTime.Now.AddDays(-34), EndDate = DateTime.Now.AddDays(8), Priority = 3 },
+                new  { Id = 8, isDone = false, Name = "Спринт по Здоровье", Description = "Describtion for sprint 8", StartDate = DateTime.Now.AddDays(-30), EndDate = DateTime.Now.AddDays(9), Priority = 2 },
+                new  { Id = 9, isDone = false, Name = "Спринт по Проект оздоровления нации", Description = "Describtion for sprint 9", StartDate = DateTime.Now.AddDays(-32), EndDate = DateTime.Now.AddDays(34), Priority = 2 },
+                new  { Id = 10, isDone = false,  Name = "Спринт по Пкция за спасение медвежат", Description = "Describtion for sprint 10", StartDate = DateTime.Now.AddDays(-31), EndDate = DateTime.Now.AddDays(14), Priority = 2 }
             );
 
 

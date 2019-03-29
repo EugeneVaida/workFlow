@@ -41,6 +41,18 @@ namespace WorkFlow.Models
             return tag;
         }
 
+        public TagDto ToTagDto(Tag tag)
+        {
+            TagDto tagD = new TagDto() {
+                Id = tag.Id,
+                Name = tag.Name
+            };
+
+            return tagD;
+        }
+
+        
+
         public Sprint ToSprint(SprintDto sprintD)
         {
             Sprint sprint = new Sprint()
@@ -64,13 +76,14 @@ namespace WorkFlow.Models
                 StartDate = sprint.StartDate,
                 EndDate = sprint.EndDate,
                 Priority = sprint.Priority,
+                isDone = sprint.isDone,
                 Percent = GetPercents(sprint.StartDate, sprint.EndDate),
                 Projects = projects == null ? new List<ProjectDto>() : projects.Select(x => ToProjectDto(x)).ToList()
             };
             return sprintDto;
         }
 
-        public ProjectDto ToProjectDto(Project project, List<Sprint> sprints = null)
+        public ProjectDto ToProjectDto(Project project, List<Sprint> sprints = null, List<Tag> tags = null)
         {
             ProjectDto projectDto = new ProjectDto()
             {
@@ -79,7 +92,8 @@ namespace WorkFlow.Models
                 Description = project.Description,
                 StartDate = project.StartDate,
                 EndDate = project.EndDate,
-                Sprints = sprints == null ? new List<SprintDto>() : sprints.Select(x => ToSprintDto(x)).ToList()                
+                Sprints = sprints == null ? new List<SprintDto>() : sprints.Select(x => ToSprintDto(x)).ToList(),
+                Tags = tags == null ? new List<TagDto>() : tags.Select(x => ToTagDto(x)).ToList()
             };
             return projectDto;
         }

@@ -64,6 +64,13 @@ namespace WorkFlow.BusinessLogic
             this.Db.SaveChanges();
         }
 
+        public void MarkSprintAsDone(int sprintId)
+        {
+            var sprint = GetSprintById(sprintId);
+            sprint.isDone = sprint.isDone ? false : true;
+            this.Db.SaveChanges();
+        }
+
         public void CreateSprint(Sprint sprint)
         {
             this.Db.Sprints.Add(sprint);

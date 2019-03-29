@@ -135,6 +135,10 @@
     <Compile Include="Migrations\20190328135505_projectModelRename.designer.cs">
       <DependentUpon>20190328135505_projectModelRename.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190329024656_addDoneToSprint.cs" />
+    <Compile Include="Migrations\20190329024656_addDoneToSprint.designer.cs">
+      <DependentUpon>20190329024656_addDoneToSprint.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\WorkFlowDbContextModelSnapshot.cs" />
     <Compile Include="Model\Domain\Company.cs" />
     <Compile Include="Model\Domain\LogHistory.cs" />

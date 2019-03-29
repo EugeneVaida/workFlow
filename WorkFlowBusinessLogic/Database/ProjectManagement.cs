@@ -15,7 +15,12 @@ namespace WorkFlow.BusinessLogic
 
         public List<Project> GetAllProjects()
         {
-            return this.Db.Projects.Include(x => x.ProjectSprints).ThenInclude(y => y.Sprint).ToList();
+            return this.Db.Projects.Include(x => x.ProjectSprints).ThenInclude(y => y.Sprint).Include(x => x.ProjectTags).ThenInclude(x => x.Tag).ToList();
+        }
+
+        public List<Project> GetAllProjectsByTag(int id)
+        {
+            return this.Db.ProjectTags.Where(x => x.TagId == id).Select(x => x.Project).ToList();
         }
 
         public List<Project> GetProjectsForUser(int userId)
@@ -61,7 +66,36 @@ namespace WorkFlow.BusinessLogic
                 };
                 updList.Add(projectSprint);
             }
-            this.Db.AddRange(updList);
+            this.Db.ProjectSprint.AddRange(updList);
+            this.Db.SaveChanges();
+        }
+
+        public void UpdateTagsToProject(int projectId, List<int> tagsIds)
+        {
+            RemoveTagsToProject(projectId);
+            AddTagsToProject(projectId, tagsIds);
+        }
+
+        public void RemoveTagsToProject(int projectId)
+        {
+            var projectTags = this.Db.ProjectTags.Where(x => x.ProjectId == projectId);
+            this.Db.ProjectTags.RemoveRange(projectTags);
+            this.Db.SaveChanges();
+        }
+
+        public void AddTagsToProject(int projectId, List<int> tagsIds)
+        {
+            List<ProjectTag> updList = new List<ProjectTag>();
+            foreach (var id in tagsIds)
+            {
+                var projectTag = new ProjectTag()
+                {
+                    ProjectId = projectId,
+                    TagId = id
+                };
+                updList.Add(projectTag);
+            }
+            this.Db.ProjectTags.AddRange(updList);
             this.Db.SaveChanges();
         }
 
