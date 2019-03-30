@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WorkFlowBusinessLogicCore.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Adress = table.Column<string>(nullable: true),
                     Telephone = table.Column<string>(nullable: true)
@@ -28,7 +28,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
@@ -44,7 +44,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -57,7 +57,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
@@ -75,7 +75,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -88,7 +88,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Username = table.Column<string>(nullable: true),
@@ -160,7 +160,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     LogDate = table.Column<DateTime>(nullable: false),
                     Platform = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: true)
@@ -181,7 +181,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Messsage = table.Column<string>(nullable: true),
                     IsRead = table.Column<bool>(nullable: false),
                     UserId = table.Column<int>(nullable: true)
@@ -226,7 +226,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     SearchQuary = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: true)
                 },
@@ -311,16 +311,16 @@ namespace WorkFlowBusinessLogicCore.Migrations
                 columns: new[] { "Id", "Description", "EndDate", "Name", "StartDate" },
                 values: new object[,]
                 {
-                    { 9, null, new DateTime(2019, 5, 3, 14, 23, 57, 844, DateTimeKind.Local), "Проект оздоровления нации", new DateTime(2019, 2, 24, 14, 23, 57, 844, DateTimeKind.Local) },
-                    { 8, null, new DateTime(2019, 4, 8, 14, 23, 57, 844, DateTimeKind.Local), "Здоровье", new DateTime(2019, 2, 20, 14, 23, 57, 844, DateTimeKind.Local) },
-                    { 7, null, new DateTime(2019, 4, 7, 14, 23, 57, 844, DateTimeKind.Local), "Аеееее", new DateTime(2019, 2, 21, 14, 23, 57, 844, DateTimeKind.Local) },
-                    { 6, null, new DateTime(2019, 4, 6, 14, 23, 57, 844, DateTimeKind.Local), "Щас мне будет легко", new DateTime(2019, 2, 23, 14, 23, 57, 844, DateTimeKind.Local) },
-                    { 1, null, new DateTime(2019, 4, 3, 14, 23, 57, 844, DateTimeKind.Local), "Проект 1", new DateTime(2019, 2, 28, 14, 23, 57, 844, DateTimeKind.Local) },
-                    { 4, null, new DateTime(2019, 4, 4, 14, 23, 57, 844, DateTimeKind.Local), "Открываю пивко", new DateTime(2019, 2, 27, 14, 23, 57, 844, DateTimeKind.Local) },
-                    { 3, null, new DateTime(2019, 4, 3, 14, 23, 57, 844, DateTimeKind.Local), "Проект по искусству", new DateTime(2019, 3, 10, 14, 23, 57, 844, DateTimeKind.Local) },
-                    { 2, null, new DateTime(2019, 4, 1, 14, 23, 57, 844, DateTimeKind.Local), "Проект по строительству", new DateTime(2019, 3, 20, 14, 23, 57, 844, DateTimeKind.Local) },
-                    { 10, null, new DateTime(2019, 4, 13, 14, 23, 57, 844, DateTimeKind.Local), "Пкция за спасение медвежат", new DateTime(2019, 2, 19, 14, 23, 57, 844, DateTimeKind.Local) },
-                    { 5, null, new DateTime(2019, 4, 5, 14, 23, 57, 844, DateTimeKind.Local), "Наливаю в бокал", new DateTime(2019, 2, 25, 14, 23, 57, 844, DateTimeKind.Local) }
+                    { 9, null, new DateTime(2019, 5, 3, 16, 28, 25, 369, DateTimeKind.Local), "Проект оздоровления нации", new DateTime(2019, 2, 24, 16, 28, 25, 369, DateTimeKind.Local) },
+                    { 8, null, new DateTime(2019, 4, 8, 16, 28, 25, 369, DateTimeKind.Local), "Здоровье", new DateTime(2019, 2, 20, 16, 28, 25, 369, DateTimeKind.Local) },
+                    { 7, null, new DateTime(2019, 4, 7, 16, 28, 25, 369, DateTimeKind.Local), "Аеееее", new DateTime(2019, 2, 21, 16, 28, 25, 369, DateTimeKind.Local) },
+                    { 6, null, new DateTime(2019, 4, 6, 16, 28, 25, 369, DateTimeKind.Local), "Щас мне будет легко", new DateTime(2019, 2, 23, 16, 28, 25, 369, DateTimeKind.Local) },
+                    { 1, null, new DateTime(2019, 4, 3, 16, 28, 25, 369, DateTimeKind.Local), "Проект 1", new DateTime(2019, 2, 28, 16, 28, 25, 368, DateTimeKind.Local) },
+                    { 4, null, new DateTime(2019, 4, 4, 16, 28, 25, 369, DateTimeKind.Local), "Открываю пивко", new DateTime(2019, 2, 27, 16, 28, 25, 369, DateTimeKind.Local) },
+                    { 3, null, new DateTime(2019, 4, 3, 16, 28, 25, 369, DateTimeKind.Local), "Проект по искусству", new DateTime(2019, 3, 10, 16, 28, 25, 369, DateTimeKind.Local) },
+                    { 2, null, new DateTime(2019, 4, 1, 16, 28, 25, 369, DateTimeKind.Local), "Проект по строительству", new DateTime(2019, 3, 20, 16, 28, 25, 369, DateTimeKind.Local) },
+                    { 10, null, new DateTime(2019, 4, 13, 16, 28, 25, 369, DateTimeKind.Local), "Пкция за спасение медвежат", new DateTime(2019, 2, 19, 16, 28, 25, 369, DateTimeKind.Local) },
+                    { 5, null, new DateTime(2019, 4, 5, 16, 28, 25, 369, DateTimeKind.Local), "Наливаю в бокал", new DateTime(2019, 2, 25, 16, 28, 25, 369, DateTimeKind.Local) }
                 });
 
             migrationBuilder.InsertData(
@@ -338,16 +338,16 @@ namespace WorkFlowBusinessLogicCore.Migrations
                 columns: new[] { "Id", "Description", "EndDate", "Name", "Priority", "StartDate", "isDone" },
                 values: new object[,]
                 {
-                    { 9, "Describtion for sprint 9", new DateTime(2019, 5, 3, 14, 23, 57, 845, DateTimeKind.Local), "Спринт по Проект оздоровления нации", 2, new DateTime(2019, 2, 26, 14, 23, 57, 845, DateTimeKind.Local), false },
-                    { 8, "Describtion for sprint 8", new DateTime(2019, 4, 8, 14, 23, 57, 845, DateTimeKind.Local), "Спринт по Здоровье", 2, new DateTime(2019, 2, 28, 14, 23, 57, 845, DateTimeKind.Local), false },
-                    { 7, "Describtion  for sprint 7 ", new DateTime(2019, 4, 7, 14, 23, 57, 845, DateTimeKind.Local), "Спринт по Аеееее", 3, new DateTime(2019, 2, 24, 14, 23, 57, 845, DateTimeKind.Local), false },
-                    { 6, "Describtion  for sprint 6", new DateTime(2019, 4, 6, 14, 23, 57, 845, DateTimeKind.Local), "Спринт по Щас мне будет легко", 2, new DateTime(2019, 2, 27, 14, 23, 57, 845, DateTimeKind.Local), false },
-                    { 10, "Describtion for sprint 10", new DateTime(2019, 4, 13, 14, 23, 57, 845, DateTimeKind.Local), "Спринт по Пкция за спасение медвежат", 2, new DateTime(2019, 2, 27, 14, 23, 57, 845, DateTimeKind.Local), false },
-                    { 4, "Describtion for sprint 4", new DateTime(2019, 4, 4, 14, 23, 57, 845, DateTimeKind.Local), "Спринт по Открываю пивко", 4, new DateTime(2019, 3, 1, 14, 23, 57, 845, DateTimeKind.Local), false },
-                    { 3, "Describtion for sprint 3", new DateTime(2019, 4, 3, 14, 23, 57, 845, DateTimeKind.Local), "Спринт по Проект по искусству", 3, new DateTime(2019, 3, 11, 14, 23, 57, 845, DateTimeKind.Local), false },
-                    { 2, "Describtion for sprint 2", new DateTime(2019, 4, 1, 14, 23, 57, 845, DateTimeKind.Local), "Спринт по Проект по строительству", 2, new DateTime(2019, 3, 21, 14, 23, 57, 845, DateTimeKind.Local), false },
-                    { 1, "Describtion for sprint 1", new DateTime(2019, 4, 3, 14, 23, 57, 844, DateTimeKind.Local), "Спринт по Проект 1", 1, new DateTime(2019, 3, 5, 14, 23, 57, 844, DateTimeKind.Local), false },
-                    { 5, "Describtion for sprint 5", new DateTime(2019, 4, 5, 14, 23, 57, 845, DateTimeKind.Local), "Спринт по Наливаю в бокал", 5, new DateTime(2019, 2, 27, 14, 23, 57, 845, DateTimeKind.Local), false }
+                    { 9, "Describtion for sprint 9", new DateTime(2019, 5, 3, 16, 28, 25, 369, DateTimeKind.Local), "Спринт по Проект оздоровления нации", 2, new DateTime(2019, 2, 26, 16, 28, 25, 369, DateTimeKind.Local), false },
+                    { 8, "Describtion for sprint 8", new DateTime(2019, 4, 8, 16, 28, 25, 369, DateTimeKind.Local), "Спринт по Здоровье", 2, new DateTime(2019, 2, 28, 16, 28, 25, 369, DateTimeKind.Local), false },
+                    { 7, "Describtion  for sprint 7 ", new DateTime(2019, 4, 7, 16, 28, 25, 369, DateTimeKind.Local), "Спринт по Аеееее", 3, new DateTime(2019, 2, 24, 16, 28, 25, 369, DateTimeKind.Local), false },
+                    { 6, "Describtion  for sprint 6", new DateTime(2019, 4, 6, 16, 28, 25, 369, DateTimeKind.Local), "Спринт по Щас мне будет легко", 2, new DateTime(2019, 2, 27, 16, 28, 25, 369, DateTimeKind.Local), false },
+                    { 10, "Describtion for sprint 10", new DateTime(2019, 4, 13, 16, 28, 25, 369, DateTimeKind.Local), "Спринт по Пкция за спасение медвежат", 2, new DateTime(2019, 2, 27, 16, 28, 25, 369, DateTimeKind.Local), false },
+                    { 4, "Describtion for sprint 4", new DateTime(2019, 4, 4, 16, 28, 25, 369, DateTimeKind.Local), "Спринт по Открываю пивко", 4, new DateTime(2019, 3, 1, 16, 28, 25, 369, DateTimeKind.Local), false },
+                    { 3, "Describtion for sprint 3", new DateTime(2019, 4, 3, 16, 28, 25, 369, DateTimeKind.Local), "Спринт по Проект по искусству", 3, new DateTime(2019, 3, 11, 16, 28, 25, 369, DateTimeKind.Local), false },
+                    { 2, "Describtion for sprint 2", new DateTime(2019, 4, 1, 16, 28, 25, 369, DateTimeKind.Local), "Спринт по Проект по строительству", 2, new DateTime(2019, 3, 21, 16, 28, 25, 369, DateTimeKind.Local), false },
+                    { 1, "Describtion for sprint 1", new DateTime(2019, 4, 3, 16, 28, 25, 369, DateTimeKind.Local), "Спринт по Проект 1", 1, new DateTime(2019, 3, 5, 16, 28, 25, 369, DateTimeKind.Local), false },
+                    { 5, "Describtion for sprint 5", new DateTime(2019, 4, 5, 16, 28, 25, 369, DateTimeKind.Local), "Спринт по Наливаю в бокал", 5, new DateTime(2019, 2, 27, 16, 28, 25, 369, DateTimeKind.Local), false }
                 });
 
             migrationBuilder.InsertData(

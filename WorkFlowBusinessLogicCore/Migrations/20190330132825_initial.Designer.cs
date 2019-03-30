@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkFlowBusinessLogicCore.Database;
@@ -10,22 +9,20 @@ using WorkFlowBusinessLogicCore.Database;
 namespace WorkFlowBusinessLogicCore.Migrations
 {
     [DbContext(typeof(WorkFlowDbContext))]
-    [Migration("20190330112358_initialMigration")]
-    partial class initialMigration
+    [Migration("20190330132825_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("WorkFlow.Models.Company", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Adress");
 
@@ -54,8 +51,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
             modelBuilder.Entity("WorkFlow.Models.LogHistory", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("LogDate");
 
@@ -73,8 +69,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
             modelBuilder.Entity("WorkFlow.Models.Notification", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("IsRead");
 
@@ -92,8 +87,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
             modelBuilder.Entity("WorkFlow.Models.Project", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description");
 
@@ -108,16 +102,16 @@ namespace WorkFlowBusinessLogicCore.Migrations
                     b.ToTable("Projects");
 
                     b.HasData(
-                        new { Id = 1, EndDate = new DateTime(2019, 4, 3, 14, 23, 57, 844, DateTimeKind.Local), Name = "Проект 1", StartDate = new DateTime(2019, 2, 28, 14, 23, 57, 844, DateTimeKind.Local) },
-                        new { Id = 2, EndDate = new DateTime(2019, 4, 1, 14, 23, 57, 844, DateTimeKind.Local), Name = "Проект по строительству", StartDate = new DateTime(2019, 3, 20, 14, 23, 57, 844, DateTimeKind.Local) },
-                        new { Id = 3, EndDate = new DateTime(2019, 4, 3, 14, 23, 57, 844, DateTimeKind.Local), Name = "Проект по искусству", StartDate = new DateTime(2019, 3, 10, 14, 23, 57, 844, DateTimeKind.Local) },
-                        new { Id = 4, EndDate = new DateTime(2019, 4, 4, 14, 23, 57, 844, DateTimeKind.Local), Name = "Открываю пивко", StartDate = new DateTime(2019, 2, 27, 14, 23, 57, 844, DateTimeKind.Local) },
-                        new { Id = 5, EndDate = new DateTime(2019, 4, 5, 14, 23, 57, 844, DateTimeKind.Local), Name = "Наливаю в бокал", StartDate = new DateTime(2019, 2, 25, 14, 23, 57, 844, DateTimeKind.Local) },
-                        new { Id = 6, EndDate = new DateTime(2019, 4, 6, 14, 23, 57, 844, DateTimeKind.Local), Name = "Щас мне будет легко", StartDate = new DateTime(2019, 2, 23, 14, 23, 57, 844, DateTimeKind.Local) },
-                        new { Id = 7, EndDate = new DateTime(2019, 4, 7, 14, 23, 57, 844, DateTimeKind.Local), Name = "Аеееее", StartDate = new DateTime(2019, 2, 21, 14, 23, 57, 844, DateTimeKind.Local) },
-                        new { Id = 8, EndDate = new DateTime(2019, 4, 8, 14, 23, 57, 844, DateTimeKind.Local), Name = "Здоровье", StartDate = new DateTime(2019, 2, 20, 14, 23, 57, 844, DateTimeKind.Local) },
-                        new { Id = 9, EndDate = new DateTime(2019, 5, 3, 14, 23, 57, 844, DateTimeKind.Local), Name = "Проект оздоровления нации", StartDate = new DateTime(2019, 2, 24, 14, 23, 57, 844, DateTimeKind.Local) },
-                        new { Id = 10, EndDate = new DateTime(2019, 4, 13, 14, 23, 57, 844, DateTimeKind.Local), Name = "Пкция за спасение медвежат", StartDate = new DateTime(2019, 2, 19, 14, 23, 57, 844, DateTimeKind.Local) }
+                        new { Id = 1, EndDate = new DateTime(2019, 4, 3, 16, 28, 25, 369, DateTimeKind.Local), Name = "Проект 1", StartDate = new DateTime(2019, 2, 28, 16, 28, 25, 368, DateTimeKind.Local) },
+                        new { Id = 2, EndDate = new DateTime(2019, 4, 1, 16, 28, 25, 369, DateTimeKind.Local), Name = "Проект по строительству", StartDate = new DateTime(2019, 3, 20, 16, 28, 25, 369, DateTimeKind.Local) },
+                        new { Id = 3, EndDate = new DateTime(2019, 4, 3, 16, 28, 25, 369, DateTimeKind.Local), Name = "Проект по искусству", StartDate = new DateTime(2019, 3, 10, 16, 28, 25, 369, DateTimeKind.Local) },
+                        new { Id = 4, EndDate = new DateTime(2019, 4, 4, 16, 28, 25, 369, DateTimeKind.Local), Name = "Открываю пивко", StartDate = new DateTime(2019, 2, 27, 16, 28, 25, 369, DateTimeKind.Local) },
+                        new { Id = 5, EndDate = new DateTime(2019, 4, 5, 16, 28, 25, 369, DateTimeKind.Local), Name = "Наливаю в бокал", StartDate = new DateTime(2019, 2, 25, 16, 28, 25, 369, DateTimeKind.Local) },
+                        new { Id = 6, EndDate = new DateTime(2019, 4, 6, 16, 28, 25, 369, DateTimeKind.Local), Name = "Щас мне будет легко", StartDate = new DateTime(2019, 2, 23, 16, 28, 25, 369, DateTimeKind.Local) },
+                        new { Id = 7, EndDate = new DateTime(2019, 4, 7, 16, 28, 25, 369, DateTimeKind.Local), Name = "Аеееее", StartDate = new DateTime(2019, 2, 21, 16, 28, 25, 369, DateTimeKind.Local) },
+                        new { Id = 8, EndDate = new DateTime(2019, 4, 8, 16, 28, 25, 369, DateTimeKind.Local), Name = "Здоровье", StartDate = new DateTime(2019, 2, 20, 16, 28, 25, 369, DateTimeKind.Local) },
+                        new { Id = 9, EndDate = new DateTime(2019, 5, 3, 16, 28, 25, 369, DateTimeKind.Local), Name = "Проект оздоровления нации", StartDate = new DateTime(2019, 2, 24, 16, 28, 25, 369, DateTimeKind.Local) },
+                        new { Id = 10, EndDate = new DateTime(2019, 4, 13, 16, 28, 25, 369, DateTimeKind.Local), Name = "Пкция за спасение медвежат", StartDate = new DateTime(2019, 2, 19, 16, 28, 25, 369, DateTimeKind.Local) }
                     );
                 });
 
@@ -202,8 +196,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
             modelBuilder.Entity("WorkFlow.Models.Role", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -221,8 +214,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
             modelBuilder.Entity("WorkFlow.Models.SearchHistory", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("SearchQuary");
 
@@ -238,8 +230,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
             modelBuilder.Entity("WorkFlow.Models.Sprint", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description");
 
@@ -258,16 +249,16 @@ namespace WorkFlowBusinessLogicCore.Migrations
                     b.ToTable("Sprints");
 
                     b.HasData(
-                        new { Id = 1, Description = "Describtion for sprint 1", EndDate = new DateTime(2019, 4, 3, 14, 23, 57, 844, DateTimeKind.Local), Name = "Спринт по Проект 1", Priority = 1, StartDate = new DateTime(2019, 3, 5, 14, 23, 57, 844, DateTimeKind.Local), isDone = false },
-                        new { Id = 2, Description = "Describtion for sprint 2", EndDate = new DateTime(2019, 4, 1, 14, 23, 57, 845, DateTimeKind.Local), Name = "Спринт по Проект по строительству", Priority = 2, StartDate = new DateTime(2019, 3, 21, 14, 23, 57, 845, DateTimeKind.Local), isDone = false },
-                        new { Id = 3, Description = "Describtion for sprint 3", EndDate = new DateTime(2019, 4, 3, 14, 23, 57, 845, DateTimeKind.Local), Name = "Спринт по Проект по искусству", Priority = 3, StartDate = new DateTime(2019, 3, 11, 14, 23, 57, 845, DateTimeKind.Local), isDone = false },
-                        new { Id = 4, Description = "Describtion for sprint 4", EndDate = new DateTime(2019, 4, 4, 14, 23, 57, 845, DateTimeKind.Local), Name = "Спринт по Открываю пивко", Priority = 4, StartDate = new DateTime(2019, 3, 1, 14, 23, 57, 845, DateTimeKind.Local), isDone = false },
-                        new { Id = 5, Description = "Describtion for sprint 5", EndDate = new DateTime(2019, 4, 5, 14, 23, 57, 845, DateTimeKind.Local), Name = "Спринт по Наливаю в бокал", Priority = 5, StartDate = new DateTime(2019, 2, 27, 14, 23, 57, 845, DateTimeKind.Local), isDone = false },
-                        new { Id = 6, Description = "Describtion  for sprint 6", EndDate = new DateTime(2019, 4, 6, 14, 23, 57, 845, DateTimeKind.Local), Name = "Спринт по Щас мне будет легко", Priority = 2, StartDate = new DateTime(2019, 2, 27, 14, 23, 57, 845, DateTimeKind.Local), isDone = false },
-                        new { Id = 7, Description = "Describtion  for sprint 7 ", EndDate = new DateTime(2019, 4, 7, 14, 23, 57, 845, DateTimeKind.Local), Name = "Спринт по Аеееее", Priority = 3, StartDate = new DateTime(2019, 2, 24, 14, 23, 57, 845, DateTimeKind.Local), isDone = false },
-                        new { Id = 8, Description = "Describtion for sprint 8", EndDate = new DateTime(2019, 4, 8, 14, 23, 57, 845, DateTimeKind.Local), Name = "Спринт по Здоровье", Priority = 2, StartDate = new DateTime(2019, 2, 28, 14, 23, 57, 845, DateTimeKind.Local), isDone = false },
-                        new { Id = 9, Description = "Describtion for sprint 9", EndDate = new DateTime(2019, 5, 3, 14, 23, 57, 845, DateTimeKind.Local), Name = "Спринт по Проект оздоровления нации", Priority = 2, StartDate = new DateTime(2019, 2, 26, 14, 23, 57, 845, DateTimeKind.Local), isDone = false },
-                        new { Id = 10, Description = "Describtion for sprint 10", EndDate = new DateTime(2019, 4, 13, 14, 23, 57, 845, DateTimeKind.Local), Name = "Спринт по Пкция за спасение медвежат", Priority = 2, StartDate = new DateTime(2019, 2, 27, 14, 23, 57, 845, DateTimeKind.Local), isDone = false }
+                        new { Id = 1, Description = "Describtion for sprint 1", EndDate = new DateTime(2019, 4, 3, 16, 28, 25, 369, DateTimeKind.Local), Name = "Спринт по Проект 1", Priority = 1, StartDate = new DateTime(2019, 3, 5, 16, 28, 25, 369, DateTimeKind.Local), isDone = false },
+                        new { Id = 2, Description = "Describtion for sprint 2", EndDate = new DateTime(2019, 4, 1, 16, 28, 25, 369, DateTimeKind.Local), Name = "Спринт по Проект по строительству", Priority = 2, StartDate = new DateTime(2019, 3, 21, 16, 28, 25, 369, DateTimeKind.Local), isDone = false },
+                        new { Id = 3, Description = "Describtion for sprint 3", EndDate = new DateTime(2019, 4, 3, 16, 28, 25, 369, DateTimeKind.Local), Name = "Спринт по Проект по искусству", Priority = 3, StartDate = new DateTime(2019, 3, 11, 16, 28, 25, 369, DateTimeKind.Local), isDone = false },
+                        new { Id = 4, Description = "Describtion for sprint 4", EndDate = new DateTime(2019, 4, 4, 16, 28, 25, 369, DateTimeKind.Local), Name = "Спринт по Открываю пивко", Priority = 4, StartDate = new DateTime(2019, 3, 1, 16, 28, 25, 369, DateTimeKind.Local), isDone = false },
+                        new { Id = 5, Description = "Describtion for sprint 5", EndDate = new DateTime(2019, 4, 5, 16, 28, 25, 369, DateTimeKind.Local), Name = "Спринт по Наливаю в бокал", Priority = 5, StartDate = new DateTime(2019, 2, 27, 16, 28, 25, 369, DateTimeKind.Local), isDone = false },
+                        new { Id = 6, Description = "Describtion  for sprint 6", EndDate = new DateTime(2019, 4, 6, 16, 28, 25, 369, DateTimeKind.Local), Name = "Спринт по Щас мне будет легко", Priority = 2, StartDate = new DateTime(2019, 2, 27, 16, 28, 25, 369, DateTimeKind.Local), isDone = false },
+                        new { Id = 7, Description = "Describtion  for sprint 7 ", EndDate = new DateTime(2019, 4, 7, 16, 28, 25, 369, DateTimeKind.Local), Name = "Спринт по Аеееее", Priority = 3, StartDate = new DateTime(2019, 2, 24, 16, 28, 25, 369, DateTimeKind.Local), isDone = false },
+                        new { Id = 8, Description = "Describtion for sprint 8", EndDate = new DateTime(2019, 4, 8, 16, 28, 25, 369, DateTimeKind.Local), Name = "Спринт по Здоровье", Priority = 2, StartDate = new DateTime(2019, 2, 28, 16, 28, 25, 369, DateTimeKind.Local), isDone = false },
+                        new { Id = 9, Description = "Describtion for sprint 9", EndDate = new DateTime(2019, 5, 3, 16, 28, 25, 369, DateTimeKind.Local), Name = "Спринт по Проект оздоровления нации", Priority = 2, StartDate = new DateTime(2019, 2, 26, 16, 28, 25, 369, DateTimeKind.Local), isDone = false },
+                        new { Id = 10, Description = "Describtion for sprint 10", EndDate = new DateTime(2019, 4, 13, 16, 28, 25, 369, DateTimeKind.Local), Name = "Спринт по Пкция за спасение медвежат", Priority = 2, StartDate = new DateTime(2019, 2, 27, 16, 28, 25, 369, DateTimeKind.Local), isDone = false }
                     );
                 });
 
@@ -300,8 +291,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
             modelBuilder.Entity("WorkFlow.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
@@ -326,8 +316,7 @@ namespace WorkFlowBusinessLogicCore.Migrations
             modelBuilder.Entity("WorkFlow.Models.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("CompanyId");
 

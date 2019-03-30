@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MySql.Data.EntityFrameworkCore.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,15 @@ namespace WorkFlowBusinessLogicCore.Database
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
 
-        public WorkFlowDbContext(DbContextOptions<WorkFlowDbContext> options)
-            : base(options)
+        //public WorkFlowDbContext(DbContextOptions<WorkFlowDbContext> options)
+        //    : base(options)
+        //{
+        //    //Database.EnsureCreated();
+        //}
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //Database.EnsureCreated();
+            optionsBuilder.UseMySql("server=remotemysql.com;UserId=1B9lWL7ngl;Password=yxol56ykol;database=1B9lWL7ngl;");
         }
 
 

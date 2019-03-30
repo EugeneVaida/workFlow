@@ -57,10 +57,13 @@ namespace WorkFlow
                     });
 
             
-            string connection = Configuration.GetConnectionString("WorkFlowConnection");
+            string connection = Configuration.GetConnectionString("WorkFlowMySql");
+
             
-            services.AddDbContext<WorkFlowDbContext>(options =>
-                options.UseSqlServer(connection));
+            services.AddDbContext<WorkFlowDbContext>();
+
+            //services.AddDbContext<WorkFlowDbContext>(options =>
+            //    options.UseMySQL(Configuration.GetConnectionString("WorkFlowMySql")));
 
             services.AddCors();
             services.AddMvc();
