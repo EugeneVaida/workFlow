@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WorkFlow.BusinessLogic;
+using WorkFlow.BusinessLogicCore;
 using WorkFlow.Models;
 using WorkFlow.Models.Dtos;
-using WorkFlowBusinessLogic;
-using WorkFlowBusinessLogic.Database;
+using WorkFlowBusinessLogicCore;
+using WorkFlowBusinessLogicCore.Database;
 
 namespace WorkFlow.Controllers
 {    

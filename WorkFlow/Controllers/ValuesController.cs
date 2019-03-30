@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WorkFlow.Models;
-using WorkFlowBusinessLogic.Database;
+using WorkFlowBusinessLogicCore.Database;
 
 namespace WorkFlow.Controllers
 {

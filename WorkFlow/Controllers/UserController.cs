@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WorkFlow.BusinessLogic;
+using WorkFlow.BusinessLogicCore;
 using WorkFlow.Models;
 using WorkFlow.Models.Dtos;
-using WorkFlowBusinessLogic.Database;
+using WorkFlowBusinessLogicCore.Database;
 
 namespace WorkFlow.Controllers
 {

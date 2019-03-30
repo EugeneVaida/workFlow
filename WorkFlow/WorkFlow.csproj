@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WorkFlowBusinessLogic\WorkFlowBusinessLogic.csproj" />
+    <ProjectReference Include="..\WorkFlowBusinessLogicCore\WorkFlowBusinessLogicCore.csproj" />
   </ItemGroup>
 
 </Project>

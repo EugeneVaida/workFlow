@@ -15,8 +15,8 @@ using Microsoft.IdentityModel.Tokens;
 using WorkFlow.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
-using WorkFlowBusinessLogic;
-using WorkFlowBusinessLogic.Database;
+using WorkFlowBusinessLogicCore;
+using WorkFlowBusinessLogicCore.Database;
 
 namespace WorkFlow
 {

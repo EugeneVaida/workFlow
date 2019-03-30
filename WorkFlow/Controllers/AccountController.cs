@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using WorkFlow.BusinessLogic;
+using WorkFlow.BusinessLogicCore;
 using WorkFlow.Models;
-using WorkFlowBusinessLogic.Database;
+using WorkFlowBusinessLogicCore.Database;
 
 namespace WorkFlow.Controllers
 {
