@@ -32,6 +32,15 @@ namespace WorkFlow.Controllers
             return Json(tags);
         }
 
+        [HttpGet]
+        [Route("api/GetTag/{id}")]
+        [AllowAnonymous]
+        public JsonResult GetTag(int id)
+        {
+            var tag = tm.GetAllTags().Where(x => x.Id == id).FirstOrDefault();
+            return Json(tag);
+        }
+
         [HttpPost]
         [Route("api/CreateTag")]
         [AllowAnonymous]

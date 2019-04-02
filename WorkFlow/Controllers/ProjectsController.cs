@@ -30,16 +30,20 @@ namespace WorkFlow.Controllers
         [AllowAnonymous]
         public JsonResult GetProjects()
         {
-            var projects = pm.GetAllProjects().Select(x => converter.ToProjectDto(x, x.ProjectSprints.Select(y => y.Sprint).ToList(), x.ProjectTags.Select(t => t.Tag).ToList()));
+            var projects = pm.GetAllProjects().
+                Select(x => converter.ToProjectDto(x, x.ProjectSprints.Select(y => y.Sprint).ToList(),
+                x.ProjectTags.Select(t => t.Tag).ToList()));
             return Json(projects);
         }
 
         [HttpGet]
-        [Route("api/GetAllProjectsByTag/{id}")]
+        [Route("api/GetProjectsByTag/{id}")]
         [AllowAnonymous]
         public JsonResult GetProjectsByTag(int id)
         {
-            var projects = pm.GetAllProjectsByTag(id);
+            var projects = pm.GetAllProjectsByTag(id).Select(x => converter.ToProjectDto(x, x.ProjectSprints.Select(y => y.Sprint).ToList(),
+                x.ProjectTags.Select(t => t.Tag).ToList()));            
+
             return Json(projects);
         }
 

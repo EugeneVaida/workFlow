@@ -35,7 +35,7 @@ namespace WorkFlow.BusinessLogicCore
             return sprint;
         }
 
-        public void UpdateProjectsToSprint(int sprintId, List<int> projectIds)
+        public void UpdateProjectsToSprint(int sprintId, List<int?> projectIds)
         {
             RemoveProjectsToSprint(sprintId);
             AddProjectsToSprint(sprintId, projectIds);
@@ -48,14 +48,14 @@ namespace WorkFlow.BusinessLogicCore
             this.Db.SaveChanges();
         }
 
-        public void AddProjectsToSprint(int sprintId, List<int> projectIds)
+        public void AddProjectsToSprint(int sprintId, List<int?> projectIds)
         {
             List<ProjectSprint> updList = new List<ProjectSprint>();
             foreach (var id in projectIds)
             {
                 var projectSprint = new ProjectSprint()
                 {
-                    ProjectId = id,
+                    ProjectId = (int)id,
                     SprintId = sprintId
                 };
                 updList.Add(projectSprint);

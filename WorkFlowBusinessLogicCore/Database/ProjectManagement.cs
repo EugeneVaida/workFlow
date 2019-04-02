@@ -18,9 +18,26 @@ namespace WorkFlow.BusinessLogicCore
             return this.Db.Projects.Include(x => x.ProjectSprints).ThenInclude(y => y.Sprint).Include(x => x.ProjectTags).ThenInclude(x => x.Tag).ToList();
         }
 
+        public List<int> GetAllProjectsIdsByTag(int id)
+        {
+            return this.Db.ProjectTags.Where(x => x.TagId == id).Select(x => x.Project.Id).ToList();
+        }
+
+        public List<Project> GetAllProjectsByIds(List<int> ids)
+        {
+            List<Project> projects = new List<Project>();
+            var allProjects = GetAllProjects();
+            foreach (var id in ids)
+            {
+                projects.AddRange(allProjects.Where(x => x.Id == id));
+            }
+            return projects;
+        }
+
         public List<Project> GetAllProjectsByTag(int id)
         {
-            return this.Db.ProjectTags.Where(x => x.TagId == id).Select(x => x.Project).ToList();
+            var ids = GetAllProjectsIdsByTag(id);
+            return GetAllProjectsByIds(ids);            
         }
 
         public List<Project> GetProjectsForUser(int userId)
@@ -41,7 +58,7 @@ namespace WorkFlow.BusinessLogicCore
             return project;
         }
 
-        public void UpdateSprintsToProject(int projectId, List<int> sprintIds)
+        public void UpdateSprintsToProject(int projectId, List<int?> sprintIds)
         {
             RemoveSprintsToProject(projectId);
             AddSprintsToProject(projectId, sprintIds);
@@ -54,7 +71,7 @@ namespace WorkFlow.BusinessLogicCore
             this.Db.SaveChanges();
         }
 
-        public void AddSprintsToProject(int projectId, List<int> sprintIds)
+        public void AddSprintsToProject(int projectId, List<int?> sprintIds)
         {
             List<ProjectSprint> updList = new List<ProjectSprint>();
             foreach (var id in sprintIds)
@@ -62,7 +79,7 @@ namespace WorkFlow.BusinessLogicCore
                 var projectSprint = new ProjectSprint()
                 {
                     ProjectId = projectId,
-                    SprintId = id
+                    SprintId = (int)id
                 };
                 updList.Add(projectSprint);
             }
@@ -70,7 +87,7 @@ namespace WorkFlow.BusinessLogicCore
             this.Db.SaveChanges();
         }
 
-        public void UpdateTagsToProject(int projectId, List<int> tagsIds)
+        public void UpdateTagsToProject(int projectId, List<int?> tagsIds)
         {
             RemoveTagsToProject(projectId);
             AddTagsToProject(projectId, tagsIds);
@@ -83,7 +100,7 @@ namespace WorkFlow.BusinessLogicCore
             this.Db.SaveChanges();
         }
 
-        public void AddTagsToProject(int projectId, List<int> tagsIds)
+        public void AddTagsToProject(int projectId, List<int?> tagsIds)
         {
             List<ProjectTag> updList = new List<ProjectTag>();
             foreach (var id in tagsIds)
@@ -91,7 +108,7 @@ namespace WorkFlow.BusinessLogicCore
                 var projectTag = new ProjectTag()
                 {
                     ProjectId = projectId,
-                    TagId = id
+                    TagId = (int)id
                 };
                 updList.Add(projectTag);
             }
