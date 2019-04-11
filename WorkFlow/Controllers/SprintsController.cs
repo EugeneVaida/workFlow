@@ -40,9 +40,11 @@ namespace WorkFlow.Controllers
         public IActionResult CreateSprint([FromBody] SprintDto sprintD)
         {
             var sprint = converter.ToSprint(sprintD);
-            sm.CreateSprint(sprint);
 
-            return Ok(sprint);
+            sm.CreateSprint(sprint);
+            sm.CreateProjectSprintsForSprint(sprint.Id, sprintD.Projects.Select(x => (int)x.Id).ToList());
+
+            return Ok(sprintD);
         }
 
         [HttpDelete]

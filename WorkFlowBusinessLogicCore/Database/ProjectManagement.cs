@@ -122,6 +122,34 @@ namespace WorkFlow.BusinessLogicCore
             this.Db.SaveChanges();
         }
 
+        public void CreateProjectSprintsForProject(int projectId, List<int> sprintIds)
+        {
+            foreach (var id in sprintIds)
+            {
+                ProjectSprint projectSprint = new ProjectSprint()
+                {
+                    ProjectId = projectId,
+                    SprintId = id
+                };
+                this.Db.ProjectSprint.Add(projectSprint);
+            }
+            this.Db.SaveChanges();
+        }
+
+        public void CreateProjectTagsForProject(int projectId, List<int> tagsId)
+        {
+            foreach (var id in tagsId)
+            {
+                ProjectTag projectSprint = new ProjectTag()
+                {
+                    ProjectId = projectId,
+                    TagId = id
+                };
+                this.Db.ProjectTags.Add(projectSprint);
+            }
+            this.Db.SaveChanges();
+        }
+
         public void UpdateProject(int id, Project project)
         {
             var item = this.Db.Projects.Where(x => x.Id == id).FirstOrDefault();

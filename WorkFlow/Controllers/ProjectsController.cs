@@ -54,8 +54,10 @@ namespace WorkFlow.Controllers
         {
             var project = converter.ToProject(projectD);
             pm.CreateProject(project);
+            pm.CreateProjectSprintsForProject(project.Id, projectD.Sprints.Select(x => (int)x.Id).ToList());
+            pm.CreateProjectTagsForProject(project.Id, projectD.Tags.Select(x => (int)x.Id).ToList());
 
-            return Ok(project);
+            return Ok(projectD);
         }
 
         [HttpDelete]

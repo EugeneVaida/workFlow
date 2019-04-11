@@ -60,7 +60,7 @@ namespace WorkFlow.BusinessLogicCore
                 };
                 updList.Add(projectSprint);
             }
-            this.Db.AddRange(updList);
+            this.Db.ProjectSprint.AddRange(updList);
             this.Db.SaveChanges();
         }
 
@@ -74,6 +74,20 @@ namespace WorkFlow.BusinessLogicCore
         public void CreateSprint(Sprint sprint)
         {
             this.Db.Sprints.Add(sprint);
+            this.Db.SaveChanges();
+        }
+
+        public void CreateProjectSprintsForSprint(int sprintId, List<int> ProjectIds)
+        {
+            foreach (int id in ProjectIds)
+            {
+                ProjectSprint projectSprint = new ProjectSprint()
+                {
+                    ProjectId = id,
+                    SprintId = sprintId
+                };
+                this.Db.ProjectSprint.Add(projectSprint);
+            }
             this.Db.SaveChanges();
         }
 

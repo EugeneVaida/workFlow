@@ -27,7 +27,7 @@ namespace WorkFlow.Models
                 Name = projectD.Name,
                 Description = projectD.Description,
                 StartDate = projectD.StartDate,
-                EndDate = projectD.EndDate
+                EndDate = projectD.EndDate                
             };
             return project;
         }
