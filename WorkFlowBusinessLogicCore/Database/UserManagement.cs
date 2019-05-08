@@ -35,11 +35,13 @@ namespace WorkFlow.BusinessLogicCore
             return GetUserByUsername(username).Id;
         }
 
-        public void CreateUser(User user)
+        public int CreateUser(User user)
         {
             user.PasswordHash = GetHash(user.PasswordHash);
             this.Db.Users.Add(user);
             Submit();
+
+            return user.Id;
         } 
 
         public User DeleteUser(int id)
@@ -59,12 +61,43 @@ namespace WorkFlow.BusinessLogicCore
                 updUser.Username = user.Username;
                 updUser.LastName = user.LastName;
                 updUser.Username = user.Username;
-                updUser.PasswordHash = GetHash(user.PasswordHash);                
+                updUser.PasswordHash = GetHash(user.PasswordHash);
+                updUser.Email = user.Email;
             }
             else
             {
                 CreateUser(user);
             }
+            Submit();
+        }
+
+        public void UpdateRolesToUser(int userId, List<int> rolesIds)
+        {
+            RemoveRolesToUser(userId);
+            AddRolesToUser(userId, rolesIds);
+        }
+
+        public void RemoveRolesToUser(int userId)
+        {
+            var userRoles = this.Db.UserRoles.Where(x => x.UserId == userId);
+            this.Db.UserRoles.RemoveRange(userRoles);
+            this.Db.SaveChanges();
+        }
+
+        public void AddRolesToUser(int? userId, List<int> rolesIds)
+        {
+            List<UserRole> updList = new List<UserRole>();
+            foreach (var id in rolesIds)
+            {
+                var userRole = new UserRole()
+                {
+                    UserId = (int)userId,
+                    RoleId = (int)id
+                };
+                updList.Add(userRole);
+            }
+            this.Db.UserRoles.AddRange(updList);
+            this.Db.SaveChanges();
         }
 
 

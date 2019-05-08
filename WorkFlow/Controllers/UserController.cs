@@ -17,18 +17,20 @@ namespace WorkFlow.Controllers
     {
         private Converter converter;
         private readonly UserManagement um;
+        private readonly RoleManagement rm;
         public UserController(WorkFlowDbContext context)
         {
             converter = new Converter();
             um = new UserManagement(context);
+            rm = new RoleManagement(context);
         }
 
         [HttpGet]
         [Route("api/GetAllUsers")]
         [AllowAnonymous]
-        public JsonResult GetCompanies()
+        public JsonResult GetAllUsers()
         {
-            var users = um.GetAllUsers();
+            var users = um.GetAllUsers().Select(x => converter.ToUserDto(x, rm.GetListOfRolesForUser(x.Id)));
             return Json(users);
         }
 
@@ -38,9 +40,10 @@ namespace WorkFlow.Controllers
         public IActionResult CreateUser([FromBody]UserDto userDto)
         {
             var user = converter.ToUser(userDto);
-            um.CreateUser(user);
+            int userId = um.CreateUser(user);
+            um.AddRolesToUser(userId, userDto.Roles.Select(x => x.Id).ToList());          
 
-            return Ok(user);
+            return Ok(userDto);
         }
 
         [HttpDelete]
@@ -49,15 +52,17 @@ namespace WorkFlow.Controllers
         public IActionResult DeleteUser(int Id)
         {
             var result = um.DeleteUser(Id);
+            //ToDo deleting userRoles to deleted user
             return Ok(result);
         }
 
         [HttpPut]
-        [Route("api/DeleteUser/{id}")]
+        [Route("api/UpdateUser/{id}")]
         [AllowAnonymous]
-        public IActionResult UpdateCompany(int id, [FromBody]UserDto userD)
+        public IActionResult UpdateUser(int id, [FromBody]UserDto userD)
         {
             var user = converter.ToUser(userD);
+            um.UpdateRolesToUser(id, userD.Roles.Select(x => x.Id).ToList());
             um.UpdateUser(id, user);
             return Ok(user);
         }

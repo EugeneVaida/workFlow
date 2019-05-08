@@ -19,6 +19,11 @@ namespace WorkFlowBusinessLogicCore.Database
             return this.Db.UserRoles.Include(x => x.Role).Select(x => x.Role.Name).ToList();
         }
 
+        public List<Role> GetListOfRolesForUser(int userId)
+        {
+            return this.Db.UserRoles.Include(x => x.Role).Where(x => x.UserId.Equals(userId)).Select(x => x.Role).ToList();
+        }
+
         public List<string> GetListOfAllRolesNames()
         {
             return this.Db.Roles.Select(x => x.Name).ToList();

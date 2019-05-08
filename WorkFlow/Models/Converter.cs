@@ -103,12 +103,38 @@ namespace WorkFlow.Models
         {
             User user = new User()
             {
-                FirstName = userD.FirstName,
-                LastName = userD.LastName,
+                FirstName = userD.Firstname,
+                LastName = userD.Lastname,
                 Username = userD.Username,
-                PasswordHash = userD.Password           
+                PasswordHash = userD.Password,
+                Email = userD.Email
             };
             return user;
+        }
+
+        public UserDto ToUserDto(User user, List<Role> roles = null)
+        {
+            UserDto userD = new UserDto()
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Firstname = user.FirstName,
+                Lastname = user.LastName,
+                Email = user.Email,
+                Password = "",
+                Roles = roles == null ? new List<RoleDto>() : roles.Select(x => ToRoleDto(x)).ToList()
+            };
+            return userD;
+        }
+
+        public RoleDto ToRoleDto(Role role)
+        {
+            RoleDto roleD = new RoleDto()
+            {
+                Id = role.Id,
+                Name = role.Name
+            };
+            return roleD;
         }
 
         public int GetPercents(DateTime start, DateTime end)

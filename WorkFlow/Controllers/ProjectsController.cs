@@ -47,6 +47,17 @@ namespace WorkFlow.Controllers
             return Json(projects);
         }
 
+        [HttpGet]
+        [Route("api/GetProjectById/{id}")]
+        [AllowAnonymous]
+        public JsonResult GetProjectById(int id)
+        {
+            var project = pm.GetProjectById(id);
+            return Json(project);
+        }
+
+
+
         [HttpPost]
         [Route("api/CreateProject")]
         [AllowAnonymous]

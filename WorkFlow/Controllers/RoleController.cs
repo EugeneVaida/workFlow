@@ -17,9 +17,12 @@ namespace WorkFlow.Controllers
     {
         private readonly RoleManagement rm;
 
+        private Converter converter;
+
         public RoleController(WorkFlowDbContext context)
         {
             rm = new RoleManagement(context);
+            converter = new Converter();
         } 
 
         [HttpGet]
@@ -27,8 +30,10 @@ namespace WorkFlow.Controllers
         [AllowAnonymous]
         public JsonResult GetRoles()
         {
-            var roles = rm.GetListOfAllRoles();
+            var roles = rm.GetListOfAllRoles().Select(x => converter.ToRoleDto(x));
             return Json(roles);
         }
+
+
     }
 }
