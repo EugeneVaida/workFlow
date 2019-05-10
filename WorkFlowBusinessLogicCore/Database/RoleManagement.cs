@@ -16,7 +16,7 @@ namespace WorkFlowBusinessLogicCore.Database
 
         public List<string> GetListOfUserRolesNames(int userId)
         {            
-            return this.Db.UserRoles.Include(x => x.Role).Select(x => x.Role.Name).ToList();
+            return this.Db.UserRoles.Include(x => x.Role).Where(x => x.UserId == userId).Select(x => x.Role.Name).ToList();
         }
 
         public List<Role> GetListOfRolesForUser(int userId)

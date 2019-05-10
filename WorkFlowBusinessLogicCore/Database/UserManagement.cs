@@ -35,13 +35,11 @@ namespace WorkFlow.BusinessLogicCore
             return GetUserByUsername(username).Id;
         }
 
-        public int CreateUser(User user)
+        public void CreateUser(User user)
         {
             user.PasswordHash = GetHash(user.PasswordHash);
             this.Db.Users.Add(user);
             Submit();
-
-            return user.Id;
         } 
 
         public User DeleteUser(int id)

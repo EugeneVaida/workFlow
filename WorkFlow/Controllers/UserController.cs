@@ -40,8 +40,8 @@ namespace WorkFlow.Controllers
         public IActionResult CreateUser([FromBody]UserDto userDto)
         {
             var user = converter.ToUser(userDto);
-            int userId = um.CreateUser(user);
-            um.AddRolesToUser(userId, userDto.Roles.Select(x => x.Id).ToList());          
+            um.CreateUser(user);
+            um.AddRolesToUser(user.Id, userDto.Roles.Select(x => x.Id).ToList());          
 
             return Ok(userDto);
         }

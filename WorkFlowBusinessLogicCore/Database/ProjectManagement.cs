@@ -119,7 +119,7 @@ namespace WorkFlow.BusinessLogicCore
         public void CreateProject(Project project)
         {
             this.Db.Projects.Add(project);
-            this.Db.SaveChanges();
+            this.Db.SaveChanges();            
         }
 
         public void CreateProjectSprintsForProject(int projectId, List<int> sprintIds)
