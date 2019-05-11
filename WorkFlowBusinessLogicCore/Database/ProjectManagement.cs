@@ -47,7 +47,7 @@ namespace WorkFlow.BusinessLogicCore
 
         public Project GetProjectById(int id)
         {
-            return this.Db.Projects.Where(x => x.Id == id).FirstOrDefault();
+            return this.Db.Projects.Include(x => x.ProjectSprints).ThenInclude(y => y.Sprint).Include(x => x.ProjectTags).ThenInclude(x => x.Tag).Where(x => x.Id == id).FirstOrDefault();
         }
 
         public Project DeleteProject(int id)

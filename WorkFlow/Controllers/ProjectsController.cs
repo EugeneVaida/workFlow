@@ -53,7 +53,9 @@ namespace WorkFlow.Controllers
         public JsonResult GetProjectById(int id)
         {
             var project = pm.GetProjectById(id);
-            return Json(project);
+            var projectDto = converter.ToProjectDto(project, project.ProjectSprints.Select(y => y.Sprint).ToList(),
+                project.ProjectTags.Select(t => t.Tag).ToList());
+            return Json(projectDto);
         }
 
 
