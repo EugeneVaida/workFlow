@@ -108,7 +108,6 @@ var TagProjectsPage = /** @class */ (function () {
             _this.tag = data;
             console.log(_this.tag);
         });
-        ;
     };
     TagProjectsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

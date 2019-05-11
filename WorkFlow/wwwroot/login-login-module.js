@@ -100,6 +100,7 @@ var LoginPage = /** @class */ (function () {
         this.userService.userAuthentication(this.loginCredentials.UserName, this.loginCredentials.Password).subscribe(function (data) {
             localStorage.setItem('userToken', data.access_token);
             localStorage.setItem('userRoles', data.role);
+            localStorage.setItem('userName', data.username);
             _this.router.navigate(['/home']);
         }, function (err) {
             _this.isLoginError = true;

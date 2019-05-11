@@ -853,6 +853,10 @@ var map = {
 		"./src/app/login/login.module.ts",
 		"login-login-module"
 	],
+	"./project/project.module": [
+		"./src/app/project/project.module.ts",
+		"project-project-module"
+	],
 	"./projects/projects.module": [
 		"./src/app/projects/projects.module.ts",
 		"common",
@@ -861,6 +865,10 @@ var map = {
 	"./search/search.module": [
 		"./src/app/search/search.module.ts",
 		"search-search-module"
+	],
+	"./sprint/sprint.module": [
+		"./src/app/sprint/sprint.module.ts",
+		"sprint-sprint-module"
 	],
 	"./sprints/sprints.module": [
 		"./src/app/sprints/sprints.module.ts",
@@ -932,6 +940,8 @@ var routes = [
     { path: 'tag-projects/:id', loadChildren: './tag-projects/tag-projects.module#TagProjectsPageModule' },
     { path: 'search', loadChildren: './search/search.module#SearchPageModule' },
     { path: 'comment', loadChildren: './comment/comment.module#CommentPageModule' },
+    { path: 'project/:id', loadChildren: './project/project.module#ProjectPageModule' },
+    { path: 'sprint', loadChildren: './sprint/sprint.module#SprintPageModule' },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -1235,8 +1245,21 @@ var ProjectService = /** @class */ (function () {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
             return data.json();
         })).toPromise().then(function (x) {
+            _this.project = x;
+        });
+    };
+    ProjectService.prototype.getProjectById = function (id) {
+        var _this = this;
+        this.http.get(this.rootUrl + '/api/GetProjectById/' + id)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            return data.json();
+        })).toPromise().then(function (x) {
             _this.projectsList = x;
         });
+    };
+    ProjectService.prototype.returnProjectById = function (id) {
+        return this.http.get(this.rootUrl + '/api/GetProjectById/' + id)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
     };
     ProjectService.prototype.returnAllProjects = function () {
         return this.http.get(this.rootUrl + '/api/GetAllProjects')
