@@ -109,6 +109,7 @@ var SprintService = /** @class */ (function () {
     function SprintService(http, connectionService) {
         this.http = http;
         this.connectionService = connectionService;
+        this.isLoad = true;
         this.rootUrl = this.connectionService.rootUrl;
     }
     SprintService.prototype.postSprint = function (spr) {
@@ -128,11 +129,13 @@ var SprintService = /** @class */ (function () {
     };
     SprintService.prototype.getAllSprints = function () {
         var _this = this;
+        this.isLoad = true;
         this.http.get(this.rootUrl + '/api/GetAllSprints')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
             return data.json();
         })).toPromise().then(function (x) {
             _this.sprintsList = x;
+            _this.isLoad = false;
         });
     };
     SprintService.prototype.returnAllSprints = function () {
@@ -187,6 +190,7 @@ var TagService = /** @class */ (function () {
     function TagService(http, connectionService) {
         this.http = http;
         this.connectionService = connectionService;
+        this.isLoad = true;
         this.rootUrl = this.connectionService.rootUrl;
     }
     TagService.prototype.postSprint = function (tg) {
@@ -205,11 +209,13 @@ var TagService = /** @class */ (function () {
     };
     TagService.prototype.getAllTags = function () {
         var _this = this;
+        this.isLoad = true;
         this.http.get(this.rootUrl + '/api/GetAllTags')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
             return data.json();
         })).toPromise().then(function (x) {
             _this.tagsList = x;
+            _this.isLoad = false;
         });
     };
     TagService.prototype.getTag = function (id) {

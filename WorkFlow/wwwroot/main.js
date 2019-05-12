@@ -1215,6 +1215,7 @@ var ProjectService = /** @class */ (function () {
     function ProjectService(http, connectionService) {
         this.http = http;
         this.connectionService = connectionService;
+        this.isLoad = true;
         this.rootUrl = this.connectionService.rootUrl;
     }
     ProjectService.prototype.postProject = function (prj) {
@@ -1232,11 +1233,13 @@ var ProjectService = /** @class */ (function () {
     };
     ProjectService.prototype.getAllProjects = function () {
         var _this = this;
+        this.isLoad = true;
         this.http.get(this.rootUrl + '/api/GetAllProjects')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
             return data.json();
         })).toPromise().then(function (x) {
             _this.projectsList = x;
+            _this.isLoad = false;
         });
     };
     ProjectService.prototype.getAllProjectsByTag = function (id) {
@@ -1338,8 +1341,6 @@ var UserService = /** @class */ (function () {
     UserService.prototype.roleMatch = function (allowedRoles) {
         var isMatch = false;
         var userRoles = localStorage.getItem('userRoles').split(',');
-        console.log(localStorage);
-        console.log(allowedRoles);
         allowedRoles.forEach(function (element) {
             if (userRoles.indexOf(element) > -1) {
                 isMatch = true;

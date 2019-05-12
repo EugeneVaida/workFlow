@@ -52,7 +52,7 @@ var LoginPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<ion-content class=\"login-content\" padding>  \r\n  <form (ngSubmit)=\"onSubmit()\" #registerForm=\"ngForm\">\r\n    <ion-grid>\r\n      <ion-row justify-content-center>\r\n        <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\">\r\n          <div text-center>\r\n            <h4>Login Form</h4>\r\n          </div>\r\n          <div padding>\r\n            <ion-item>\r\n              <ion-input type=\"text\" placeholder=\"UserName\" name=\"UserName\" [(ngModel)]=\"loginCredentials.UserName\"\r\n                required></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-input type=\"password\" placeholder=\"Password\" name=\"Password\" [(ngModel)]=\"loginCredentials.Password\"\r\n                required></ion-input>\r\n            </ion-item>\r\n          </div>\r\n\r\n          <div padding>\r\n            <ion-button size=\"large\" type=\"submit\" expand=\"block\">Login</ion-button>\r\n          </div>\r\n\r\n          <div text-center *ngIf=\"isLoginError\" class=\"red-text error-message\">            \r\n            Incorrect Username or Password\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </form>  \r\n</ion-content>"
+module.exports = "\r\n<ion-content class=\"login-content\" padding>  \r\n  <form (ngSubmit)=\"onSubmit()\" #registerForm=\"ngForm\">\r\n    <ion-grid>\r\n      <ion-row justify-content-center>\r\n        <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\">\r\n          <div text-center>\r\n            <h4>Login Form</h4>\r\n          </div>\r\n          <div padding>\r\n            <ion-item>\r\n              <ion-input type=\"text\" placeholder=\"UserName\" name=\"UserName\" [(ngModel)]=\"loginCredentials.UserName\"\r\n                required></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-input type=\"password\" placeholder=\"Password\" name=\"Password\" [(ngModel)]=\"loginCredentials.Password\"\r\n                required></ion-input>\r\n            </ion-item>\r\n\r\n          </div>\r\n\r\n          <div padding>\r\n            <ion-button size=\"large\" type=\"submit\" expand=\"block\">Login</ion-button>\r\n          </div>\r\n\r\n          <ion-spinner *ngIf=\"isLogging\"></ion-spinner>\r\n          <div text-center *ngIf=\"isLoginError\" class=\"red-text error-message\">            \r\n            Incorrect Username or Password\r\n          </div>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </form>  \r\n</ion-content>"
 
 /***/ }),
 
@@ -63,7 +63,7 @@ module.exports = "\r\n<ion-content class=\"login-content\" padding>  \r\n  <form
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".red-text {\n  color: #bb5252;\n  font-weight: 700; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vRDpcXHByb2plY3RzXFxXb3JrRmxvd0NsaWVudFxcd29ya0Zsb3cvc3JjXFxhcHBcXGxvZ2luXFxsb2dpbi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxjQUF1QjtFQUN2QixnQkFBZ0IsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2xvZ2luL2xvZ2luLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5yZWQtdGV4dHtcbiAgY29sb3I6IHJnYigxODcsIDgyLCA4Mik7XG4gIGZvbnQtd2VpZ2h0OiA3MDA7XG59XG5cbiJdfQ== */"
+module.exports = ".red-text {\n  color: #bb5252;\n  font-weight: 700; }\n\nion-spinner {\n  display: block;\n  margin: 0 auto; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbG9naW4vRDpcXHByb2plY3RzXFxXb3JrRmxvd0NsaWVudFxcd29ya0Zsb3cvc3JjXFxhcHBcXGxvZ2luXFxsb2dpbi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxjQUF1QjtFQUN2QixnQkFBZ0IsRUFBQTs7QUFHbEI7RUFDRSxjQUFjO0VBQ2QsY0FBYyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvbG9naW4vbG9naW4ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnJlZC10ZXh0e1xuICBjb2xvcjogcmdiKDE4NywgODIsIDgyKTtcbiAgZm9udC13ZWlnaHQ6IDcwMDtcbn1cblxuaW9uLXNwaW5uZXIge1xuICBkaXNwbGF5OiBibG9jaztcbiAgbWFyZ2luOiAwIGF1dG87XG59Il19 */"
 
 /***/ }),
 
@@ -93,16 +93,21 @@ var LoginPage = /** @class */ (function () {
         this.router = router;
         this.navCtrl = navCtrl;
         this.isLoginError = false;
+        this.isLogging = false;
         this.loginCredentials = { UserName: '', Password: '' };
     }
     LoginPage.prototype.onSubmit = function () {
         var _this = this;
+        this.isLoginError = false;
+        this.isLogging = true;
         this.userService.userAuthentication(this.loginCredentials.UserName, this.loginCredentials.Password).subscribe(function (data) {
             localStorage.setItem('userToken', data.access_token);
             localStorage.setItem('userRoles', data.role);
             localStorage.setItem('userName', data.username);
+            _this.isLogging = false;
             _this.router.navigate(['/home']);
         }, function (err) {
+            _this.isLogging = false;
             _this.isLoginError = true;
         });
     };
