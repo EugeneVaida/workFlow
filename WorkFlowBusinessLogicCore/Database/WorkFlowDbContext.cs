@@ -23,18 +23,11 @@ namespace WorkFlowBusinessLogicCore.Database
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public string ConnectionString { get; set; }
 
-        //public WorkFlowDbContext(DbContextOptions<WorkFlowDbContext> options)
-        //    : base(options)
-        //{
-        //    //Database.EnsureCreated();
-        //}
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseMySql("server=remotemysql.com;UserId=1B9lWL7ngl;Password=yxol56ykol;database=1B9lWL7ngl;");
-        }
-
+        public WorkFlowDbContext(DbContextOptions<WorkFlowDbContext> options)
+        : base(options)
+        { }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
