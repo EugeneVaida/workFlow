@@ -20,7 +20,7 @@ namespace WorkFlowBusinessLogicCore
             .Build();
 
             var builder = new DbContextOptionsBuilder<WorkFlowDbContext>();
-            builder.UseSqlServer(configuration.GetConnectionString("WorkFlowMySql"));
+            builder.UseMySql(configuration.GetConnectionString("WorkFlowMySqlLocal"));
             return new WorkFlowDbContext(builder.Options);
         }       
         
