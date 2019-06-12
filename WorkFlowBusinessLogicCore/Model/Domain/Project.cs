@@ -14,6 +14,7 @@ namespace WorkFlow.Models
         public DateTime EndDate { get; set; }
 
         public virtual ICollection<ProjectSprint> ProjectSprints { get; set; }
+        public virtual ICollection<ProjectInvitation> ProjectInvitations { get; set; }
         public virtual ICollection<ProjectUser> ProjectUsers { get; set; }
         public virtual ICollection<ProjectTag> ProjectTags { get; set; }
 

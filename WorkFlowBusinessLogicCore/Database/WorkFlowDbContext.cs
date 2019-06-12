@@ -44,6 +44,17 @@ namespace WorkFlowBusinessLogicCore.Database
                 .WithMany(c => c.ProjectSprints)
                 .HasForeignKey(bc => bc.SprintId);
 
+            modelBuilder.Entity<ProjectInvitation>()
+                .HasKey(bc => new { bc.ProjectId, bc.InvitationId });
+            modelBuilder.Entity<ProjectInvitation>()
+                .HasOne(bc => bc.Project)
+                .WithMany(b => b.ProjectInvitations)
+                .HasForeignKey(bc => bc.ProjectId);
+            modelBuilder.Entity<ProjectInvitation>()
+                .HasOne(bc => bc.Invitation)
+                .WithMany(c => c.ProjectInvitations)
+                .HasForeignKey(bc => bc.InvitationId);
+
             modelBuilder.Entity<ProjectTag>()
                 .HasKey(bc => new { bc.ProjectId, bc.TagId });
             modelBuilder.Entity<ProjectTag>()

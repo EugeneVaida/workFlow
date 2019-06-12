@@ -18,11 +18,13 @@ namespace WorkFlow.Controllers
         private Converter converter;
         private readonly UserManagement um;
         private readonly RoleManagement rm;
+        private readonly EmailSendingManagement es;
         public UserController(WorkFlowDbContext context)
         {
             converter = new Converter();
             um = new UserManagement(context);
             rm = new RoleManagement(context);
+            es = new EmailSendingManagement();
         }
 
         [HttpGet]
@@ -65,6 +67,21 @@ namespace WorkFlow.Controllers
             um.UpdateRolesToUser(id, userD.Roles.Select(x => x.Id).ToList());
             um.UpdateUser(id, user);
             return Ok(user);
+        }
+
+        [Route("api/InviteUser/{id}")]
+        public Guid InviteUser(int id)
+        {
+            Guid g;
+            g = Guid.NewGuid();
+            es.SendEmail("e.v.e.r.e.s.tt.1551@gmail.com", "WorkFlow invite", g.ToString());
+            return g;
+        }
+
+
+        public void SendEmailWithInvite()
+        {
+
         }
     }
 }
