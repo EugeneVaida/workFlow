@@ -63,7 +63,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"common":"common","comment-comment-module":"comment-comment-module","projects-projects-module":"projects-projects-module","sprints-sprints-module":"sprints-sprints-module","tag-projects-tag-projects-module":"tag-projects-tag-projects-module","tags-tags-module":"tags-tags-module","companies-companies-module":"companies-companies-module","home-home-module":"home-home-module","login-login-module":"login-login-module","project-project-module":"project-project-module","search-search-module":"search-search-module","sprint-sprint-module":"sprint-sprint-module","users-users-module":"users-users-module"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"common":"common","comment-comment-module":"comment-comment-module","projects-projects-module":"projects-projects-module","sprints-sprints-module":"sprints-sprints-module","tag-projects-tag-projects-module":"tag-projects-tag-projects-module","tags-tags-module":"tags-tags-module","companies-companies-module":"companies-companies-module","home-home-module":"home-home-module","login-login-module":"login-login-module","profile-profile-module":"profile-profile-module","project-project-module":"project-project-module","search-search-module":"search-search-module","sprint-sprint-module":"sprint-sprint-module","users-users-module":"users-users-module"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function

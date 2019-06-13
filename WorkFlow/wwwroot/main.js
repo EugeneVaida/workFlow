@@ -853,6 +853,10 @@ var map = {
 		"./src/app/login/login.module.ts",
 		"login-login-module"
 	],
+	"./profile/profile.module": [
+		"./src/app/profile/profile.module.ts",
+		"profile-profile-module"
+	],
 	"./project/project.module": [
 		"./src/app/project/project.module.ts",
 		"project-project-module"
@@ -942,6 +946,8 @@ var routes = [
     { path: 'comment', loadChildren: './comment/comment.module#CommentPageModule' },
     { path: 'project/:id', loadChildren: './project/project.module#ProjectPageModule' },
     { path: 'sprint', loadChildren: './sprint/sprint.module#SprintPageModule' },
+    { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
+    { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -966,7 +972,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
+module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n  <ion-tabs>\n    <ion-tab-bar #myTabBar id=\"myTabBar\" slot=\"bottom\">\n      <ion-tab-button tab=\"projects\">\n        <ion-icon name=\"document\"></ion-icon>\n        <ion-label>Проекты</ion-label>\n      </ion-tab-button>\n      <ion-tab-button tab=\"sprints\">\n        <ion-icon name=\"construct\"></ion-icon>\n        <ion-label>Спринты</ion-label>\n      </ion-tab-button>\n      <ion-tab-button tab=\"profile\">\n        <ion-icon name=\"contact\"></ion-icon>\n        <ion-label>Профиль</ion-label>\n      </ion-tab-button>\n      <ion-tab-button tab=\"companies\">\n          <ion-icon name=\"business\"></ion-icon>\n        <ion-label>Компании</ion-label>\n      </ion-tab-button>\n    </ion-tab-bar>\n  </ion-tabs>\n</ion-app>\n"
 
 /***/ }),
 
@@ -985,13 +991,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _shared_tab_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./shared/tab.service */ "./src/app/shared/tab.service.ts");
+
 
 
 
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar) {
+    function AppComponent(tabs, platform, splashScreen, statusBar) {
+        this.tabs = tabs;
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
@@ -1009,7 +1018,8 @@ var AppComponent = /** @class */ (function () {
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html")
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_tab_service__WEBPACK_IMPORTED_MODULE_5__["TabService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
     ], AppComponent);
@@ -1045,8 +1055,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _shared_user_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./shared/user.service */ "./src/app/shared/user.service.ts");
-/* harmony import */ var _shared_company_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./shared/company.service */ "./src/app/shared/company.service.ts");
-/* harmony import */ var _shared_project_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shared/project.service */ "./src/app/shared/project.service.ts");
+/* harmony import */ var _shared_tab_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./shared/tab.service */ "./src/app/shared/tab.service.ts");
+/* harmony import */ var _shared_company_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shared/company.service */ "./src/app/shared/company.service.ts");
+/* harmony import */ var _shared_project_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./shared/project.service */ "./src/app/shared/project.service.ts");
+
 
 
 
@@ -1074,11 +1086,12 @@ var AppModule = /** @class */ (function () {
             imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__["BrowserAnimationsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_13__["HttpClientModule"], _angular_http__WEBPACK_IMPORTED_MODULE_4__["HttpModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_11__["AppRoutingModule"], ngx_toastr__WEBPACK_IMPORTED_MODULE_10__["ToastrModule"].forRoot()],
             providers: [
                 _shared_user_service__WEBPACK_IMPORTED_MODULE_14__["UserService"],
-                _shared_company_service__WEBPACK_IMPORTED_MODULE_15__["CompanyService"],
-                _shared_project_service__WEBPACK_IMPORTED_MODULE_16__["ProjectService"],
+                _shared_company_service__WEBPACK_IMPORTED_MODULE_16__["CompanyService"],
+                _shared_project_service__WEBPACK_IMPORTED_MODULE_17__["ProjectService"],
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_9__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_8__["SplashScreen"],
                 _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_5__["Toast"],
+                _shared_tab_service__WEBPACK_IMPORTED_MODULE_15__["TabService"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__["IonicRouteStrategy"] }
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_12__["AppComponent"]]
@@ -1287,6 +1300,98 @@ var ProjectService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/shared/tab.service.ts":
+/*!***************************************!*\
+  !*** ./src/app/shared/tab.service.ts ***!
+  \***************************************/
+/*! exports provided: TabService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabService", function() { return TabService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
+
+
+
+
+var TabService = /** @class */ (function () {
+    function TabService(router, platform) {
+        var _this = this;
+        this.router = router;
+        this.platform = platform;
+        this.hideTabBarPages = [
+            'login',
+        ];
+        this.routeParamPages = [
+            'product-details',
+        ];
+        this.platform.ready().then(function () {
+            console.log('Core service init');
+            _this.navEvents();
+        });
+    }
+    TabService.prototype.hideTabs = function () {
+        var tabBar = document.getElementById('myTabBar');
+        if (tabBar.style.display !== 'none')
+            tabBar.style.display = 'none';
+    };
+    TabService.prototype.showTabs = function () {
+        var tabBar = document.getElementById('myTabBar');
+        if (tabBar.style.display !== 'flex')
+            tabBar.style.display = 'flex';
+    };
+    // A simple subscription that tells us what page we're currently navigating to.
+    TabService.prototype.navEvents = function () {
+        var _this = this;
+        this.router.events.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (e) { return e instanceof _angular_router__WEBPACK_IMPORTED_MODULE_3__["NavigationEnd"]; })).subscribe(function (e) {
+            console.log(e);
+            _this.showHideTabs(e);
+        });
+    };
+    TabService.prototype.showHideTabs = function (e) {
+        // Result:  e.url: "/tabs/groups/new-group?type=group"
+        var _this = this;
+        // Split the URL up into an array.
+        var urlArray = e.urlAfterRedirects.split('/');
+        // Result: urlArray: ["", "tabs", "groups", "new-group?type=group"]
+        // Grab the parentUrl
+        var pageUrlParent = urlArray[urlArray.length - 2];
+        // Grab the last page url.
+        var pageUrl = urlArray[urlArray.length - 1];
+        // Result: new-group?type=group
+        var page = pageUrl.split('?')[0];
+        // Result: new-group
+        // Check if it's a routeParamPage that we need to hide on
+        //const hideParamPage = this.routeParamPages.indexOf(pageUrlParent) > -1 && !isNaN(Number(page));
+        // Check if we should hide or show tabs.
+        var shouldHide = this.hideTabBarPages.indexOf(page) > -1;
+        // Result: true
+        // Not ideal to set the timeout, but I haven't figured out a better method to wait until the page is in transition...
+        try {
+            setTimeout(function () { return shouldHide ? _this.hideTabs() : _this.showTabs(); }, 300);
+        }
+        catch (err) {
+        }
+    };
+    TabService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root',
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["Platform"]])
+    ], TabService);
+    return TabService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/shared/user.service.ts":
 /*!****************************************!*\
   !*** ./src/app/shared/user.service.ts ***!
@@ -1311,6 +1416,7 @@ var UserService = /** @class */ (function () {
     function UserService(connectionService, http) {
         this.connectionService = connectionService;
         this.http = http;
+        this.isLogging = false;
         this.rootUrl = this.connectionService.rootUrl;
     }
     UserService.prototype.registerUser = function (user, roles) {
@@ -1460,7 +1566,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\projects\WorkFlowClient\workFlow\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\projects\WorkFlowClient\WorkFlow\src\main.ts */"./src/main.ts");
 
 
 /***/ })
