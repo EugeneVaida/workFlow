@@ -57,7 +57,7 @@ namespace WorkFlow
                     });
 
             
-            string connection = Configuration.GetConnectionString("WorkFlowMySql");
+            string connection = Configuration.GetConnectionString("WorkFlowMySqlLocal");
 
             services.AddDbContext<WorkFlowDbContext>(options => options.UseMySql(connection));
 

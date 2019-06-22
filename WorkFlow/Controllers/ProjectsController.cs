@@ -94,5 +94,14 @@ namespace WorkFlow.Controllers
             return Ok(project);
         }
 
+        [HttpGet]
+        [Route("api/SearchProjects/{id}")]
+        [AllowAnonymous]
+        public IActionResult SearchProjects(string id)
+        {
+            var projects = pm.SearchProjects(id);
+            return Ok(projects);
+        }
+
     }
 }

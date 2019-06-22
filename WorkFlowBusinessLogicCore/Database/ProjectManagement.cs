@@ -18,6 +18,16 @@ namespace WorkFlow.BusinessLogicCore
             return this.Db.Projects.Include(x => x.ProjectSprints).ThenInclude(y => y.Sprint).Include(x => x.ProjectTags).ThenInclude(x => x.Tag).ToList();
         }
 
+        public List<Project> SearchProjects(string quary)
+        {
+            var projects = this.Db.Projects.Where(x => 
+            x.Description.ToLower().Contains(quary) ||
+            x.Name.ToLower().Contains(quary) || 
+            x.StartDate.ToString().ToLower().Contains(quary) ||
+            x.EndDate.ToString().ToLower().Contains(quary));
+            return projects.ToList();
+        }
+
         public List<int> GetAllProjectsIdsByTag(int id)
         {
             return this.Db.ProjectTags.Where(x => x.TagId == id).Select(x => x.Project.Id).ToList();
