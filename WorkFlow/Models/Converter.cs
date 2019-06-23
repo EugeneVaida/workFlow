@@ -141,7 +141,7 @@ namespace WorkFlow.Models
         {
             int allDays = (end - start).Days;
             int daysFromStart = (DateTime.Now - start).Days;
-            var per = Math.Round(((double)daysFromStart / allDays) * 100, 0);
+            var per = Math.Round(((double)daysFromStart / allDays) * 10, 0);
             return (int)per;
         }
     }

@@ -57,7 +57,7 @@ namespace WorkFlow.Controllers
             {
                 access_token = encodedJwt,
                 role = userRolesNames.ToArray(),
-                username = identity.Name
+                userId = userId
             };
 
             Response.ContentType = "application/json";

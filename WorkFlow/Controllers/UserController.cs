@@ -19,12 +19,15 @@ namespace WorkFlow.Controllers
         private readonly UserManagement um;
         private readonly RoleManagement rm;
         private readonly EmailSendingManagement es;
+        private readonly ProjectManagement pm;
+
         public UserController(WorkFlowDbContext context)
         {
             converter = new Converter();
             um = new UserManagement(context);
             rm = new RoleManagement(context);
             es = new EmailSendingManagement();
+            pm = new ProjectManagement(context);
         }
 
         [HttpGet]
@@ -34,6 +37,15 @@ namespace WorkFlow.Controllers
         {
             var users = um.GetAllUsers().Select(x => converter.ToUserDto(x, rm.GetListOfRolesForUser(x.Id)));
             return Json(users);
+        }
+
+        [HttpGet]
+        [Route("api/GetUser/{id}")]
+        [AllowAnonymous]
+        public JsonResult GetUser(int id)
+        {
+            var user = um.GetUserById(id);
+            return Json(user);
         }
 
         [HttpPost]
@@ -74,6 +86,7 @@ namespace WorkFlow.Controllers
         {
             Guid g;
             g = Guid.NewGuid();
+            pm.InvitationForProject(id, g.ToString());
             es.SendEmail("e.v.e.r.e.s.tt.1551@gmail.com", "WorkFlow invite", g.ToString());
             return g;
         }

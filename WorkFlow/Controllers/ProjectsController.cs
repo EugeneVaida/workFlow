@@ -70,7 +70,7 @@ namespace WorkFlow.Controllers
             pm.CreateProjectSprintsForProject(project.Id, projectD.Sprints.Select(x => (int)x.Id).ToList());
             pm.CreateProjectTagsForProject(project.Id, projectD.Tags.Select(x => (int)x.Id).ToList());
 
-            return Ok(projectD);
+            return Ok(project.Id);
         }
 
         [HttpDelete]
@@ -91,7 +91,7 @@ namespace WorkFlow.Controllers
             pm.UpdateProject(id, project);
             pm.UpdateSprintsToProject(id, projectD.Sprints.Select(x => x.Id).ToList());
             pm.UpdateTagsToProject(id, projectD.Tags.Select(x => x.Id).ToList());
-            return Ok(project);
+            return Ok(id);
         }
 
         [HttpGet]

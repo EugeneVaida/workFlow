@@ -18,6 +18,8 @@ namespace WorkFlowBusinessLogicCore.Database
         public DbSet<ProjectSprint> ProjectSprint { get; set; }
         public DbSet<ProjectTag> ProjectTags { get; set; }
         public DbSet<SearchHistory> SearchHistories { get; set; }
+        public DbSet<Invitation> Invitations { get; set; }
+        public DbSet<ProjectInvitation> ProjectInvitations { get; set; }
         public DbSet<Sprint> Sprints { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<User> Users { get; set; }

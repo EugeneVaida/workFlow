@@ -171,5 +171,25 @@ namespace WorkFlow.BusinessLogicCore
 
             this.Db.SaveChanges();
         }
+
+        public void InvitationForProject(int projectId, string guid)
+        {
+            Invitation invitation = new Invitation
+            {
+                GUID = guid
+            };
+
+            this.Db.Invitations.Add(invitation);
+            this.Db.SaveChanges();
+
+            ProjectInvitation projectInvitation = new ProjectInvitation
+            {
+                InvitationId = invitation.Id,
+                ProjectId = projectId
+            };
+
+            this.Db.ProjectInvitations.Add(projectInvitation);
+            this.Db.SaveChanges();
+        }
     }
 }

@@ -127,7 +127,7 @@ namespace WorkFlow.BusinessLogicCore
             }
 
             return null;
-        }        
+        }              
 
         public string GetHash(string password)
         {
