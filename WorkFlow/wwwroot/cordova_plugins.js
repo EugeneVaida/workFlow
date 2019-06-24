@@ -57,6 +57,14 @@ module.exports = [
         "clobbers": [
             "window.plugins.toast"
         ]
+    },
+    {
+        "file": "plugins/cordova-clipboard/www/clipboard.js",
+        "id": "cordova-clipboard.Clipboard",
+        "pluginId": "cordova-clipboard",
+        "clobbers": [
+            "cordova.plugins.clipboard"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -68,7 +76,8 @@ module.exports.metadata =
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
     "cordova-plugin-whitelist": "1.3.3",
-    "cordova-plugin-x-toast": "2.7.2"
+    "cordova-plugin-x-toast": "2.7.2",
+    "cordova-clipboard": "1.2.1"
 }
 // BOTTOM OF METADATA
 });

@@ -81,14 +81,24 @@ namespace WorkFlow.Controllers
             return Ok(user);
         }
 
-        [Route("api/InviteUser/{id}")]
-        public Guid InviteUser(int id)
+        [Route("api/InviteUserWithEmail")]
+        public IActionResult InviteUserWithEmail([FromBody] InviteDto invite)
+        {
+            Guid g;
+            g = Guid.NewGuid();
+            pm.InvitationForProject(invite.Id, g.ToString());
+            es.SendEmail(invite.Email, "WorkFlow invite", g.ToString());
+            return Ok(invite);
+        }
+
+        [HttpGet]
+        [Route("api/GenerateLink/{id}")]
+        public IActionResult GenerateLink(int id)
         {
             Guid g;
             g = Guid.NewGuid();
             pm.InvitationForProject(id, g.ToString());
-            es.SendEmail("e.v.e.r.e.s.tt.1551@gmail.com", "WorkFlow invite", g.ToString());
-            return g;
+            return Ok(g);
         }
 
 

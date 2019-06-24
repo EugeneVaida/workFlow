@@ -179,7 +179,7 @@ namespace WorkFlow.BusinessLogicCore
                 GUID = guid
             };
 
-            this.Db.Invitations.Add(invitation);
+            this.Db.Invitation.Add(invitation);
             this.Db.SaveChanges();
 
             ProjectInvitation projectInvitation = new ProjectInvitation
@@ -188,7 +188,7 @@ namespace WorkFlow.BusinessLogicCore
                 ProjectId = projectId
             };
 
-            this.Db.ProjectInvitations.Add(projectInvitation);
+            this.Db.ProjectInvitation.Add(projectInvitation);
             this.Db.SaveChanges();
         }
     }
