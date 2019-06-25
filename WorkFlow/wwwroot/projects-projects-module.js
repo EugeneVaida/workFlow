@@ -58,7 +58,7 @@ var ProjectsPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      <span class=\"blue\">Projects</span>\n      \n    </ion-title>    \n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding> \n  <ion-spinner *ngIf=\"projectService.isLoad && tagService.isLoad && sprintService.isLoad\"></ion-spinner>\n  <!-- <div class=\"row\" *ngIf=\"!projectService.isLoad && !tagService.isLoad && !sprintService.isLoad\">\n    <div class=\"col s12 m4\">\n      <form (ngSubmit)=\"onSubmit(projectForm)\" #projectForm=\"ngForm\">\n        <ion-grid>\n          <ion-row justify-content-center>\n            <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\">\n              <div text-center *ngIf=\"isMatch(['Manager'])\">                  \n                <h4>Project form </h4>\n              </div>\n              <div padding>\n                <input type=\"hidden\" name=\"ID\" #ID=\"ngModel\" [(ngModel)]=\"projectService.selectedProject.id\">\n                <ion-item>\n                  <ion-input type=\"text\" #name ngModel name=\"name\" [(ngModel)]=\"projectService.selectedProject.name\"\n                    placeholder=\"Название\" required></ion-input>\n                </ion-item>\n                <ion-item>\n                  <ion-datetime #startDate ngModel name=\"startDate\" placeholder=\"Начало\"\n                    [(ngModel)]=\"projectService.selectedProject.startDate\" display-format=\"DD/MM/YYYY\"\n                    picker-format=\"DD MM YYYY\"></ion-datetime>\n                </ion-item>\n\n                <ion-item>\n                  <ion-datetime #endDate ngModel name=\"endDate\" placeholder=\"Конец\"\n                    [(ngModel)]=\"projectService.selectedProject.endDate\" display-format=\"DD/MM/YYYY\"\n                    picker-format=\"DD MM YYYY\"></ion-datetime>\n                </ion-item>\n\n                <ion-item>\n                  <ion-textarea #description ngModel name=\"description\"\n                    [(ngModel)]=\"projectService.selectedProject.description\" placeholder=\"Описание\" required>\n                  </ion-textarea>\n                </ion-item>\n                <ion-item>\n                  <ion-label position=\"floating\">Выберите спринты</ion-label>\n                  <ion-select #sprints ngModel name=\"sprints\" [(ngModel)]=\"projectService.selectedProject.sprints\"\n                    multiple=\"true\" [compareWith]=\"compareFn\">\n                    <ion-select-option *ngFor=\"let sprint of sprintService.sprintsList\" [value]=\"sprint\">\n                      {{sprint.name}}\n                    </ion-select-option>\n                  </ion-select>\n                </ion-item>\n                <ion-item>\n                  <ion-label position=\"floating\">Выберите теги</ion-label>\n                  <ion-select #tags ngModel name=\"tags\" [(ngModel)]=\"projectService.selectedProject.tags\"\n                    multiple=\"true\" [compareWith]=\"compareFn\">\n                    <ion-select-option *ngFor=\"let tag of tagService.tagsList\" [value]=\"tag\">\n                      {{tag.name}}\n                    </ion-select-option>\n                  </ion-select>\n                </ion-item>\n              </div>\n              <div padding>\n                <ion-button color=\"light\" size=\"default\" type=\"submit\" expand=\"block\">Create</ion-button>\n                <ion-button color=\"dark\" size=\"default\" type=\"button\" expand=\"block\" (click)=\"resetForm(projectForm)\">\n                  Reset\n                </ion-button>\n              </div>\n            </ion-col>\n          </ion-row>\n        </ion-grid>\n      </form>\n    </div>\n  </div> -->\n  <ion-row justify-content-center>    \n    <ion-col align-self-center size-md=\"4\" size-lg=\"4\" size-xs=\"12\">\n      <div *ngFor=\"let project of projectService.projectsList\">\n        <ion-card>\n          <ion-card-header>\n            <ion-card-title>{{ project.name }}</ion-card-title>\n            <ion-card-subtitle>\n              {{ project.startDate | date: \"dd/MM/yyyy\"}} - {{ project.endDate | date: \"dd/MM/yyyy\"}}\n            </ion-card-subtitle>\n          </ion-card-header>\n\n          <ion-card-content>\n            {{ project.description }}\n            <ion-list *ngFor=\"let sprint of project.sprints\">\n              <ion-item-sliding>\n                <ion-item-options side=\"start\">\n                  <ion-item-option color=\"danger\" (click)=\"deleteSprint(sprint.id, project)\">Delete</ion-item-option>\n                </ion-item-options>\n                <ion-item>\n                  <ion-label>{{ sprint.name }}</ion-label>\n                  <ion-icon *ngIf=\"sprint.isDone\" color=\"tertiary\" name=\"checkmark-circle\"></ion-icon>\n                </ion-item>\n                <ion-item-options side=\"end\">\n                  <ion-item-option color=\"warning\" (click)=\"markSprintAsDone(sprint.id, project.id)\">Done!\n                  </ion-item-option>\n                </ion-item-options>\n              </ion-item-sliding>\n            </ion-list>\n\n            <div *ngFor=\"let tag of project.tags\">\n              <ion-chip [routerLink]=\"'/tag-projects/' + tag.id\" color=\"tertiary\">\n                <ion-label  color=\"tertiary\">{{ tag.name }}</ion-label>\n              </ion-chip>\n            </div>\n          </ion-card-content>\n          <ion-item>\n              \n            <ion-button color=\"medium\" (click)=\"onDelete(project.id)\">\n              <ion-ripple-effect></ion-ripple-effect>\n              <ion-icon name=\"trash\" slot=\"start\"></ion-icon>\n              Remove\n            </ion-button>\n            <ion-button color=\"light\" (click)=\"showForEdit(project)\">\n              <ion-ripple-effect></ion-ripple-effect>\n              <ion-icon name=\"create\" slot=\"start\"></ion-icon>\n              Edit\n            </ion-button>\n            <ion-button color=\"primary\" [routerLink]=\"'/project/' + project.id\">\n                <ion-ripple-effect></ion-ripple-effect>\n                <ion-icon name=\"arrow-forward\" slot=\"start\"></ion-icon>\n                Open\n              </ion-button>\n          </ion-item>\n        </ion-card>\n      </div>\n    </ion-col>\n  </ion-row>\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>\r\n      <span class=\"blue\">Проекты</span>          \r\n    </ion-title>\r\n    \r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content padding>\r\n    <ion-fab vertical=\"top\" horizontal=\"end\" edge slot=\"fixed\" (click)=\"createNew()\">\r\n        <ion-fab-button>\r\n          <ion-icon name=\"add\"></ion-icon>\r\n        </ion-fab-button>\r\n      </ion-fab>\r\n  <ion-spinner *ngIf=\"projectService.isLoad && tagService.isLoad && sprintService.isLoad\"></ion-spinner>\r\n  <!-- <div class=\"row\" *ngIf=\"!projectService.isLoad && !tagService.isLoad && !sprintService.isLoad\">\r\n    <div class=\"col s12 m4\">\r\n      <form (ngSubmit)=\"onSubmit(projectForm)\" #projectForm=\"ngForm\">\r\n        <ion-grid>\r\n          <ion-row justify-content-center>\r\n            <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\">\r\n              <div text-center *ngIf=\"isMatch(['Manager'])\">                  \r\n                <h4>Project form </h4>\r\n              </div>\r\n              <div padding>\r\n                <input type=\"hidden\" name=\"ID\" #ID=\"ngModel\" [(ngModel)]=\"projectService.selectedProject.id\">\r\n                <ion-item>\r\n                  <ion-input type=\"text\" #name ngModel name=\"name\" [(ngModel)]=\"projectService.selectedProject.name\"\r\n                    placeholder=\"Название\" required></ion-input>\r\n                </ion-item>\r\n                <ion-item>\r\n                  <ion-datetime #startDate ngModel name=\"startDate\" placeholder=\"Начало\"\r\n                    [(ngModel)]=\"projectService.selectedProject.startDate\" display-format=\"DD/MM/YYYY\"\r\n                    picker-format=\"DD MM YYYY\"></ion-datetime>\r\n                </ion-item>\r\n\r\n                <ion-item>\r\n                  <ion-datetime #endDate ngModel name=\"endDate\" placeholder=\"Конец\"\r\n                    [(ngModel)]=\"projectService.selectedProject.endDate\" display-format=\"DD/MM/YYYY\"\r\n                    picker-format=\"DD MM YYYY\"></ion-datetime>\r\n                </ion-item>\r\n\r\n                <ion-item>\r\n                  <ion-textarea #description ngModel name=\"description\"\r\n                    [(ngModel)]=\"projectService.selectedProject.description\" placeholder=\"Описание\" required>\r\n                  </ion-textarea>\r\n                </ion-item>\r\n                <ion-item>\r\n                  <ion-label position=\"floating\">Выберите спринты</ion-label>\r\n                  <ion-select #sprints ngModel name=\"sprints\" [(ngModel)]=\"projectService.selectedProject.sprints\"\r\n                    multiple=\"true\" [compareWith]=\"compareFn\">\r\n                    <ion-select-option *ngFor=\"let sprint of sprintService.sprintsList\" [value]=\"sprint\">\r\n                      {{sprint.name}}\r\n                    </ion-select-option>\r\n                  </ion-select>\r\n                </ion-item>\r\n                <ion-item>\r\n                  <ion-label position=\"floating\">Выберите теги</ion-label>\r\n                  <ion-select #tags ngModel name=\"tags\" [(ngModel)]=\"projectService.selectedProject.tags\"\r\n                    multiple=\"true\" [compareWith]=\"compareFn\">\r\n                    <ion-select-option *ngFor=\"let tag of tagService.tagsList\" [value]=\"tag\">\r\n                      {{tag.name}}\r\n                    </ion-select-option>\r\n                  </ion-select>\r\n                </ion-item>\r\n              </div>\r\n              <div padding>\r\n                <ion-button color=\"light\" size=\"default\" type=\"submit\" expand=\"block\">Create</ion-button>\r\n                <ion-button color=\"dark\" size=\"default\" type=\"button\" expand=\"block\" (click)=\"resetForm(projectForm)\">\r\n                  Reset\r\n                </ion-button>\r\n              </div>\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n      </form>\r\n    </div>\r\n  </div> -->\r\n  <br>\r\n  <ion-searchbar (ionInput)=\"search($event)\" placeholder=\"Поиск\"></ion-searchbar>\r\n  <ion-grid>\r\n    <ion-row justify-content-center>\r\n      <ion-col align-self-center size-md=\"4\" size-lg=\"4\" size-xs=\"12\"\r\n        *ngFor=\"let project of projectService.projectsList\">\r\n        <div>\r\n          <ion-card color=\"light shade\">\r\n            <ion-card-header>\r\n              <ion-card-title>{{ project.name }}</ion-card-title>\r\n              <ion-card-subtitle>\r\n                {{ project.startDate | date: \"dd/MM/yyyy\"}} - {{ project.endDate | date: \"dd/MM/yyyy\"}}\r\n              </ion-card-subtitle>\r\n            </ion-card-header>\r\n\r\n            <ion-card-content>  \r\n              <span *ngFor=\"let tag of project.tags\">\r\n                <ion-chip [routerLink]=\"'/tag-projects/' + tag.id\" color=\"tertiary\">\r\n                  <ion-label color=\"tertiary\">{{ tag.name }}</ion-label>\r\n                </ion-chip>\r\n              </span>\r\n              <br>\r\n              <ion-button color=\"primary\" [routerLink]=\"'/project/' + project.id\">\r\n                <ion-ripple-effect></ion-ripple-effect>\r\n                <ion-icon name=\"arrow-forward\" slot=\"start\"></ion-icon>\r\n                Открыть\r\n              </ion-button>              \r\n            </ion-card-content>\r\n          </ion-card>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n</ion-content>"
 
 /***/ }),
 
@@ -69,7 +69,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      <span cl
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-spinner {\n  display: block;\n  margin: 0 auto; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcHJvamVjdHMvRDpcXHByb2plY3RzXFxXb3JrRmxvd0NsaWVudFxcV29ya0Zsb3cvc3JjXFxhcHBcXHByb2plY3RzXFxwcm9qZWN0cy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxjQUFjO0VBQ2QsY0FBYyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcHJvamVjdHMvcHJvamVjdHMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLXNwaW5uZXIge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICBtYXJnaW46IDAgYXV0bztcclxuICB9Il19 */"
+module.exports = "ion-spinner {\n  display: block;\n  margin: 0 auto; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcHJvamVjdHMvRDpcXHByb2plY3RzXFxXb3JrRmxvd0NsaWVudFxcd29ya0Zsb3cvc3JjXFxhcHBcXHByb2plY3RzXFxwcm9qZWN0cy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxjQUFjO0VBQ2QsY0FBYyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcHJvamVjdHMvcHJvamVjdHMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLXNwaW5uZXIge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICBtYXJnaW46IDAgYXV0bztcclxuICB9Il19 */"
 
 /***/ }),
 
@@ -91,6 +91,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _shared_sprint_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/sprint.service */ "./src/app/shared/sprint.service.ts");
 /* harmony import */ var _shared_tag_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shared/tag.service */ "./src/app/shared/tag.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
 
 
 
@@ -101,17 +103,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ProjectsPage = /** @class */ (function () {
-    function ProjectsPage(projectService, sprintService, toast, toastController, tagService, userService) {
+    function ProjectsPage(projectService, sprintService, toast, toastController, tagService, userService, router) {
         this.projectService = projectService;
         this.sprintService = sprintService;
         this.toast = toast;
         this.toastController = toastController;
         this.tagService = tagService;
         this.userService = userService;
+        this.router = router;
         this.isLoading = true;
     }
     ProjectsPage.prototype.ngOnInit = function () {
-        this.resetForm();
         this.projectService.getAllProjects();
         this.sprintService.getAllSprints();
         this.tagService.getAllTags();
@@ -125,6 +127,7 @@ var ProjectsPage = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.toastController.create({
                             message: text,
                             showCloseButton: true,
+                            duration: 2000,
                             position: 'top',
                             closeButtonText: 'Done',
                             color: theme
@@ -174,13 +177,16 @@ var ProjectsPage = /** @class */ (function () {
             _this.presentToast('Sprint done!', 'success');
         });
     };
-    ProjectsPage.prototype.compareFn = function (e1, e2) {
-        return e1 && e2 ? e1.id === e2.id : e1 === e2;
-    };
-    ProjectsPage.prototype.resetForm = function (form) {
-        if (form != null) {
-            form.reset();
+    ProjectsPage.prototype.search = function (ev) {
+        var val = ev.target.value;
+        if (val && val.trim() != '') {
+            this.projectService.searchProjects(val);
         }
+        else {
+            this.projectService.getAllProjects();
+        }
+    };
+    ProjectsPage.prototype.createNew = function () {
         this.projectService.selectedProject = {
             id: null,
             name: '',
@@ -190,33 +196,7 @@ var ProjectsPage = /** @class */ (function () {
             sprints: [],
             tags: []
         };
-    };
-    ProjectsPage.prototype.onSubmit = function (form) {
-        var _this = this;
-        if (form.value.ID == null) {
-            this.projectService.postProject(form.value).subscribe(function (data) {
-                _this.resetForm(form);
-                _this.projectService.getAllProjects();
-                // this.toast.show(`New company add!`, '5000', 'center').subscribe(
-                //   toast => {
-                //     console.log(toast);
-                //   }
-                // );
-                _this.presentToast('project created!', 'success');
-            });
-        }
-        else {
-            this.projectService.putProject(form.value.ID, form.value).subscribe(function (data) {
-                _this.resetForm(form);
-                _this.projectService.getAllProjects();
-                // this.toast.show(`Companies updated`, '5000', 'center').subscribe(
-                //   toast => {
-                //     this.presentToast('Project updated!', 'warning');
-                //   }
-                // );
-                _this.presentToast('project updated!', 'success');
-            });
-        }
+        this.router.navigateByUrl("/projectform");
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonContent"]),
@@ -233,7 +213,8 @@ var ProjectsPage = /** @class */ (function () {
             _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_4__["Toast"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"],
             _shared_tag_service__WEBPACK_IMPORTED_MODULE_7__["TagService"],
-            _shared_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]])
+            _shared_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"]])
     ], ProjectsPage);
     return ProjectsPage;
 }());

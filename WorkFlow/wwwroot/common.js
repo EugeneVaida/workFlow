@@ -142,6 +142,10 @@ var SprintService = /** @class */ (function () {
         return this.http.get(this.rootUrl + '/api/GetAllSprints')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
     };
+    SprintService.prototype.returnSprintById = function (id) {
+        return this.http.get(this.rootUrl + '/api/GetSprintById/' + id)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
+    };
     SprintService.prototype.deleteSprint = function (id) {
         var headerOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["Headers"]({ 'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('userToken') });
         //var header = new HttpHeaders({"Authorization" : "Bearer " + localStorage.getItem('userToken')});

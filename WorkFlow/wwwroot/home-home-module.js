@@ -69,7 +69,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title><span class=\"bl
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-slide {\n  height: 80vh;\n  flex-direction: column; }\n\nion-img {\n  padding: 30px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9EOlxccHJvamVjdHNcXFdvcmtGbG93Q2xpZW50XFxXb3JrRmxvdy9zcmNcXGFwcFxcaG9tZVxcaG9tZS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFZO0VBQ1osc0JBQXNCLEVBQUE7O0FBSTFCO0VBQ0ksYUFBYSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1zbGlkZSB7XHJcbiAgICBoZWlnaHQ6IDgwdmg7XHJcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG59XHJcblxyXG5cclxuaW9uLWltZyB7XHJcbiAgICBwYWRkaW5nOiAzMHB4O1xyXG59Il19 */"
+module.exports = "ion-slide {\n  height: 80vh;\n  flex-direction: column; }\n\nion-img {\n  padding: 30px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9EOlxccHJvamVjdHNcXFdvcmtGbG93Q2xpZW50XFx3b3JrRmxvdy9zcmNcXGFwcFxcaG9tZVxcaG9tZS5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxZQUFZO0VBQ1osc0JBQXNCLEVBQUE7O0FBSTFCO0VBQ0ksYUFBYSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1zbGlkZSB7XHJcbiAgICBoZWlnaHQ6IDgwdmg7XHJcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG59XHJcblxyXG5cclxuaW9uLWltZyB7XHJcbiAgICBwYWRkaW5nOiAzMHB4O1xyXG59Il19 */"
 
 /***/ }),
 
@@ -122,6 +122,8 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.isMatch = function (array) {
         return this.userService.roleMatch(array);
+    };
+    HomePage.prototype.logout = function () {
     };
     HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
