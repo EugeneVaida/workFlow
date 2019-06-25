@@ -24,7 +24,7 @@ namespace WorkFlow.BusinessLogicCore
 
         public Sprint GetSprintById(int id)
         {
-            return this.Db.Sprints.Where(x => x.Id == id).FirstOrDefault();
+            return this.Db.Sprints.Where(x => x.Id == id).Include(x => x.ProjectSprints).ThenInclude(x => x.Project).FirstOrDefault();
         }
 
         public Sprint DeleteSprint(int id)

@@ -67,6 +67,16 @@ namespace WorkFlow.Controllers
             return Ok(sprint);
         }
 
+        [HttpGet]
+        [Route("api/GetSprintById/{id}")]
+        [AllowAnonymous]
+        public JsonResult GetSprintById(int id)
+        {
+            var sprint = sm.GetSprintById(id);
+            var projectDto = converter.ToSprintDto(sprint, sprint.ProjectSprints.Select(y => y.Project).ToList());
+            return Json(projectDto);
+        }
+
         [HttpPut]
         [Route("api/MarkSprintAsDone/{id}")]
         [AllowAnonymous]
