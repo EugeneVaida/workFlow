@@ -60,6 +60,12 @@ namespace WorkFlow.BusinessLogicCore
             return this.Db.Projects.Include(x => x.ProjectSprints).ThenInclude(y => y.Sprint).Include(x => x.ProjectTags).ThenInclude(x => x.Tag).Where(x => x.Id == id).FirstOrDefault();
         }
 
+        public Project GetProjectByLink(string guid)
+        {
+            var invitation = this.Db.Invitation.FirstOrDefault(x => x.GUID.Equals(guid));
+            return this.Db.ProjectInvitation.Include(x => x.Project).FirstOrDefault(x => x.InvitationId.Equals(invitation.Id)).Project;
+        }
+
         public Project DeleteProject(int id)
         {
             var project = this.Db.Projects.Where(x => x.Id == id).FirstOrDefault();

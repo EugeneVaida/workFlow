@@ -59,6 +59,15 @@ namespace WorkFlow.Controllers
         }
 
 
+        [HttpGet]
+        [Route("api/GetProjectByLink/{id}")]
+        [AllowAnonymous]
+        public JsonResult GetProjectByLink(string id)
+        {
+            var project = pm.GetProjectByLink(id);
+            var projectDto = converter.ToProjectDto(project);
+            return Json(projectDto);
+        }         
 
         [HttpPost]
         [Route("api/CreateProject")]
