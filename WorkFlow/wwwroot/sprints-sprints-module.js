@@ -58,7 +58,7 @@ var SprintsPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title><span class=\"blue\">Sprints</span></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-row justify-content-center>\n    <ion-col align-self-center size-md=\"4\" size-lg=\"4\" size-xs=\"12\">\n      <div *ngFor=\"let sprint of sprintService.sprintsList\">\n        <ion-card color=\"light shade\">\n          <ion-card-header>\n            <ion-card-title>\n              {{ sprint.name }}\n              <ion-icon *ngIf=\"sprint.isDone\" color=\"success\" name=\"checkmark-circle\"></ion-icon>\n            </ion-card-title>\n            <ion-card-subtitle>              \n              {{ sprint.startDate | date: \"dd/MM/yyyy\"}} - {{ sprint.endDate | date: \"dd/MM/yyyy\"}}\n            </ion-card-subtitle>\n          </ion-card-header>\n          <ion-card-content>\n            <span *ngFor=\"let project of sprint.projects\">\n              <ion-chip [routerLink]=\"'/project/' + project.id\">\n                <ion-label>{{ project.name }}</ion-label>\n              </ion-chip>\n            </span>\n            <br>\n            <ion-button color=\"primary\" [routerLink]=\"'/sprint/' + sprint.id\">\n              <ion-ripple-effect></ion-ripple-effect>\n              <ion-icon name=\"arrow-forward\" slot=\"start\"></ion-icon>\n              Открыть\n            </ion-button>\n          </ion-card-content>\n        </ion-card>\n      </div>\n    </ion-col>\n  </ion-row>\n\n\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title><span class=\"blue\">Спринты</span></ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n    <ion-fab vertical=\"top\" horizontal=\"end\" edge slot=\"fixed\" (click)=\"createNew()\">\n        <ion-fab-button>\n          <ion-icon name=\"add\"></ion-icon>\n        </ion-fab-button>\n      </ion-fab>\n  <ion-grid>\n    <ion-row justify-content-center>\n      <ion-col align-self-center size-md=\"4\" size-lg=\"4\" size-xs=\"12\"\n      *ngFor=\"let sprint of sprintService.sprintsList\">\n        <div >\n          <ion-card color=\"light shade\">\n            <ion-card-header>\n              <ion-card-title>\n                {{ sprint.name }}\n                <ion-icon *ngIf=\"sprint.isDone\" color=\"success\" name=\"checkmark-circle\"></ion-icon>\n              </ion-card-title>\n              <ion-card-subtitle>\n                {{ sprint.startDate | date: \"dd/MM/yyyy\"}} - {{ sprint.endDate | date: \"dd/MM/yyyy\"}}\n              </ion-card-subtitle>\n            </ion-card-header>\n            <ion-card-content>\n              <span *ngFor=\"let project of sprint.projects\">\n                <ion-chip [routerLink]=\"'/project/' + project.id\">\n                  <ion-label>{{ project.name }}</ion-label>\n                </ion-chip>\n              </span>\n              <br>\n              <ion-button color=\"primary\" [routerLink]=\"'/sprint/' + sprint.id\">\n                <ion-ripple-effect></ion-ripple-effect>\n                <ion-icon name=\"arrow-forward\" slot=\"start\"></ion-icon>\n                Открыть\n              </ion-button>\n            </ion-card-content>\n          </ion-card>\n        </div>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n</ion-content>"
 
 /***/ }),
 
@@ -88,16 +88,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_sprint_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/sprint.service */ "./src/app/shared/sprint.service.ts");
 /* harmony import */ var _shared_project_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/project.service */ "./src/app/shared/project.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
 
 
 
 
 
 var SprintsPage = /** @class */ (function () {
-    function SprintsPage(sprintService, projectService, toastController) {
+    function SprintsPage(sprintService, projectService, toastController, router) {
         this.sprintService = sprintService;
         this.projectService = projectService;
         this.toastController = toastController;
+        this.router = router;
     }
     SprintsPage.prototype.presentToast = function (text, theme) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -122,24 +125,6 @@ var SprintsPage = /** @class */ (function () {
     SprintsPage.prototype.ngOnInit = function () {
         this.sprintService.getAllSprints();
         this.projectService.getAllProjects();
-        this.resetForm();
-    };
-    SprintsPage.prototype.showForEdit = function (spr) {
-        this.sprintService.selectedSprint = Object.assign({}, spr);
-        this.ScrollToTop();
-    };
-    SprintsPage.prototype.ScrollToTop = function () {
-        this.content.scrollToTop(800);
-    };
-    SprintsPage.prototype.onDelete = function (id) {
-        var _this = this;
-        if (confirm('Are you sure to delete this record ?') == true) {
-            this.sprintService.deleteSprint(id)
-                .subscribe(function (x) {
-                _this.sprintService.getAllSprints();
-                _this.presentToast('Sprint deleted!', 'danger');
-            });
-        }
     };
     SprintsPage.prototype.resetForm = function (form) {
         if (form != null) {
@@ -156,6 +141,20 @@ var SprintsPage = /** @class */ (function () {
             isDone: false,
             projects: []
         };
+    };
+    SprintsPage.prototype.createNew = function () {
+        this.sprintService.selectedSprint = {
+            id: null,
+            name: '',
+            description: '',
+            startDate: '',
+            endDate: '',
+            percent: 0,
+            priority: 0,
+            isDone: false,
+            projects: []
+        };
+        this.router.navigate(['/sprintform']);
     };
     SprintsPage.prototype.onSubmit = function (form) {
         var _this = this;
@@ -204,12 +203,12 @@ var SprintsPage = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-sprints',
             template: __webpack_require__(/*! ./sprints.page.html */ "./src/app/sprints/sprints.page.html"),
-            providers: [_shared_sprint_service__WEBPACK_IMPORTED_MODULE_2__["SprintService"], _shared_project_service__WEBPACK_IMPORTED_MODULE_3__["ProjectService"]],
             styles: [__webpack_require__(/*! ./sprints.page.scss */ "./src/app/sprints/sprints.page.scss")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_sprint_service__WEBPACK_IMPORTED_MODULE_2__["SprintService"],
             _shared_project_service__WEBPACK_IMPORTED_MODULE_3__["ProjectService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"]])
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], SprintsPage);
     return SprintsPage;
 }());

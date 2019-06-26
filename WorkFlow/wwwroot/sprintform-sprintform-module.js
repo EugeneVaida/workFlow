@@ -58,7 +58,7 @@ var SprintformPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Форма спринта</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n    <div class=\"row\">\n        <div class=\"col s12 m4\">\n          <form (ngSubmit)=\"onSubmit(sprintForm)\" #sprintForm=\"ngForm\">\n            <ion-grid>\n              <ion-row justify-content-center>\n                <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\">\n                  <div text-center>\n                    <h4>Форма спринта</h4>\n                  </div>\n                  <div padding>\n                    <input type=\"hidden\" name=\"ID\" #ID=\"ngModel\" [(ngModel)]=\"sprintService.selectedSprint.id\">\n                    <input type=\"hidden\" name=\"projects\" ngModel [(ngModel)]=\"sprintService.selectedSprint.projects\">\n                    <ion-item>\n                      <ion-input type=\"text\" #name ngModel name=\"name\" [(ngModel)]=\"sprintService.selectedSprint.name\"\n                        placeholder=\"Название\" required></ion-input>\n                    </ion-item>\n                    <ion-item>\n                      <ion-datetime #startDate ngModel name=\"startDate\" placeholder=\"Начало\"\n                        [(ngModel)]=\"sprintService.selectedSprint.startDate\" display-format=\"DD/MM/YYYY\"\n                        picker-format=\"DD MM YYYY\"></ion-datetime>\n                    </ion-item>\n    \n                    <ion-item>\n                      <ion-datetime #endDate ngModel name=\"endDate\" placeholder=\"Конец\"\n                        [(ngModel)]=\"sprintService.selectedSprint.endDate\" display-format=\"DD/MM/YYYY\"\n                        picker-format=\"DD MM YYYY\"></ion-datetime>\n                    </ion-item>\n    \n                    <ion-item>\n                      <ion-input type=\"text\" #description ngModel name=\"description\"\n                        [(ngModel)]=\"sprintService.selectedSprint.description\" placeholder=\"Описание\" required></ion-input>\n                    </ion-item>\n                    <ion-item>\n                      <ion-select #priority ngModel name=\"priority\" [(ngModel)]=\"sprintService.selectedSprint.priority\"\n                        placeholder=\"\">\n                        <ion-select-option [value]=1>Высокий</ion-select-option>\n                        <ion-select-option [value]=2>Низкий</ion-select-option>\n                      </ion-select>\n                    </ion-item>\n                    <ion-item>\n                      <ion-select #projects ngModel name=\"projects\" [(ngModel)]=\"sprintService.selectedSprint.projects\"\n                        multiple=\"true\" [compareWith]=\"compareFn\">\n                        <ion-select-option *ngFor=\"let project of projectService.projectsList\" [value]=\"project\">\n                          {{project.name}}\n                        </ion-select-option>                        \n                      </ion-select>\n                    </ion-item>\n                  </div>\n                  <div padding>\n                    <ion-button color=\"light\" size=\"default\" type=\"submit\" expand=\"block\">Сохранить</ion-button>\n                    <ion-button color=\"dark\" size=\"default\" type=\"button\" expand=\"block\" (click)=\"resetForm(sprintForm)\">\n                      Сбросить\n                    </ion-button>\n                  </div>\n                </ion-col>\n              </ion-row>\n            </ion-grid>\n          </form>\n        </div>\n      </div>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title class=\"blue\">Форма спринта</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content padding>\n    <div class=\"row\">\n        <div class=\"col s12 m4\">\n          <form (ngSubmit)=\"onSubmit(sprintForm)\" #sprintForm=\"ngForm\">\n            <ion-grid>\n              <ion-row justify-content-center>\n                <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\">\n                  <div text-center>\n                    <h4>Форма спринта</h4>\n                  </div>\n                  <div padding>\n                    <input type=\"hidden\" name=\"ID\" #ID=\"ngModel\" [(ngModel)]=\"sprintService.selectedSprint.id\">                    \n                    <ion-item>\n                      <ion-input type=\"text\" #name ngModel name=\"name\" [(ngModel)]=\"sprintService.selectedSprint.name\"\n                        placeholder=\"Название\" required></ion-input>\n                    </ion-item>\n                    <ion-item>\n                      <ion-datetime #startDate ngModel name=\"startDate\" placeholder=\"Начало\"\n                        [(ngModel)]=\"sprintService.selectedSprint.startDate\" display-format=\"DD/MM/YYYY\"\n                        picker-format=\"DD MM YYYY\"></ion-datetime>\n                    </ion-item>\n    \n                    <ion-item>\n                      <ion-datetime #endDate ngModel name=\"endDate\" placeholder=\"Конец\"\n                        [(ngModel)]=\"sprintService.selectedSprint.endDate\" display-format=\"DD/MM/YYYY\"\n                        picker-format=\"DD MM YYYY\"></ion-datetime>\n                    </ion-item>\n    \n                    <ion-item>\n                      <ion-input type=\"text\" #description ngModel name=\"description\"\n                        [(ngModel)]=\"sprintService.selectedSprint.description\" placeholder=\"Описание\" required></ion-input>\n                    </ion-item>\n                    <ion-item>\n                      <ion-select #priority ngModel name=\"priority\" [(ngModel)]=\"sprintService.selectedSprint.priority\"\n                        placeholder=\"\">\n                        <ion-select-option [value]=1>Высокий</ion-select-option>\n                        <ion-select-option [value]=2>Низкий</ion-select-option>\n                      </ion-select>\n                    </ion-item>\n                    <ion-item>                      \n                      <ion-select #projects ngModel name=\"projects\" [(ngModel)]=\"sprintService.selectedSprint.projects\"\n                        multiple=\"true\" [compareWith]=\"compareFn\">\n                        <ion-select-option *ngFor=\"let project of projectService.projectsList\" [value]=\"project\">\n                          {{project.name}}\n                        </ion-select-option>\n                      </ion-select>\n                    </ion-item>\n                  </div>\n                  <div padding>\n                    <ion-button color=\"light\" size=\"default\" type=\"submit\" expand=\"block\">Сохранить</ion-button>\n                    <ion-button color=\"dark\" size=\"default\" type=\"button\" expand=\"block\" (click)=\"resetForm(sprintForm)\">\n                      Сбросить\n                    </ion-button>\n                  </div>\n                </ion-col>\n              </ion-row>\n            </ion-grid>\n          </form>\n        </div>\n      </div>\n</ion-content>\n"
 
 /***/ }),
 
@@ -85,19 +85,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SprintformPage", function() { return SprintformPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _shared_sprint_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/sprint.service */ "./src/app/shared/sprint.service.ts");
-/* harmony import */ var _shared_project_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/project.service */ "./src/app/shared/project.service.ts");
+/* harmony import */ var _shared_project_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/project.service */ "./src/app/shared/project.service.ts");
+/* harmony import */ var _shared_sprint_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/sprint.service */ "./src/app/shared/sprint.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _shared_tag_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/tag.service */ "./src/app/shared/tag.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
 
 
 
 
 
 var SprintformPage = /** @class */ (function () {
-    function SprintformPage(sprintService, projectService, toastController) {
-        this.sprintService = sprintService;
+    function SprintformPage(projectService, sprintService, tagService, toastController, router) {
         this.projectService = projectService;
+        this.sprintService = sprintService;
+        this.tagService = tagService;
         this.toastController = toastController;
+        this.router = router;
     }
     SprintformPage.prototype.ngOnInit = function () {
     };
@@ -120,19 +126,6 @@ var SprintformPage = /** @class */ (function () {
                 }
             });
         });
-    };
-    SprintformPage.prototype.showForEdit = function (spr) {
-        this.sprintService.selectedSprint = Object.assign({}, spr);
-    };
-    SprintformPage.prototype.onDelete = function (id) {
-        var _this = this;
-        if (confirm('Are you sure to delete this record ?') == true) {
-            this.sprintService.deleteSprint(id)
-                .subscribe(function (x) {
-                _this.sprintService.getAllSprints();
-                _this.presentToast('Sprint deleted!', 'danger');
-            });
-        }
     };
     SprintformPage.prototype.resetForm = function (form) {
         if (form != null) {
@@ -172,28 +165,17 @@ var SprintformPage = /** @class */ (function () {
     SprintformPage.prototype.compareFn = function (e1, e2) {
         return e1 && e2 ? e1.id === e2.id : e1 === e2;
     };
-    SprintformPage.prototype.containsObject = function (obj, list) {
-        //console.log(`enter values ${obj} - ${list}`);
-        var project = Object.assign({}, obj);
-        var list1 = Object.assign({}, list);
-        var i;
-        for (i = 0; i < list1.length; i++) {
-            if (list[i] === project) {
-                console.log(true);
-                return "true";
-            }
-        }
-        return "false";
-    };
     SprintformPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-sprintform',
             template: __webpack_require__(/*! ./sprintform.page.html */ "./src/app/sprintform/sprintform.page.html"),
             styles: [__webpack_require__(/*! ./sprintform.page.scss */ "./src/app/sprintform/sprintform.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_sprint_service__WEBPACK_IMPORTED_MODULE_2__["SprintService"],
-            _shared_project_service__WEBPACK_IMPORTED_MODULE_3__["ProjectService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_project_service__WEBPACK_IMPORTED_MODULE_2__["ProjectService"],
+            _shared_sprint_service__WEBPACK_IMPORTED_MODULE_3__["SprintService"],
+            _shared_tag_service__WEBPACK_IMPORTED_MODULE_5__["TagService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])
     ], SprintformPage);
     return SprintformPage;
 }());

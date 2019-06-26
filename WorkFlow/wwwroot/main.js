@@ -859,8 +859,11 @@ var map = {
 	],
 	"./project/project.module": [
 		"./src/app/project/project.module.ts",
-		"common",
 		"project-project-module"
+	],
+	"./projectforcustomer/projectforcustomer.module": [
+		"./src/app/projectforcustomer/projectforcustomer.module.ts",
+		"projectforcustomer-projectforcustomer-module"
 	],
 	"./projectform/projectform.module": [
 		"./src/app/projectform/projectform.module.ts",
@@ -878,7 +881,6 @@ var map = {
 	],
 	"./sprint/sprint.module": [
 		"./src/app/sprint/sprint.module.ts",
-		"common",
 		"sprint-sprint-module"
 	],
 	"./sprintform/sprintform.module": [
@@ -888,7 +890,6 @@ var map = {
 	],
 	"./sprints/sprints.module": [
 		"./src/app/sprints/sprints.module.ts",
-		"common",
 		"sprints-sprints-module"
 	],
 	"./tag-projects/tag-projects.module": [
@@ -962,6 +963,7 @@ var routes = [
     { path: 'projectform', loadChildren: './projectform/projectform.module#ProjectformPageModule' },
     { path: 'invite-link', loadChildren: './invite-link/invite-link.module#InviteLinkPageModule' },
     { path: 'sprintform', loadChildren: './sprintform/sprintform.module#SprintformPageModule' },
+    { path: 'projectforcustomer/:guid', loadChildren: './projectforcustomer/projectforcustomer.module#ProjectforcustomerPageModule' },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -1073,7 +1075,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_tab_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shared/tab.service */ "./src/app/shared/tab.service.ts");
 /* harmony import */ var _shared_company_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./shared/company.service */ "./src/app/shared/company.service.ts");
 /* harmony import */ var _shared_project_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./shared/project.service */ "./src/app/shared/project.service.ts");
-/* harmony import */ var _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @ionic-native/clipboard/ngx */ "./node_modules/@ionic-native/clipboard/ngx/index.js");
+/* harmony import */ var _shared_sprint_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./shared/sprint.service */ "./src/app/shared/sprint.service.ts");
+/* harmony import */ var _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @ionic-native/clipboard/ngx */ "./node_modules/@ionic-native/clipboard/ngx/index.js");
+
 
 
 
@@ -1101,16 +1105,23 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [_app_component__WEBPACK_IMPORTED_MODULE_13__["AppComponent"]],
             entryComponents: [],
-            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__["BrowserAnimationsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"], _angular_http__WEBPACK_IMPORTED_MODULE_4__["HttpModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_12__["AppRoutingModule"], ngx_toastr__WEBPACK_IMPORTED_MODULE_11__["ToastrModule"].forRoot()],
+            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__["BrowserAnimationsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_14__["HttpClientModule"],
+                _angular_http__WEBPACK_IMPORTED_MODULE_4__["HttpModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["IonicModule"].forRoot(),
+                _app_routing_module__WEBPACK_IMPORTED_MODULE_12__["AppRoutingModule"],
+                ngx_toastr__WEBPACK_IMPORTED_MODULE_11__["ToastrModule"].forRoot()],
             providers: [
                 _shared_user_service__WEBPACK_IMPORTED_MODULE_15__["UserService"],
                 _shared_company_service__WEBPACK_IMPORTED_MODULE_17__["CompanyService"],
                 _shared_project_service__WEBPACK_IMPORTED_MODULE_18__["ProjectService"],
+                _shared_sprint_service__WEBPACK_IMPORTED_MODULE_19__["SprintService"],
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_10__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_9__["SplashScreen"],
                 _ionic_native_toast_ngx__WEBPACK_IMPORTED_MODULE_5__["Toast"],
                 _shared_tab_service__WEBPACK_IMPORTED_MODULE_16__["TabService"],
-                _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_19__["Clipboard"],
+                _ionic_native_clipboard_ngx__WEBPACK_IMPORTED_MODULE_20__["Clipboard"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["IonicRouteStrategy"] },
                 { provide: _angular_common__WEBPACK_IMPORTED_MODULE_7__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_7__["HashLocationStrategy"] }
             ],
@@ -1278,7 +1289,7 @@ var ProjectService = /** @class */ (function () {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
             return data.json();
         })).toPromise().then(function (x) {
-            _this.link = "http://localhost:8100/#/invite-page/" + x;
+            _this.link = "https://work-flow-service.herokuapp.com/#/projectforcustomer/" + x;
         });
     };
     ProjectService.prototype.getAllProjects = function () {
@@ -1323,6 +1334,10 @@ var ProjectService = /** @class */ (function () {
         return this.http.get(this.rootUrl + '/api/GetProjectById/' + id)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
     };
+    ProjectService.prototype.returnProjectByLink = function (guid) {
+        return this.http.get(this.rootUrl + '/api/GetProjectByLink/' + guid)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
+    };
     ProjectService.prototype.searchProjects = function (quary) {
         var _this = this;
         this.http.get(this.rootUrl + '/api/SearchProjects/' + quary)
@@ -1349,6 +1364,91 @@ var ProjectService = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_2__["Http"], _connection_service__WEBPACK_IMPORTED_MODULE_4__["ConnectionService"]])
     ], ProjectService);
     return ProjectService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/shared/sprint.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/shared/sprint.service.ts ***!
+  \******************************************/
+/*! exports provided: SprintService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SprintService", function() { return SprintService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _connection_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./connection.service */ "./src/app/shared/connection.service.ts");
+
+
+
+
+
+var SprintService = /** @class */ (function () {
+    function SprintService(http, connectionService) {
+        this.http = http;
+        this.connectionService = connectionService;
+        this.isLoad = true;
+        this.rootUrl = this.connectionService.rootUrl;
+    }
+    SprintService.prototype.postSprint = function (spr) {
+        var body = JSON.stringify(spr);
+        console.log(body + " - " + spr);
+        var headerOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["Headers"]({ 'Content-Type': 'application/json' });
+        headerOptions.append('Authorization', "Bearer " + localStorage.getItem('userToken'));
+        var requestOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["RequestOptions"]({ method: _angular_http__WEBPACK_IMPORTED_MODULE_2__["RequestMethod"].Post, headers: headerOptions });
+        return this.http.post(this.rootUrl + '/api/CreateSprint', body, requestOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (x) { return x.json(); }));
+    };
+    SprintService.prototype.putSprint = function (id, spr) {
+        var body = JSON.stringify(spr);
+        console.log(spr + " - " + body);
+        var headerOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["Headers"]({ 'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('userToken') });
+        var requestOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["RequestOptions"]({ method: _angular_http__WEBPACK_IMPORTED_MODULE_2__["RequestMethod"].Put, headers: headerOptions });
+        return this.http.put(this.rootUrl + '/api/UpdateSprint/' + id, body, requestOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
+    };
+    SprintService.prototype.getAllSprints = function () {
+        var _this = this;
+        this.isLoad = true;
+        this.http.get(this.rootUrl + '/api/GetAllSprints')
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) {
+            return data.json();
+        })).toPromise().then(function (x) {
+            _this.sprintsList = x;
+            _this.isLoad = false;
+        });
+    };
+    SprintService.prototype.returnAllSprints = function () {
+        return this.http.get(this.rootUrl + '/api/GetAllSprints')
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
+    };
+    SprintService.prototype.returnSprintById = function (id) {
+        return this.http.get(this.rootUrl + '/api/GetSprintById/' + id)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
+    };
+    SprintService.prototype.deleteSprint = function (id) {
+        var headerOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["Headers"]({ 'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('userToken') });
+        //var header = new HttpHeaders({"Authorization" : "Bearer " + localStorage.getItem('userToken')});
+        var requestOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["RequestOptions"]({ method: _angular_http__WEBPACK_IMPORTED_MODULE_2__["RequestMethod"].Delete, headers: headerOptions });
+        return this.http.delete(this.rootUrl + '/api/DeleteSprint/' + id, requestOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
+    };
+    SprintService.prototype.markSprintAsDone = function (id) {
+        var headerOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["Headers"]({ 'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('userToken') });
+        var requestOptions = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["RequestOptions"]({ method: _angular_http__WEBPACK_IMPORTED_MODULE_2__["RequestMethod"].Put, headers: headerOptions });
+        return this.http.put(this.rootUrl + '/api/MarkSprintAsDone/' + id, requestOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
+    };
+    SprintService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_2__["Http"], _connection_service__WEBPACK_IMPORTED_MODULE_4__["ConnectionService"]])
+    ], SprintService);
+    return SprintService;
 }());
 
 
@@ -1479,8 +1579,8 @@ var UserService = /** @class */ (function () {
             UserName: user.username,
             Password: user.password,
             Email: user.email,
-            FirstName: user.firstName,
-            LastName: user.lastName,
+            FirstName: user.firstname,
+            LastName: user.lastname,
             Roles: roles
         };
         console.log(body);
